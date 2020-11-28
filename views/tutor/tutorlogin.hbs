@@ -1,0 +1,20 @@
+<section style="height: 100vh;" class="bg-dark">
+
+<div class="container">
+ <div class="row">
+
+    <div class="adminloginform">
+        <div class="backtohome">
+            <a href="/"><i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+<form action="admin/login" method="POST" class="form">
+<legend>{{#if loginErr}} {{loginErr}}{{else}}Tutor Login{{/if}}</legend>
+    <input type="text" name="name" placeholder="Name.."><br>
+    <input type="password" name="password" placeholder="Password.."><br>
+    <button type="submit">submit</button>
+</form>
+</div>
+</div>
+</div>
+
+</section>

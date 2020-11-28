@@ -1,0 +1,417 @@
+*{
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+padding: 0;
+}
+
+.adminloginform{
+  background:url(/images/classroom2.jpg);
+  background-size: cover;
+  position: relative;
+  height: 90vh;
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px 5px rgba(177, 174, 174, 0.4);
+}
+
+.adminloginform>form{
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 130px;
+}
+.adminloginform>form>input{
+  width: 50%;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+.adminloginform>form>button{
+  z-index: 1;
+  width: 150px;
+  margin: auto;
+  border-radius: 10px;
+}
+.adminloginform>form>legend{
+  background:linear-gradient(to left,rgb(112,101,214),rgb(230,106,213));
+  font-size: 3rem;
+  font-weight: 900;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:transparent;
+  display: inline;
+
+}
+
+.adminloginform>form>input:hover{
+  border-radius: 20px;
+  width: 250px;
+  transition-duration: 1s;
+}
+.adminloginform>form>input:focus{
+  outline: 0;
+  border-radius: 20px;
+  width: 250px;
+}
+.adminloginform>form>button:focus{
+  outline: 0;
+}
+.adminloginform>form>button:hover{
+  background-color:skyblue;
+}
+.Navbar{
+  display: flex;
+  background-color: rgb(9, 19, 49);
+  height: 60px;
+  align-items: center;
+  padding: 20px 3%;
+  justify-content: space-between;
+  width: 100%;
+}
+.navText{
+  
+  margin-top: 4px;
+  display: inline-block;
+  color: azure;
+  list-style: none;
+  font-size: 1.8rem;
+  
+}
+
+.NavbarLogout{
+ 
+  display: inline-block;
+  list-style: none;
+  justify-self: end;
+}
+.NavbarLogout>a>button{
+  border-radius: 30px;
+  background-color: red;
+  border: none;
+  color: white;
+  height: 50px;
+  margin-top: 3px;
+  width: 90px;
+
+}
+.NavbarLogout>a>button:hover{
+  background-color: teal;
+}
+.NavbarLogout>a>button:focus{
+  outline: 0;
+}
+
+
+.sidebar{
+  margin-top: -39px;
+  position: fixed;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: teal;
+  transition: all .5s ease;
+  z-index: 1;
+}
+.sidebar ul a{
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 60px;
+  font-size: 20px;
+  color: white;
+  padding-left: 40px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid black;
+  text-decoration: none;
+  transition: .4s;
+}
+.sidebar ul a:hover{
+  padding-left: 50px;
+}
+#check{
+  display: none;
+}
+label #btn,label #cancel{
+  position: absolute;
+  cursor: pointer;
+  background-color: #042331;
+  border-radius: 3px;
+}
+label #btn{
+  left: 20px;
+  top: 70px;
+  font-size: 28px;
+  color: white;
+padding: 6px 12px;
+transition: all .5s;
+z-index: 1;
+}
+label #cancel{
+  position: fixed;
+  z-index: 1111;
+ left: -195px;
+ top: 65px;
+ font-size: 25px;
+ color: #0a5275;
+ padding: 4px 9px;
+ transition: all .5s ease;
+}
+#check:checked ~ .sidebar{
+  left: 0;
+}
+#check:checked ~ label #btn{
+  left: 250px;
+  opacity: 0;
+  pointer-events: none;
+
+}
+#check:checked ~ label #cancel{
+  left: 208px;
+  
+
+}
+.tutorhomeimg{
+  margin-top: -38px;
+  height: 60vh;
+  width: 100vw;
+  z-index: -1;
+}
+.tutorannouncement{
+  position: absolute;
+  height: 40vh;
+  width: 45%;
+  z-index: 0;
+  margin-top: -100px;
+  margin-left: 25px;
+  background-color: rgb(250, 250, 250);
+  border-radius: 20px;
+  overflow-y: scroll;
+}
+.tutorannouncement::-webkit-scrollbar,.tutorevents::-webkit-scrollbar{
+  display: none;
+}
+.tutorevents{
+  position: absolute;
+  height: 40vh;
+  width: 45%;
+  z-index: 0;
+  margin-top: -100px;
+  margin-left: 51%;
+  border-radius: 20px;
+  background-color: rgb(251, 251, 251);
+  overflow-y: scroll;
+}
+.tutorannouncement>h1{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 2rem;
+}
+.tutorevents>h1{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 2rem;
+
+}
+.landingpage{
+  background:url(/images/classroom2.jpg);
+  background-size: cover;
+  height: 100%;
+  min-height: 100vh;
+
+}
+.tutorselection>img,.studentselection>img{
+  height: 40vh;
+  width: 40vw;
+  border-radius: 50%;
+  margin-top: 35%;
+  padding: 0px 10px;
+  margin-left: 20px;
+}
+.tutorselection>h1,.studentselection>h1{
+  color: rgb(227, 243, 137);
+  text-align: center;
+  font-size: 2.9rem;
+  font-weight: 900;
+  
+}
+.tutorselection>h1:hover,.studentselection>h1:hover{
+color: red;
+}
+.backtohome{
+position: absolute;
+left: 30px;
+top: 30px;
+}
+.backtohome>a>i{
+  font-size: 2rem;
+}
+.edittutorprofile{
+  margin: auto;
+  padding: 20px;
+  background-color: rgb(130, 204, 246);
+  margin-top: 25px;
+  border-radius: 20px;
+  text-align: center;
+  align-items: center;
+}
+.edittutorprofile>div>button{
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 0px 3px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 15px;
+}
+.edittutorprofile>div{
+  margin: 15px 0;
+  border: 2px solid rgb(0, 0, 0);
+  text-align: center;
+
+}
+.profilebg{
+  display: flex;
+position: relative;
+  height: 75vh;
+  margin: auto;
+  top: 60px;
+  background-color: rgb(161, 125, 125);
+  opacity: 0.6;
+  border-radius: 30px;
+
+}
+.profilecard{
+  
+  height: 70vh;
+  width: 450px;
+  margin-top: 15px;
+  border-radius: 20px;
+  opacity: 1;
+  background-color: white;
+  text-align: center;
+}
+.profilecard>img{
+  height: 30vh;
+  width: 20vw;
+
+}
+.myprofilecard{
+  height: 40vh;
+  padding-top: 10px;
+}
+.myprofilecard>h2{
+font-size: 1.4rem;
+text-align: left;
+margin:25px;
+margin-left: 100px;
+font-weight: bold;  
+background:linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
+  -webkit-background-clip: text;
+-webkit-text-fill-color:transparent;
+transition: all 1s ease-in;
+}
+.myprofilecard>h1{
+  font-size: 1.8rem;
+  font-weight: bolder;
+  text-decoration: underline;
+  background:linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
+  -webkit-background-clip: text;
+  margin-left: -150px;
+  -webkit-text-fill-color:transparent;
+  display: inline;
+
+  
+}
+.myadrsscard{
+  position: absolute;
+  top: 25px;
+ left: 500px;
+  height: 40vh;
+  width: 55vh;
+  background-color: white;
+  border-radius: 20px;
+  overflow-y: scroll;
+}
+.myadrsscard::-webkit-scrollbar{
+  display: none;
+}
+.myadrsscard>h2{
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-left: 40px;
+  margin-top: 18px;
+  background: linear-gradient(to left ,red,black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.myadrsscard>h1{
+  font-size: 1.7rem;
+  font-weight: bolder;
+  margin-top: 15px;
+}
+.profileeditcard{
+  
+  position: absolute;
+  top: 300px;
+  right: 150px;
+  width: 20vw;
+  height: 20vh;
+  background: linear-gradient(to left,rgba(255, 0, 0, 0.637),rgba(0, 0, 0, 0.89));
+  border-radius: 20px;
+  
+}
+.profileeditcard>h1{
+  background: linear-gradient(to left,rgb(45, 206, 255),rgb(255, 244, 238));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ 
+  font-size: 1.7rem ;
+  font-weight: bolder;
+  margin-top: 15px;
+}
+.addProfile{
+  margin: auto;
+
+}
+.addProfile>a{
+  
+  height: 9vh; 
+  width: 13vw;
+}
+.editconfirm{
+
+  position: absolute;
+  z-index: 11111;
+  min-height: 30vh;
+  max-height: 100%;
+  width: 40vw;
+  top: 40%;
+  left: 28%;
+  background-color: rgb(255, 254, 251);
+  border-radius: 20px;
+  text-align: center;
+  border: 2px solid red;
+  
+}
+.editconfirm>h1{
+  margin-top: 20px;
+  color: #0a5275;
+}
+.editconfirm>button{
+  margin-top: 25px;
+  margin: 25px 20px;
+  height: 50px;
+  width: 90px;
+  border-radius: 10px;
+  border: none;
+
+}
+.editconfirm1{
+ display: none;
+ position: absolute;
+}

@@ -1,0 +1,34 @@
+<section style="background: url(/images/gradientbg.jpg); background-size: cover; height: 100vh; max-height: 100%;margin-top: -41px;  ">
+<div class="container profilebg">
+    {{#if profile}}
+    <div class="row col-md-12">
+        <div class="profilecard">
+            <img src="/images/male1.png" alt="">
+            <div class=" myprofilecard">
+                <h1>My Profile</h1>
+                <h2>Name :  {{profile.Name}}</h2>
+                <h2>Job  :  {{profile.Job}}</h2>
+                <h2>Mob  :  {{profile.Mobile}}</h2>
+            </div>
+            <div class=" myadrsscard">
+                <h1>More details</h1>
+                <h2>Class : {{profile.Class}}</h2>
+                <h2>Email : {{profile.Email}}</h2>
+                <h2>Address : {{profile.Address}}</h2>
+            </div>
+            <div class="profileeditcard">
+                <h1>Edit Profile</h1>
+                <a href="/admin/editprofile" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+
+    </div>
+{{else}}
+<div class="addProfile">
+<a href="/admin/editProfile"class="btn btn-success">Add Profile</a>
+</div>
+{{/if}}
+</div>
+
+</section>
+

@@ -2,7 +2,7 @@
     <div class="container">
             <div class="row col-md-12">
               {{#if profile}}
-                <form   id="turorForm" class="edittutorprofile">
+                <form  method="POST" action="admin/editprofile"  id="tutorForm" class="edittutorprofile">
                     <legend>Edit Tutor</legend>
                     <div class="form-control">
                         <label for="Name"> Name:</label> <input type="text" name="Name" value="{{profile.Name}}" id="">
@@ -39,11 +39,11 @@
           <label for="Job">Job</label> <input type="text" value="{{profile.Job}}" name="Job">
       </div>
       <div class="form-control">
-          <button  style="background-color: green;">Save </button>
-          <button style="background-color: red;" > Cancel</button>
+          <button  type="submit" style="background-color: green;">Save </button>
+          <button type="button" onclick="cancel()"  style="background-color: red;" > Cancel</button>
       </div>
                 </form>{{else}}
-                <form action="" method="POST" class="edittutorprofile">
+                <form action="" method="POST" id="tutorForm" class="edittutorprofile">
                     <legend>Add Profile</legend>
                     <div class="form-control">
                         <label for="Name"> Name:</label> <input type="text" name="Name" id="">
@@ -81,7 +81,7 @@
       </div>
       <div class="form-control">
           <button type="submit" style="background-color: green;">Save </button>
-          <button style="background-color: red;" > Cancel</button>
+          <button type="button" onclick="cancel()" style="background-color: red;" > Cancel</button>
       </div>
                 </form>
                 {{/if}}
@@ -91,6 +91,10 @@
       <h1>
         Are you sure
       </h1>
-      <button class="btn-success" onclick="submitprofile()">Yes</button> <button class="btn-danger">No</button>
+      <button class="btn-success" onclick="submitprofile()">Yes</button> <button onclick="cancel()" class="btn-danger">No</button>
+    </div>
+    <div class="editsuccess">
+      <h1>Profile Edited</h1>
+      <a href="/admin/profile" class="btn btn-danger">Ok</a>
     </div>
 </section>

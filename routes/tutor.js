@@ -45,9 +45,9 @@ router.get('/editprofile',verifyLogin,async(req,res)=>{
     res.render('tutor/tutoreditprofile',{adminLogin:req.session.adminLogin,profile})
 })
 router.post('/editprofile',(req,res)=>{
-   
-    adminHelper.editProfile(req.body,req.session.admin).then((response)=>{
-        res.json()
+   console.log(req.body)
+    adminHelper.editProfile(req.body,req.session.admin).then(()=>{
+       res.json({status:true})
  })
 
     

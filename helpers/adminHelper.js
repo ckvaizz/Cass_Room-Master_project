@@ -31,7 +31,7 @@ module.exports={
             $set:{
                 Profile:details
             }   
-            }).then((response)=>{
+            }).then(()=>{
                 resolve();
             })
         })

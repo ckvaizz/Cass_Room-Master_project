@@ -1,7 +1,7 @@
 $(function(){
     $('.edittutorprofile').on('submit', function(event){
         event.preventDefault();
-        event.stopPropagation();
+        
         console.log("calling++");
         $('.editconfirm1').addClass('editconfirm').removeClass('editconfirm1');
     });
@@ -9,13 +9,16 @@ $(function(){
 
 
 submitprofile=()=>{
-    
+    let data=$('#tutorForm')
+    console.log(data)
     $.ajax({
         url:'/admin/editprofile',
         method:'post',
         data:$('#tutorForm').serialize(),
-        success:()=>{
-            console.log("ajaxxx")
+        success:(response)=>{
+            if(response.status) {
+                
+            }
         }
         
     })
@@ -23,6 +26,6 @@ submitprofile=()=>{
  }
 
 
- $(document).ready(function() {
-    console.log($.ajax);
-  });
+ cancel=()=>{
+     location.href='/admin/profile';
+ }

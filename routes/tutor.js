@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var adminHelper =require('../helpers/adminHelper')
+const mongodb=require('mongodb')
+const binary = mongodb.Binary
+const fs= require('fs')
+const path =require('path')
 const verifyLogin=(req,res,next)=>{
 if(req.session.adminLogin)next()
 else res.redirect('/admin')
@@ -81,4 +85,27 @@ router.post('/editStudent',verifyLogin,(req,res)=>{
         res.json({status:true})
     })
 })
+router.get('/assignments',verifyLogin,(req,res)=>{
+    res.render('tutor/assignments',{adminLogin:req.session.adminLogin})
+})
+router.post('/assignment',(req,res)=>{
+    
+    let file ={ Name:req.body.Name,fileName:req.files.File.name,file:binary(req.files.File.data) }
+    adminHelper.addAssignment(file).then(()=>{
+        res.redirect('/admin/assignments')
+    })
+})
+ 
+router.get('/getassignment',(req,res)=>{
+    
+    adminHelper.getAssignment().then((data)=>{
+     let buffer= data[0].file.buffer;
+       res.send(buffer)
+     
+      
+    })
+})
+
+
+
 module.exports = router;

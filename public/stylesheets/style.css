@@ -595,3 +595,76 @@ border-radius: 20px;
   user-select: none;
 
 }
+.assignmentForm{
+  background-color: rgb(48, 48, 65);
+  width: 300px;
+  height: 30vh;
+  text-align: center;
+  padding: 20px;
+  margin-top: 10%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.2);
+  color: rgb(243, 110, 110);
+  transition: 1s ease;
+}
+.assignmentForm:hover{
+  box-shadow: 0px 0px 7px 7px rgba(255, 0, 0, 0.82);
+}
+.assignmentForm>form>h3{
+  font-weight: bolder;
+  background: linear-gradient(to left, red,skyblue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+.assignmentForm>form>input{
+  margin-top: 10px;
+  background-color: rgb(114, 98, 98);
+  width: 210px;
+  border-radius: 7px;
+  border: none;
+  
+}
+.assignmentForm>form>input:focus{
+  outline: 0;
+}
+.assignmentForm>form>input::placeholder{
+  color: rgb(176, 246, 85);
+  text-align: center;
+}
+.assignmentForm>form>button{
+  margin-top: 9px;
+  border-radius: 10px;
+  border: none;
+  width: 90px;
+  box-shadow: 0px 0px 5px 5px rgba(240, 237, 237, 0.2);
+  background-color: rgba(26, 56, 77, 0.89);
+  color: skyblue;
+  transition: 2s;
+}
+.assignmentForm>form>button:hover{
+  background: linear-gradient(to left , skyblue,black);
+  box-shadow: 0px 0px 5px 7px rgba(250, 37, 37, 0.2);
+}
+.assignmentTable{
+  width: 80vh;
+  position: absolute;
+  background-color: darkgray;
+  margin-top: -20%;
+  margin-left: 37%;
+  height: 60vh;
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.5);
+  overflow-y: scroll;
+  transition: 2s ease;
+}
+.assignmentTable::-webkit-scrollbar{
+  display: none;
+}
+.assignmentTable:hover{
+  box-shadow: 0px 0px 7px 7px rgba(241, 4, 4, 0.6);
+}
+.assgnmtTable>button{
+width: 30px;
+border-radius: 5px;
+}

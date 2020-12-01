@@ -2,6 +2,7 @@ var db=require('../config/connection');
 var collections=require('../config/collections');
 const bcrypt=require('bcrypt')
 var objectId=require('mongodb').ObjectId
+
 module.exports={
     doLogin:(userData)=>{
         return new Promise(async(resolve,reject)=>{
@@ -86,6 +87,20 @@ module.exports={
 
                 resolve()
             })
+        })
+    },
+    addAssignment:(file)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(file);
+            db.get().collection(collections.ASSIGNMENTS_COLLECTION).insertOne(file).then((response)=>{
+                console.log("res++",response);
+            })
+        })
+    },
+    getAssignment:()=>{
+        return new Promise(async(resolve,reject)=>{
+          const data=await  db.get().collection(collections.ASSIGNMENTS_COLLECTION).find({}).toArray()
+            resolve(data);
         })
     }
 

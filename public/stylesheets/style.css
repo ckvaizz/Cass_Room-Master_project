@@ -417,7 +417,7 @@ transition: all 1s ease-in;
 }
 .editsuccess{
   position: absolute;
-  background-color: aliceblue;
+  background:linear-gradient(to left, skyblue,rgb(218, 168, 168));
   z-index: 11111;
   min-height: 30vh;
   max-height: 100%;
@@ -426,6 +426,172 @@ transition: all 1s ease-in;
   left: 28%;
   border-radius: 20px;
   border: 2px solid red;
+  text-align: center;
+  padding: 20px;
+
+}
+.editsuccess>h1{
+  font-weight: 900;
+}
+.editsuccess>a{
+  margin-top: 20px;
+  width: 90px;
+  text-align: center;
+}
+.editsuccess1{
+  display: none;
+}
+.addstudentbg{
+  width: 80%;
+  height: 80vh;
+  position: relative;
+  margin: auto;
+background-color: rgb(0, 0, 0);
+top: 48px;
+opacity: 0.7;
+text-align: center;
+
+}
+.addstudentbg>form>legend{
+  font-size: 2rem;
+  color: aqua;
+  font-weight: 900;
+}
+.addstudentbg>form>input{
+  margin-top: 30px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid springgreen;
+  background-color: transparent;
+  width: 40%;
+  color: red;
+}
+.addstudentbg>form>input::placeholder{
   
+  color: rgba(128, 230, 230, 0.685);
+  
+}
+.addstudentbg>form>input:focus{
+  outline: 0;
+}
+.addstudentbg>form>h3{
+  color: aqua;
+  margin-left: -30%;
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+.addstudentbg>form>label{
+  color: aqua;
+  margin-left: -18%;
+  padding-right:10px ;
+}
+#male,#female{
+  display: none;
+}
+.gndr-dv{
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: rgb(170, 255, 72);
+  top :160px;
+  left: 0px;
+  transition: .7s;
+}
+#female:checked ~ .gndr-dv{
+  left: 290px;
+}
+#male:checked ~ .gndr-dv{
+  left: 360px;
+}
+.addstudentbg>form>button , .addstudentbg>form>a{
+  margin-top: 30px;
+  background-color: transparent;
+  width: 18%; 
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom:3px solid ;
+  text-decoration: none;
+  color: aqua;
+}
+.addstudentbg>form>a:hover{
+  background-color: red;
+}
+.addstudentbg>form>button{
+  border-bottom: 3px solid rgb(98, 235, 63);
+}
+.addstudentbg>form>a{
+  border-bottom: 3px solid red;
+}
+.studentstablebg{
+  position: relative;
+  min-height: 90vh;
+  max-height: 100%;
+  width: 75vw;
+  margin: auto;
+  background-color: rgb(41, 40, 40) ;
+  top: 30px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+  padding: 9px; 
+}
+.studentstablebg::-webkit-scrollbar{
+  display: none;
+}
+.studentstablebg>table{
+  color: aliceblue;
+}
+.stdntactn>a{
+border: none;
+padding: 0px 10px;
+margin-left: 5px;
+border-radius: 20px;
+}
+.stdntactn>button{
+  border: none;
+  padding: 0px 10px;
+  margin-left: 5px;
+  border-radius: 20px;
+  }
+.stdntactn>a:focus{
+  outline: 0;
+}
+.studnteditconfirm{
+  position: fixed;
+  background: linear-gradient(to left,rgb(240, 85, 85),skyblue);
+  height: 30vh;
+  width: 30vw;
+  top: 200px;
+  left: 35%;
+  border-radius: 20px;
+  border: 3px solid rgb(255, 0, 0);
+  opacity: 1;
+  transition: 1s;
+}
+.studnteditconfirm>h3{
+  margin-top: 20px;
+  font-weight: bolder;
+
+}
+.studnteditconfirm>button{
+  margin-top: 30px;
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: green;  
+}
+.studnteditconfirm>a{
+  height: 40px;
+  text-align: center;
+  margin-top:-1px;
+}
+.studnteditconfirm1{
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
 
 }

@@ -46,5 +46,47 @@ module.exports={
             }
             
         })
+    },
+    addStudent:(data)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.STUDENTS_COLLECTION).insertOne(data).then((respo)=>{
+                console.log(respo);
+                resolve()
+            })
+        })
+    },
+    getStudents:()=>{
+        return new Promise(async(resolve,reject)=>{
+            const students=await db.get().collection(collections.STUDENTS_COLLECTION).find().toArray();
+                resolve(students)
+        })
+    },
+
+    getStudent:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            
+             db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(userId)}).then((data)=>{
+        
+            resolve(data)
+             })
+        })
+    },
+    editStudent:(data,Id)=>{
+        return new  Promise((resolve,reject)=>{
+           db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(Id)},{
+                $set:{
+                    "Name":data.Name,
+                    "Gender":data.Gender,
+                    "Roll-No":data['Roll-No'],
+                    "Mobile":data.Mobile,
+                    "Email":data.Email,
+                    "Address":data.Address
+                }
+            }).then((response)=>{
+
+                resolve()
+            })
+        })
     }
+
 }

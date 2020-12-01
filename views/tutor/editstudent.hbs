@@ -1,0 +1,31 @@
+<section style=" margin-top:-40px;background:url(/images/addstudentBG1.jpg); background-size: cover; height: 100vh;">
+<div class="container">
+<div class="addstudentbg">
+    <form action="" id="editstudentform">
+        <legend>ADD</legend>
+        <input type="text" name="Name" value="{{student.Name}}" placeholder="Name"> <br>
+          <h3>Gender</h3>
+          <input class="form-check-input" type="radio" name="Gender" id="male" value="Male" checked>
+          <label class="form-check-label"  for="male">
+            Male
+          </label>
+           <input class="form-check-input" type="radio" name="Gender" id="female" value="Female">
+           <label class="form-check-label"  for="female">
+            Female
+          </label><br>
+          <input type="number" name="Roll-No" placeholder="Roll-No" value="{{student.Roll-No}}"><br>
+            <input type="number" name="Mobile" placeholder="Mobile" value="{{student.Mobile}}"><br>
+            <input type="Email" name="Email" placeholder="Email" value="{{student.Email}}"><br>
+            <input type="textarea" name="Address" placeholder="Address" value="{{student.Address}}"><br>
+            <div class="gndr-dv"></div>
+            <button class="btn btn-success">Save</button> <a  class="btn " href="/admin/students">Cancel</a>
+            <div class="studnteditconfirm1">
+              <h3>Edit {{student.Name}}'s profile</h3>
+              <button onclick="SaveStudent('{{student._id}}')">Save</button> <a href="/admin/students" class="btn btn-danger">Cancel</a>
+            </div>
+    </form>
+</div>
+</div>
+
+
+</section>

@@ -1,0 +1,28 @@
+<section style="background-color: rgb(8, 180, 157); height: 100vh; margin-top:-40px;">
+    <div class="container">
+     <div class="studentstablebg">
+         <table class="table">
+             <thead>
+                 <tr>
+                <th>Roll-NO</th>
+                <th>Name</th>
+                <th>Action</th> 
+                <a class="btn btn-primary float-right" style="margin-right: 10px;" href="/admin/addstudent">Add Student</a>
+                </tr>
+             </thead>
+             <tbody>
+                 {{#each students}}
+                 <tr>
+                 <td>{{this.Roll-No}}</td>
+                 <td>{{this.Name}}</td>
+                 <td class="stdntactn"><a href="/admin/editstudent?id={{this._id}}" class="btn-primary"><i class="fa fa-edit"></i></a><button class="btn-danger"> <i class="fa fa-trash"></i></button></td>
+                </tr>
+                {{/each}}
+             </tbody>
+         </table>
+     </div>
+    </div>
+</section>
+
+
+

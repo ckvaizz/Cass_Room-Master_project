@@ -20,11 +20,11 @@ router.post('/login',(req,res)=>{
             res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin})
 
         }else{
-            req.session.adminLoginErr='Invalid Password'
+            req.session.adminLoginErr='Invalid Login'
             res.redirect('/admin')
         }
     }).catch(()=>{
-        req.session.adminLoginErr='Invalid User'
+        req.session.adminLoginErr='Invalid Login '
         res.redirect('/admin')
 
     })
@@ -50,6 +50,35 @@ router.post('/editprofile',(req,res)=>{
        res.json({status:true})
  })
 
+})
+
+router.get('/students',verifyLogin,async(req,res)=>{
+    let students=await adminHelper.getStudents()
+   await students.sort((a,b)=>{
+        return a['Roll-No']-b['Roll-No']
+    })
     
+    res.render('tutor/students',{adminLogin:req.session.adminLogin,students})
+})
+router.get('/addstudent',verifyLogin,(req,res)=>{
+    res.render('tutor/addstudent',{adminLogin:req.session.adminLogin})
+})
+router.post('/addstudent',verifyLogin,(req,res)=>{
+   
+    adminHelper.addStudent(req.body).then(()=>{
+        res.json({status:true})
+    })
+})
+
+router.get('/editstudent',verifyLogin,async(req,res)=>{
+    
+    const student=await adminHelper.getStudent(req.query.id)
+ res.render('tutor/editstudent',{student,adminLogin:req.session.adminLogin})
+})
+router.post('/editStudent',verifyLogin,(req,res)=>{
+    
+    adminHelper.editStudent(req.body,req.query.id).then((response)=>{
+        res.json({status:true})
+    })
 })
 module.exports = router;

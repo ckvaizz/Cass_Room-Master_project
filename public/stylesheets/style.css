@@ -43,7 +43,7 @@ padding: 0;
   background:linear-gradient(to left,rgb(112,101,214),rgb(230,106,213));
   font-size: 3rem;
   font-weight: 900;
-  -webkit-background-clip: text;
+  -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   display: inline;
 
@@ -596,9 +596,11 @@ border-radius: 20px;
 
 }
 .assignmentForm{
+  position: absolute;
   background-color: rgb(48, 48, 65);
   width: 300px;
   height: 30vh;
+  left: 20px;
   text-align: center;
   padding: 20px;
   margin-top: 10%;
@@ -623,6 +625,7 @@ border-radius: 20px;
   width: 210px;
   border-radius: 7px;
   border: none;
+  overflow: hidden;
   
 }
 .assignmentForm>form>input:focus{
@@ -633,6 +636,7 @@ border-radius: 20px;
   text-align: center;
 }
 .assignmentForm>form>button{
+  
   margin-top: 9px;
   border-radius: 10px;
   border: none;
@@ -650,8 +654,8 @@ border-radius: 20px;
   width: 80vh;
   position: absolute;
   background-color: darkgray;
-  margin-top: -20%;
-  margin-left: 37%;
+  margin-top: 40px;
+  margin-left: 39%;
   height: 60vh;
   border-radius: 20px;
   box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.5);
@@ -668,3 +672,131 @@ border-radius: 20px;
 width: 30px;
 border-radius: 5px;
 }
+
+.assignmentbg{
+  background-color: rgba(255, 255, 255, 0.87);
+  height: 80vh;
+  top: 30px;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px 7px rgba(77, 55, 55, 0.9);
+}
+.assignmentTable>h4{
+text-align: center;
+text-decoration: underline;
+font-weight: 900;
+}
+
+.deltestudentcnfrm{
+  z-index: 111;
+  background-color: rgb(246, 243, 243);
+  position: absolute;
+  height: 30vh;
+  width: 50vh;
+  text-align: center;
+  border-radius: 20px;
+  border: 2px solid blue;
+  padding: 30px;
+  margin-left: 23%;
+  margin-top: 20%;
+  opacity: 1;
+  transition: .5s;
+}
+.deltestudentcnfrm>h3{
+  display: inline;
+  transition: .5s;
+  
+}
+.deltestudentcnfrm>h2{
+  color: red;
+  transition: .5s;
+}
+.deltestudentcnfrm>button, .deltestudentcnfrm>a{
+  width:60px;
+  height:40px;
+  border: none;
+  border-radius: 10px;
+  transition: .5s;
+}
+.deltestudentcnfrm>button{
+  background-color: green;
+}
+.deltestudentcnfrm1{
+  height: 200px;
+  width: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  background-color: red;
+  margin-top: 20%;
+  margin-left: 68%;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
+.studentremovedalert{
+  padding: 5px;
+  width: 50px;
+  background-color: rgb(241, 220, 99);
+  font-size: .9rem;
+  color: rgb(250, 4, 4);
+  border-radius: 3px;
+  opacity: 1;
+  transition:  1s;
+}
+.studentremovedalert1{
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+user-select: none;
+pointer-events: none;
+}
+.deleteassignmentcnfrm{
+  position: absolute;
+  z-index: 111;
+  min-height: 20vh;
+  min-width: 30vw;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 30px;
+  background-color: rgb(180, 157, 175);
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 20%;
+  margin-top: 50px;
+  opacity: 1;
+  transition: .5s;
+  border: 2px solid red;
+}
+.deleteassignmentcnfrm>h3{
+  font-weight: 500;
+
+}
+.deleteassignmentcnfrm>button, .deleteassignmentcnfrm>a{
+  width: 60px;
+}
+.deleteassignmentcnfrm1{
+  opacity: 0;
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+.uploadindication{
+  height: 50px;
+  width: 150px;
+  position: absolute;
+  z-index: 1111;
+  background-color: red;
+  margin-left: 250px;
+
+}
+
+.uploadindication1{
+  display: none;
+  z-index: -111;
+}
+
+
+
+
+

@@ -1,14 +1,16 @@
-<section>
+<section style="background-color: black ; height: 91vh; margin-top: -40px;">
 <div class="container">
+    <div class="assignmentbg">
     <div class="assignmentForm">       
-<form action="/admin/assignment" method="post" enctype="multipart/form-data">
+<form  id="assignmentupload" method="POST" action="/admin/assignment" enctype="multipart/form-data">
 <h3>Add New </h3>
 <input type="text" name="Name" placeholder="Topic Name"><br>
-<input type="file" name="File"><br>
-<button type="submit">upload</button>
+<input type="file" name="File" id="File"><br>
+<button type="submit" id="uploadbtn">upload</button>
 </form>
 </div>
 <div class="assignmentTable">
+    <h4>Assignments</h4>
 <table class="table">
 <thead>
     <tr>
@@ -18,14 +20,26 @@
     </tr>
 </thead>
 <tBody>
-    <tr>
-        <td>name</td>
-        <td>name</td>
-        <td class="assgnmtTable"><button class="btn-danger"><i class="fa fa-trash"></i></button></td>
+    {{#each assignments}}
+    <tr id="tr{{this._id}}">
+        <td>{{this.Name}}</td>
+        <td><a href="/admin/view-assignment?id={{this._id}}">{{this.fileName}}</a></td>
+        <td class="assgnmtTable"><button onclick="deleteAssignmentcnfrm('{{this._id}}')" class="btn-danger"><i  class="fa fa-trash"></i></button></td>
+    <div class="deleteassignmentcnfrm1">
+        <h3>Delete this Topic</h3>
+        <button onclick="deleteAssignment()" class="btn btn-success">Yes</button> <a class="btn btn-danger" href="/admin/assignments"> No</a>
+    </div>
     </tr>
+    {{/each}}
 </tBody>
 </table>
 </div>
+    <div class="uploadindication1">
+        Uploading file...
+    </div>
 </div>
+</div>
+
+
 
 </section>

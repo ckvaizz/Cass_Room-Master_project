@@ -85,14 +85,18 @@ router.post('/editStudent',verifyLogin,(req,res)=>{
         res.json({status:true})
     })
 })
-router.get('/assignments',verifyLogin,(req,res)=>{
-    res.render('tutor/assignments',{adminLogin:req.session.adminLogin})
+router.get('/assignments',verifyLogin,async(req,res)=>{
+    let assignments= await adminHelper.getAssignments();
+    console.log("++",assignments);
+    res.render('tutor/assignments',{adminLogin:req.session.adminLogin,assignments})
 })
 router.post('/assignment',(req,res)=>{
+
+
+    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
     
-    let file ={ Name:req.body.Name,fileName:req.files.File.name,file:binary(req.files.File.data) }
     adminHelper.addAssignment(file).then(()=>{
-        res.redirect('/admin/assignments')
+    res.redirect('/admin/assignments')
     })
 })
  
@@ -105,7 +109,21 @@ router.get('/getassignment',(req,res)=>{
       
     })
 })
-
-
+router.get('/deletestudent',verifyLogin,(req,res)=>{
+    adminHelper.deleteStudent(req.query.id).then(()=>{
+        res.json({status:true})
+    })
+})
+router.get('/deleteassignment',verifyLogin,(req,res)=>{
+    adminHelper.deleteAssignment(req.query.id).then(()=>{
+        res.json({status:true})
+    })
+})
+router.get('/view-assignment',verifyLogin,async(req,res)=>{
+    let file=await adminHelper.getAssignment(req.query.id)
+    const buffer=file.file.buffer;
+   res.type('application/pdf');
+   res.end(buffer);
+})
 
 module.exports = router;

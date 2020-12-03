@@ -28,6 +28,10 @@ db.connect((err)=>{
   if(err) console.log("connection error:",err)
   else console.log("Database Connected*")
 })
+//app.use((req, res, next) => {
+//  res.set('Cache-Control', 'no-store')
+//  next()
+//})
 app.use(session({secret:"Key",cookie:{maxAge:600000}}))
 const exhbs=hbs.create({ extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials/'});
 app.engine('hbs',exhbs.engine)

@@ -91,16 +91,37 @@ module.exports={
     },
     addAssignment:(file)=>{
         return new Promise((resolve,reject)=>{
-            console.log(file);
+            
             db.get().collection(collections.ASSIGNMENTS_COLLECTION).insertOne(file).then((response)=>{
-                console.log("res++",response);
+               
+                resolve()
             })
         })
     },
-    getAssignment:()=>{
+    getAssignment:(Id)=>{
         return new Promise(async(resolve,reject)=>{
-          const data=await  db.get().collection(collections.ASSIGNMENTS_COLLECTION).find({}).toArray()
+          const data = await  db.get().collection(collections.ASSIGNMENTS_COLLECTION).findOne({_id:objectId(Id)})
             resolve(data);
+        })
+    },
+    getAssignments:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let assignments= await db.get().collection(collections.ASSIGNMENTS_COLLECTION).find({}).toArray()
+            resolve(assignments);
+        })
+    },
+    deleteStudent:(Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.STUDENTS_COLLECTION).removeOne({_id:objectId(Id)}).then((response)=>{
+                resolve();
+            })
+        })
+    },
+    deleteAssignment:(Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.ASSIGNMENTS_COLLECTION).removeOne({_id:objectId(Id)}).then((response)=>{
+                resolve()
+            })
         })
     }
 

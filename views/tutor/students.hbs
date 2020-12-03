@@ -3,6 +3,7 @@
      <div class="studentstablebg">
          <table class="table">
              <thead>
+                 <span class="studentremovedalert1"> Student Removed <i onclick="removespan()" class="fa fa-close"></i></span>
                  <tr>
                 <th>Roll-NO</th>
                 <th>Name</th>
@@ -12,10 +13,14 @@
              </thead>
              <tbody>
                  {{#each students}}
-                 <tr>
+                 <tr id="tr{{this._id}}">
                  <td>{{this.Roll-No}}</td>
                  <td>{{this.Name}}</td>
-                 <td class="stdntactn"><a href="/admin/editstudent?id={{this._id}}" class="btn-primary"><i class="fa fa-edit"></i></a><button class="btn-danger"> <i class="fa fa-trash"></i></button></td>
+                 <td class="stdntactn"><a href="/admin/editstudent?id={{this._id}}" class="btn-primary"><i class="fa fa-edit"></i></a><button onclick="deleteStudentconfrm('{{this._id}}')" class="btn-danger"> <i class="fa fa-trash"></i></button></td>
+                <div class="deltestudentcnfrm1">
+                   <h3> Are you sure to <h2>Delete</h2></h3>
+                   <button onclick="deltStudent()">Yes</button> <a class="btn btn-danger" href="/admin/students">No</a>
+                </div>
                 </tr>
                 {{/each}}
              </tbody>

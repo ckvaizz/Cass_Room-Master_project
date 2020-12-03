@@ -64,3 +64,65 @@ $.ajax({
     }
 })
 }
+let delteStudentId='';
+//$('#assignmentupload').submit(e=>{
+   // e.preventDefault()
+   // $.ajax({
+    //    url:'/admin/assignment',
+    //    method:'post',
+  //      data:$("#File")[0].files[0],
+//        success:()=>{
+
+  //      }
+  //  })
+//})
+
+deleteStudentconfrm=(Id)=>{
+    delteStudentId=Id
+$('.deltestudentcnfrm1').addClass('deltestudentcnfrm').removeClass('deltestudentcnfrm1');
+}
+
+deltStudent=()=>{
+$.ajax({
+    url:'/admin/deletestudent?id='+delteStudentId,
+    method:'get',
+    success:()=>{
+        
+        $('.deltestudentcnfrm').addClass('deltestudentcnfrm1').removeClass('deltestudentcnfrm')
+        $('#tr'+delteStudentId).remove()
+        delteStudentId='';
+        $('.studentremovedalert1').addClass('studentremovedalert').removeClass('studentremovedalert1')
+        
+    }
+    
+})
+}
+removespan=()=>{
+    $('.studentremovedalert').addClass('studentremovedalert1').removeClass('studentremovedalert')
+}
+
+let deleteAssignmentId='';
+
+deleteAssignmentcnfrm=(Id)=>{
+delteAssignmentId=Id
+$('.deleteassignmentcnfrm1').addClass('deleteassignmentcnfrm').removeClass('deleteassignmentcnfrm1')
+
+}
+
+deleteAssignment=()=>{
+    $.ajax({
+        url:'/admin/deleteassignment?id='+delteAssignmentId,
+        method:'get',
+        success:()=>{
+            $('.deleteassignmentcnfrm').addClass('deleteassignmentcnfrm1').removeClass('deleteassignmentcnfrm')
+            $('#tr'+delteAssignmentId).remove()
+            delteAssignmentId='';
+        }
+    })
+}
+
+window.load=()=>{
+    console.log('Loading');
+    $('.uploadindication1').addClass('uploadindication').removeClass('uploadindication1')
+
+}

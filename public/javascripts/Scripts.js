@@ -165,14 +165,40 @@ backToLogin=()=>{
     $('.stdCreatePassword').addClass('stdCreatePassword1').removeClass('stdCreatePassword')
 
 }
+let stdMobile=''
 $('#MobileCheck').submit(e=>{
     e.preventDefault()
+    stdMobile=$('#Mob_no').val()
     $.ajax({
         url:'/checkNumber',
         method:'post',
         data:$('#MobileCheck').serialize(),
         success:(response)=>{
-            alert(response);
+            console.log(response.status)
+            if(response.status==true){
+                $('.stdCreatePassword').addClass('stdCreatePassword1').removeClass('stdCreatePassword')
+                $('.stdOtp1').addClass('stdOtp').removeClass('stdOtp1')
+            
+            }else{
+                $('.errorh21').addClass('errorh2').removeClass('errorh21')
+            }
+        }
+    })
+})
+
+$('#stdOtp').submit(e=>{
+    e.preventDefault()
+
+    $.ajax({
+        url:'/verifyOtp?No='+stdMobile,
+        method:'post',
+        data:$('#stdOtp').serialize(),
+        success:(response)=>{
+            if(response.status===true){
+
+            }else{
+
+            }
         }
     })
 })

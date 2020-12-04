@@ -17,10 +17,12 @@
                         </form>
                         <form action="" id="MobileCheck" class="stdCreatePassword1">
                             <i onclick="backToLogin()" class="fa fa-times-circle"></i>
-                            <input type="number"name="Mobile" placeholder="Mobile-No" ><br>
+                            <input type="number" id="Mob_no" name="Mobile"  placeholder="Mobile-No" ><br>
                             <button type="submit" class="btn btn-primary">Send OTP</button>
+                            <p class="errorh21" style="color: red;">Cannot Find This Number</p>
                         </form>
                         <form id="stdOtp" class="stdOtp1" action="">
+                            <p class="errotp1">Incorrect OTP</p>
                             <input type="number" name="OTP" placeholder="OTP">
                             <button class="btn btn-primary">Sumbit</button>
                         </form>

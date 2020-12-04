@@ -12,9 +12,18 @@ router.get('/login',(req,res)=>{
 router.post('/checkNumber',(req,res)=>{
   console.log(req.body);
   studentHelper.checkMobile_NO(req.body).then((response)=>{
-    
+    res.json(response)
+  }).catch(response=>{
+    res.json(response)
   })
 
+})
+router.post('/verifyOtp',(req,res)=>{
+  studentHelper.checkOtp(req.body,req.query.No).then(response=>{
+    res.json(response)
+  }).catch(response=>{
+    res.json(response)
+  })
 })
 
 module.exports = router;

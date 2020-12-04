@@ -913,7 +913,7 @@ pointer-events: none;
   flex-direction: column;
   margin-top:20%;
   opacity: 1;
-  transition: all 1s ease-in-out;
+  transition: all .5s ease-in-out;
   
 }
 .stdCreatePassword>i{
@@ -931,20 +931,44 @@ pointer-events: none;
   
   user-select: none;
   pointer-events: none;
-  transition: all 1s ease-in;
+  transition: all .5s ease-in;
 }
 .stdOtp{
   display: flex;
   flex-direction: column;
+  margin-top: -70px;
   height: 20vh;
+  width: 200px;
   justify-content: space-between;
   opacity: 1;
-  transition: 2s;
+  transition: 1s;
+  
 }
 .stdOtp1{
   opacity: 0;
 pointer-events: none;
 user-select: none;
 }
-
-
+.errorh2{
+  font-size: 1em;
+  display: inline;
+  opacity: 1;
+  text-decoration: underline;
+  transition: 2s ease-in;
+}
+.errorh21{
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.errotp{
+  color: red;
+  opacity: 1;
+  font-size: 1.5em;
+  transition: 1s;
+}
+.errotp1{
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}

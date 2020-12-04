@@ -123,6 +123,32 @@ module.exports={
                 resolve()
             })
         })
+    },
+    addNote:(file)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.NOTES_COLLECTION).insertOne(file).then((response)=>{
+                resolve()
+            })
+        })
+    },
+    getNotes:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let notes= await db.get().collection(collections.NOTES_COLLECTION).find({}).toArray()
+            resolve(notes)
+        })
+    },
+    deleteNote:(Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.NOTES_COLLECTION).removeOne({_id:objectId(Id)}).then(()=>{
+                resolve()
+            })
+        })
+    },
+    getNote:(Id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let note=await db.get().collection(collections.NOTES_COLLECTION).findOne({_id:objectId(Id)});
+            resolve(note)
+        })
     }
 
 }

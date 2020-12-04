@@ -2,7 +2,7 @@
 <div class="container">
     <div class="assignmentbg">
     <div class="assignmentForm">       
-<form  id="assignmentupload" method="POST" action="/admin/assignment" enctype="multipart/form-data">
+<form  id="notesupload" method="POST" action="/admin/notes" enctype="multipart/form-data">
 <h3>Add New </h3>
 <input type="text" name="Name" placeholder="Topic Name"><br>
 <input type="file" name="File" id="File"><br>
@@ -10,7 +10,7 @@
 </form>
 </div>
 <div class="assignmentTable">
-    <h4>Assignments</h4>
+    <h4>Notes</h4>
 <table class="table">
 <thead>
     <tr>
@@ -20,14 +20,14 @@
     </tr>
 </thead>
 <tBody>
-    {{#each assignments}}
+    {{#each notes}}
     <tr id="tr{{this._id}}">
         <td>{{this.Name}}</td>
-        <td><a href="/admin/view-assignment?id={{this._id}}">{{this.fileName}}</a></td>
-        <td class="assgnmtTable"><button onclick="deleteAssignmentcnfrm('{{this._id}}')" class="btn-danger"><i  class="fa fa-trash"></i></button></td>
+        <td><a href="/admin/view-Notes?id={{this._id}}">{{this.fileName}}</a></td>
+        <td class="assgnmtTable"><button onclick="deleteNotecnfrm('{{this._id}}')" class="btn-danger"><i  class="fa fa-trash"></i></button></td>
     <div class="deleteassignmentcnfrm1">
         <h3>Delete this Topic</h3>
-        <button onclick="deleteAssignment()" class="btn btn-success">Yes</button> <a class="btn btn-danger" href="/admin/assignments"> No</a>
+        <button onclick="deleteNote()" class="btn btn-success">Yes</button> <a class="btn btn-danger" href="/admin/notes"> No</a>
     </div>
     </tr>
     {{/each}}

@@ -100,15 +100,7 @@ router.post('/assignment',(req,res)=>{
     })
 })
  
-router.get('/getassignment',(req,res)=>{
-    
-    adminHelper.getAssignment().then((data)=>{
-     let buffer= data[0].file.buffer;
-       res.send(buffer)
-     
-      
-    })
-})
+
 router.get('/deletestudent',verifyLogin,(req,res)=>{
     adminHelper.deleteStudent(req.query.id).then(()=>{
         res.json({status:true})
@@ -125,5 +117,25 @@ router.get('/view-assignment',verifyLogin,async(req,res)=>{
    res.type('application/pdf');
    res.end(buffer);
 })
-
+router.get('/notes',verifyLogin,async(req,res)=>{
+    let notes= await adminHelper.getNotes()
+    res.render('tutor/notes',{adminLogin:req.session.adminLogin,notes})
+})
+router.post('/notes',verifyLogin,(req,res)=>{
+    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
+  adminHelper.addNote(file).then(()=>{
+     res.redirect('/admin/notes') 
+  }) 
+})
+router.get('/deleteNote',verifyLogin,(req,res)=>{
+    adminHelper.deleteNote(req.query.id).then(()=>{
+        res.json({status:true})
+    })
+})
+router.get('/view-Notes',verifyLogin,async(req,res)=>{
+    let note= await adminHelper.getNote(req.query.id)
+    const buffer=note.file.buffer;
+   res.type('application/pdf');
+   res.end(buffer);
+})
 module.exports = router;

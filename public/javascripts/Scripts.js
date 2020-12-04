@@ -121,8 +121,58 @@ deleteAssignment=()=>{
     })
 }
 
-window.load=()=>{
-    console.log('Loading');
-    $('.uploadindication1').addClass('uploadindication').removeClass('uploadindication1')
+   window.onbeforeunload=()=>{
+    console.log("loading")
+    $('.loading1').addClass('loading').removeClass('loading1')
+   
+}
+
+let deleteNoteId=''
+
+deleteNotecnfrm=(Id)=>{
+    console.log("calling");
+    deleteNoteId=Id
+$('.deleteassignmentcnfrm1').addClass('deleteassignmentcnfrm').removeClass('deleteassignmentcnfrm1')
+}
+deleteNote=()=>{
+$.ajax({
+    url:'/admin/deleteNote?id='+deleteNoteId,
+    method:'get',
+    success:()=>{
+        $('.deleteassignmentcnfrm').addClass('deleteassignmentcnfrm1').removeClass('deleteassignmentcnfrm')
+        $('#tr'+deleteNoteId).remove()
+        deleteNoteId='';
+    }
+})
+}
+let option=false;
+showoptions=()=>{
+if(!option){
+    option=true;
+    $('.passwordoptions1').addClass('passwordoptions').removeClass('passwordoptions1')
+}else{
+    option=false
+    $('.passwordoptions').addClass('passwordoptions1').removeClass('passwordoptions')
+}
+}
+creatPassWordForm=()=>{
+    $('.stdLoginForm').addClass('stdLoginForm1').removeClass('stdLoginForm')
+    $('.stdCreatePassword1').addClass('stdCreatePassword').removeClass('stdCreatePassword1')
+}
+
+backToLogin=()=>{
+    $('.stdLoginForm1').addClass('stdLoginForm').removeClass('stdLoginForm1')
+    $('.stdCreatePassword').addClass('stdCreatePassword1').removeClass('stdCreatePassword')
 
 }
+$('#MobileCheck').submit(e=>{
+    e.preventDefault()
+    $.ajax({
+        url:'/checkNumber',
+        method:'post',
+        data:$('#MobileCheck').serialize(),
+        success:(response)=>{
+            alert(response);
+        }
+    })
+})

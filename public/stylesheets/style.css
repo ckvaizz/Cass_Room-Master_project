@@ -4,6 +4,9 @@
   text-decoration: none;
 padding: 0;
 }
+body{
+  overflow: hidden;
+}
 
 .adminloginform{
   background:url(/images/classroom2.jpg);
@@ -658,6 +661,8 @@ border-radius: 20px;
   margin-left: 39%;
   height: 60vh;
   border-radius: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.5);
   overflow-y: scroll;
   transition: 2s ease;
@@ -781,22 +786,165 @@ pointer-events: none;
   user-select: none;
   pointer-events: none;
 }
-.uploadindication{
-  height: 50px;
-  width: 150px;
-  position: absolute;
+.loading{
+  height: 100vh;
+  width: 98vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   z-index: 1111;
-  background-color: red;
-  margin-left: 250px;
-
+  background-color: rgb(0, 0, 0);
+  
+  opacity: 1;
+  transition: opacity .9s ease;
+}
+.loading>img{
+  margin-top: 20%;
+  
+}
+.loading1{
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  height: 0px;
+  
+}
+.loginbg{
+  position: relative;
+  text-align: center;
+  height: 80vh;
+  width: 85vw;
+  margin: auto;
+  top:50px;
+  border-radius: 10px;
+  
+  box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.89);
+  background:url(/images/studentloginbg.webp);
+  
+  background-position: left;
+}
+.logincard{
+  position: absolute;
+  height: 60vh;
+  background-color: rgb(253, 253, 253);
+  width: 30vw;
+  left: 30%;
+  top:6%;
+  overflow: hidden;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.7);
 }
 
-.uploadindication1{
-  display: none;
-  z-index: -111;
+.circlebg{
+  background: url(/images/friendsbg.jpeg);
+  background-size:cover;
+  background-position: center;
+  height: 50vh;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+  transform: translateY(-50%);
+}
+.loginform{
+  position: absolute;
+  
+  top:45%;
+  left: 15%;
+}
+.stdLoginForm{
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transition:left 1s;
+  width: 200px;
+}
+.loginform>form>i{
+  position: absolute;
+  margin-top: 54px;
+  margin-left: 200px;
+}
+.passwordoptions{
+  height:10vh;
+  background:linear-gradient(to left,skyblue,rgb(241, 117, 117));
+  transition: all 1s;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  
+}
+.passwordoptions>p{
+  
+  margin-top: -7px;
+  opacity: 1;
+  transition: 2.5s;
+}
+.passwordoptions>p:hover{
+  text-decoration: underline;
+  color: rgb(19, 185, 250);
+}
+.passwordoptions1{
+  height: 0vh;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.passwordoptions1>p{
+  opacity: 0;
 }
 
+.stdLoginForm1{
+  top: -200px;
+  position: absolute;
+  opacity: 0;
+  
+  pointer-events: none;
+  user-select: none;
+  transition: top .5s ease;
 
+}
+.stdCreatePassword{
+  height: 30vh;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-top:20%;
+  opacity: 1;
+  transition: all 1s ease-in-out;
+  
+}
+.stdCreatePassword>i{
+  position: absolute;
+  top: -50px;
+  left: -10px;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  margin: auto;
+  
 
+}
+.stdCreatePassword1{
+  opacity: 0;
+  
+  user-select: none;
+  pointer-events: none;
+  transition: all 1s ease-in;
+}
+.stdOtp{
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  justify-content: space-between;
+  opacity: 1;
+  transition: 2s;
+}
+.stdOtp1{
+  opacity: 0;
+pointer-events: none;
+user-select: none;
+}
 
 

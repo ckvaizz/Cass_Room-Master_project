@@ -1,3 +1,5 @@
+
+
 $(function(){
     $('.edittutorprofile').on('submit', function(event){
         event.preventDefault();
@@ -195,10 +197,50 @@ $('#stdOtp').submit(e=>{
         data:$('#stdOtp').serialize(),
         success:(response)=>{
             if(response.status===true){
-
+                $('.stdOtp').addClass('stdOtp1').removeClass('stdOtp')
+                $('.stdNewpassword1').addClass('stdNewpassword').removeClass('stdNewpassword1')
             }else{
-
+                $('.errotp1').addClass('errotp').removeClass('errotp1')
             }
         }
     })
 })
+ 
+$('#NewPasswordForm').submit(e=>{
+    e.preventDefault()
+
+    let newPswrd=$('#Newpswrd').val()
+    let rePswrd =$('#re-entrpswrd').val()
+    if(newPswrd===rePswrd){
+       $.ajax({
+           url:'/newPassword',
+           method:'post',
+           data:{
+               Password:newPswrd,
+               Mobile  :stdMobile
+           },
+           success:(response)=>{
+              
+              if(response.status===false){
+                alert("something ERROR please try again");
+                location.reload()
+              }else{
+                 location.href='/loginstd'
+              }
+           }
+
+       })
+    }else{
+        $('.matchingerr1').addClass('matchingerr').removeClass('matchingerr1')
+    }
+})
+
+repasword=()=>{
+    let newPswrd=$('#Newpswrd').val()
+    let rePswrd =$('#re-entrpswrd').val()
+    if(newPswrd!=rePswrd){
+        $('.matchingerr1').addClass('matchingerr').removeClass('matchingerr1')
+    }else{
+        $('.matchingerr').addClass('matchingerr1').removeClass('matchingerr')
+    }
+}

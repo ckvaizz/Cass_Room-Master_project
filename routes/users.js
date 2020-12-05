@@ -25,5 +25,14 @@ router.post('/verifyOtp',(req,res)=>{
     res.json(response)
   })
 })
+router.post('/newPassword',(req,res)=>{
+  console.log(req.body)
+  studentHelper.newPassword(req.body).then((response)=>{
+    res.json({status:true})
+  }).catch(err=>{
+    res.json({status:false})
+  })
+})
+
 
 module.exports = router;

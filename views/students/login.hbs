@@ -3,7 +3,9 @@
     <div class="container">
         <div class="loginbg">
             <div class="logincard">
-                <div class="circlebg"></div>
+                <div class="circlebg"> <h3>Login</h3>
+                <div class="loginuserIcon"><i class="fa fa-user"></i></div>
+                </div>
                 <div class="loginform">
                         <form class="stdLoginForm" id="stdloginForm" action="" method="post" >
                         <input type="number" maxlength="10" placeholder="Mobile-No" minlength="10" name="Mobile" ><br>
@@ -25,6 +27,12 @@
                             <p class="errotp1">Incorrect OTP</p>
                             <input type="number" name="OTP" placeholder="OTP">
                             <button class="btn btn-primary">Sumbit</button>
+                        </form>
+                        <form class="stdNewpassword1" id="NewPasswordForm" action="">
+                            <input type="password" id="Newpswrd" name="Password" placeholder="New password"><br><br>
+                            <input type="password" onchange="repasword()" id="re-entrpswrd" name="Re-enterPassword" placeholder="Re-enter password"><br><br>
+                            <p class="matchingerr1">Password Not Matching..</p>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </form>
 
                 </div>

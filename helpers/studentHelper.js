@@ -42,7 +42,7 @@ module.exports={
                 code:data.OTP
             }).then(data=>{
                 console.log(data.status)
-                if(data.status===approved){
+                if(data.status==='approved'){
                     resolve({status:true})
                 }else{
                     reject({status:false})
@@ -51,6 +51,23 @@ module.exports={
                 console.log("error in verification",err)
             })
         })
-    }
+    },
+    newPassword:(data)=>{
+        return new Promise(async(resolve,reject)=>{
+            if(data.Mobile==''){
+               reject({mobile:null})
+            }else{
+            data.Password =await bcrypt.hash(data.Password,10)
+            db.get().collection(collections.STUDENTS_COLLECTION).updateOne({Mobile:data.Mobile},{
+                $set:{
+                    Password:data.Password
+                }
+            }).then(response=>{
+                console.log("response",response)
+                //resolve({})
+            })}
+    
+        })
+        }
 
 }

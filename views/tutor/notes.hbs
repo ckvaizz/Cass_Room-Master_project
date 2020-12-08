@@ -2,10 +2,24 @@
 <div class="container">
     <div class="assignmentbg">
     <div class="assignmentForm">       
-<form  id="notesupload" method="POST" action="/admin/notes" enctype="multipart/form-data">
+<form  id="notesupload" class="videoNoteform" method="POST" action="/admin/notes" enctype="multipart/form-data">
 <h3>Add New </h3>
 <input type="text" name="Name" placeholder="Topic Name"><br>
+<label for="">Pdf</label>
 <input type="file" name="File" id="File"><br>
+<label  for="">Video</label>
+<input type="file" name="Video" placeholder="Video">
+<button type="button" onclick="addLink()">Add link</button>
+<button type="submit" id="uploadbtn">upload</button>
+</form>
+<form action="/admin/linkNotes" class="linkNoteform1" method="post" enctype="multipart/form-data">
+<h3>Add New </h3>
+<input type="text" name="Name" placeholder="Topic Name"><br>
+<label for="">Pdf</label>
+<input type="file" name="File" id="File"><br>
+<label  for="">Video</label>
+<input type="url" name="Video" placeholder="Paste The Link">
+<button type="button" onclick="addVideo()">Add video</button>
 <button type="submit" id="uploadbtn">upload</button>
 </form>
 </div>

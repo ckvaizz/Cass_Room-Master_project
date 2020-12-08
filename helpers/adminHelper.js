@@ -127,7 +127,8 @@ module.exports={
     addNote:(file)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collections.NOTES_COLLECTION).insertOne(file).then((response)=>{
-                resolve()
+               
+                resolve(response.ops[0]._id)
             })
         })
     },

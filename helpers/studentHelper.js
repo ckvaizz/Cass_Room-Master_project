@@ -20,8 +20,7 @@ module.exports={
                     channel:"sms"
                     
                   }).then((data)=>{
-                    console.log("caliing");  
-                    console.log(data);
+                    
                     resolve({status:true})
 
                   }).catch((err)=>{
@@ -64,10 +63,45 @@ module.exports={
                 }
             }).then(response=>{
                 console.log("response",response)
-                //resolve({})
+                resolve()
             })}
     
         })
-        }
+        },
+       getStudent:(number)=>{
+        return new Promise(async(resolve,reject)=>{
+            const student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({Mobile:number})
+            resolve(student)
+        })
+       },
+       doLogin:(data)=>{
+        return new Promise(async(resolve,reject)=>{
+            let user = await db.get().collection(collections.STUDENTS_COLLECTION).findOne({Mobile:data.Mobile})
+            if(user!=null){
+                bcrypt.compare(data.Password,user.Password).then(status=>{
+                    if(status){
+                        resolve(user)
+                    }else reject({status:false})
+                    
+                })
+            }else reject({status:false})
+                
+            
+        })
+       },
+       getNotes:()=>{
+           return new Promise(async(resolve,reject)=>{
+               const notes = await db.get().collection(collections.NOTES_COLLECTION).find({}).toArray()
+               console.log(notes)
+               resolve(notes)
+            })
+       },
+       getNote:(id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.NOTES_COLLECTION).findOne({_id:objectId(id)}).then(note=>{
+                resolve(note)
+            })
+        })
+       }
 
 }

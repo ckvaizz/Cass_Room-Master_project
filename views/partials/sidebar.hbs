@@ -3,6 +3,7 @@
     <i class="fa fa-list-ul" id="btn"></i>
     <i class="fa fa-close" id="cancel"></i>
   </label>
+  {{#if adminLogin}}
 <div class="sidebar">
 <ul>
   <li><a href="/admin">Home</a></li>
@@ -17,3 +18,20 @@
 </ul>
 
 </div>
+{{else}}
+<div class="sidebar">
+<ul>
+  <li><a href="/admin">Home</a></li>
+  <li><a href="/admin/profile">Profile</a></li>
+  <li><a href="/admin/students">Today's task</a></li>
+  <li><a href="">Attedance</a></li>
+  <li><a href="/admin/assignments">Assignment</a></li>
+  <li><a href="/notes">Notes</a></li>
+  <li><a href="">Announcements</a></li>
+  <li><a href="">Galary</a></li>
+  <li><a href="">--</a></li>
+</ul>
+
+</div>
+
+{{/if}}

@@ -1,11 +1,18 @@
 <nav>
 <ul class="Navbar">   
 <li class="navText">
+    {{#if adminLogin}}
     <span>Hi Tutor</span>
-
+    {{else}}
+    <span>Hi {{student.Name}}</span>
+    {{/if}}
 </li>
 <li class="NavbarLogout">
+    {{#if adminLogin}}
    <a href="/admin/logout"><button>Logout</button></a>
+    {{else}}
+    <a href="/logout"><button>Logout</button></a>
+    {{/if}}
 </li>
 </ul>
 </nav>

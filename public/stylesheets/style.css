@@ -600,7 +600,7 @@ border-radius: 20px;
   position: absolute;
   background-color: rgb(48, 48, 65);
   width: 300px;
-  height: 30vh;
+  height: 45vh;
   left: 20px;
   text-align: center;
   padding: 20px;
@@ -612,6 +612,11 @@ border-radius: 20px;
 }
 .assignmentForm:hover{
   box-shadow: 0px 0px 7px 7px rgba(255, 0, 0, 0.82);
+}
+.assignmentForm>form>i{
+  position: absolute;
+  margin-top: 20px;
+
 }
 .assignmentForm>form>h3{
   font-weight: bolder;
@@ -635,6 +640,28 @@ border-radius: 20px;
 .assignmentForm>form>input::placeholder{
   color: rgb(176, 246, 85);
   text-align: center;
+}
+.videoNoteform{
+  opacity: 1;
+  transition:  .7s ease-in-out ;
+  transition-property: opacity ;
+  transition-delay: .2s;
+}
+
+.videoNoteform1{
+  opacity: 0;
+  margin-left: -900px;
+}
+.linkNoteform{
+  opacity: 1;
+  margin-top: -119px;
+  transition: .7s ease-in-out;
+  transition-property: opacity ;
+  transition-delay: .2s;
+}
+.linkNoteform1{
+  opacity: 0;
+  margin-left: -900px;
 }
 .assignmentForm>form>button{
   
@@ -827,7 +854,7 @@ pointer-events: none;
 }
 .logincard{
   position: absolute;
-  height: 60vh;
+  height: 65vh;
   background-color: rgb(253, 253, 253);
   width: 30vw;
   left: 30%;
@@ -897,7 +924,8 @@ pointer-events: none;
   margin-left: 200px;
 }
 .passwordoptions{
-  height:10vh;
+  height:15vh;
+  margin-top: -10px;
   background:linear-gradient(to left,skyblue,rgb(241, 117, 117));
   transition: all 1s;
   border: 2px solid black;
@@ -1033,3 +1061,145 @@ user-select: none;
   user-select: none;
  
 }
+.loginError{
+  color: red;
+  text-decoration: underline;
+  transition-duration: 1s;
+  opacity: 1;
+}
+.loginError1{
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+  text-decoration: none;
+}
+.otpLogin{
+  width: 200px;
+  position: absolute;
+  margin-top: -400px;
+  height: 30vh;
+  
+
+}
+.otpLogin>input{
+  margin-top: 10px;
+}
+.otpLogin>button{
+  position: absolute;
+
+top: 210px;
+}
+.otp-mob-err{
+  color: red;
+}
+.otp-mob-err1{
+  opacity: 0;
+  
+}
+.wait4otp{
+  position: absolute;
+  color: red;
+  margin-top: -40px;
+  margin-left:10px ;
+  opacity: 1;
+  transition: 1s;
+}
+.wait4otp1{
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+.otp-Err{
+  position: absolute;
+  color: red;
+  margin-top: 0px;
+  margin-left: 10px;
+  opacity: 1;
+  transition: 1s;
+}
+.otp-Err1{
+  opacity: 0;
+  pointer-events: none;
+
+}
+.otpLogin>button{
+  position: absolute;
+  margin-top: -30px;
+  margin-left: -26px;
+}
+.Notesboard{
+  top: -38px;
+  height: 99vh;
+  margin: auto;
+  background-color: rgb(114, 98, 98);
+ 
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+.Notesboard>h1{
+  font-size: 2.5rem;
+  font-weight: bolder;
+  background: linear-gradient(to left , rgb(192, 132, 241) , rgb(252, 187, 134));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+}
+.Notesboard>input{
+  position: absolute;
+  top:17px ;
+  right: 25px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.623);
+}
+.notes{
+  height: 75vh;
+  width: 75vw;
+  border: 3px solid black;
+  justify-content: center;
+  overflow-y: scroll;
+  
+  
+}
+.notes::-webkit-scrollbar{
+  display: none;
+}
+.note{
+  height: 150px;
+  
+  
+  background-color: rgba(128, 230, 230, 0.685);
+  text-align: center;
+  border: 3px solid black;
+  margin: 10px;
+}
+.note>i{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.note>p>a>i
+{
+  text-decoration: none;
+  color:black;
+  margin-left: 15px;
+}
+.note>h3{
+  margin: auto;
+  max-width: 140px;
+  color:#ee3131;
+ 
+ overflow-x:scroll ;
+}
+.note>h3::-webkit-scrollbar{
+display: none;
+}
+
+
+
+
+
+

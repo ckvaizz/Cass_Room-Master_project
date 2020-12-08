@@ -67,17 +67,7 @@ $.ajax({
 })
 }
 let delteStudentId='';
-//$('#assignmentupload').submit(e=>{
-   // e.preventDefault()
-   // $.ajax({
-    //    url:'/admin/assignment',
-    //    method:'post',
-  //      data:$("#File")[0].files[0],
-//        success:()=>{
 
-  //      }
-  //  })
-//})
 
 deleteStudentconfrm=(Id)=>{
     delteStudentId=Id
@@ -126,8 +116,12 @@ deleteAssignment=()=>{
    window.onbeforeunload=()=>{
     console.log("loading")
     $('.loading1').addClass('loading').removeClass('loading1')
-   
+  setTimeout(()=>{
+console.log("loading......")
+$('.loading').addClass('loading1').removeClass('loading')
+  },7000) 
 }
+
 
 let deleteNoteId=''
 
@@ -225,7 +219,7 @@ $('#NewPasswordForm').submit(e=>{
                 alert("something ERROR please try again");
                 location.reload()
               }else{
-                 location.href='/loginstd'
+                 location.href='/loginstd-otp?num='+stdMobile
               }
            }
 
@@ -243,4 +237,76 @@ repasword=()=>{
     }else{
         $('.matchingerr').addClass('matchingerr1').removeClass('matchingerr')
     }
+}
+
+$('#stdloginForm').submit(e=>{
+    e.preventDefault()
+    $.ajax({
+        url:'/login',
+        method:'post',
+        data:$('#stdloginForm').serialize(),
+        success:(response)=>{
+           if(response.status){
+               location.href='/logintrue'
+           }else{
+            $('.loginError1').addClass('loginError').removeClass('loginError1')   
+           }
+        }
+    })
+})
+
+OtpLogin=()=>{
+    $('.stdLoginForm').addClass('stdLoginForm1').removeClass('stdLoginForm')
+    $('.otpLogin1').addClass('otpLogin').removeClass('otpLogin1')
+}
+
+otp_Mob=()=>{
+    let otpMob=$('#otp-Mob').val()
+   
+    if(otpMob.length === 10){
+        $.ajax({
+            url:'/checkNumber',
+            method:'post',
+            data:{
+                Mobile:otpMob
+            },
+            success:(response)=>{
+                if(response.status){
+                    $('.wait4otp1').addClass('wait4otp').removeClass('wait4otp1')                  
+                    $('.otp-mob-err').addClass('otp-mob-err1').removeClass('otp-mob-err')
+                }else{
+                    $('.otp-mob-err1').addClass('otp-mob-err').removeClass('otp-mob-err1')          
+                }
+            }
+        })
+    }else {
+        $('.otp-mob-err1').addClass('otp-mob-err').removeClass('otp-mob-err1')
+}}
+
+
+$('#OtpLogin').submit(e=>{
+    e.preventDefault()
+    const otp=$('#otp-Otp').val()
+    const mob=$('#otp-Mob').val()
+    $.ajax({
+      url:'/verifyOtp?No='+mob,
+      method:'post',
+      data:{
+          OTP:otp
+      },
+      success:(response)=>{
+        if(response.status) location.href='/loginstd-otp?num='+mob
+        else $('.otp-Err1').addClass('otp-Err').removeClass('otp-Err1')
+      }
+  })
+
+})
+
+addLink=()=>{
+    $('.videoNoteform').addClass('videoNoteform1').removeClass('videoNoteform')
+    $('.linkNoteform1').addClass('linkNoteform').removeClass('linkNoteform1')
+}
+addVideo=()=>{
+    $('.linkNoteform').addClass('linkNoteform1').removeClass('linkNoteform')
+    $('.videoNoteform1').addClass('videoNoteform').removeClass('videoNoteform1')
 }

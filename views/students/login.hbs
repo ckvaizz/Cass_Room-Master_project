@@ -10,10 +10,12 @@
                         <form class="stdLoginForm" id="stdloginForm" action="" method="post" >
                         <input type="number" maxlength="10" placeholder="Mobile-No" minlength="10" name="Mobile" ><br>
                         <input type="password" name="Password" placeholder="Password"><br>
+                        <h4 class="loginError1">Invalid Login</h4>
                         <i onclick="showoptions()" class="fa fa-gear fa-spin" style="font-size:24px"></i>
                         <div class="passwordoptions1">
                             <p onclick="creatPassWordForm()">create NEW</p>
-                            <p>Forgot password</p>
+                            <p onclick="creatPassWordForm()">Forgot password</p>
+                            <p onclick="OtpLogin()">Login with OTP</p>
                         </div>
                         <button style="transition: 1s ; background-color: rgba(246, 126, 83, 0.835);" class="btn " type="submit">Login</button>
                         </form>
@@ -33,6 +35,15 @@
                             <input type="password" onchange="repasword()" id="re-entrpswrd" name="Re-enterPassword" placeholder="Re-enter password"><br><br>
                             <p class="matchingerr1">Password Not Matching..</p>
                             <button type="submit" class="btn btn-success">Save</button>
+                        </form>
+                        <form action="" class="otpLogin1" id="OtpLogin">
+                            <input type="tel" name="Mobile" onchange="otp_Mob()" id="otp-Mob" placeholder="Mobile-No">
+                            <p class="otp-mob-err1">Cannot find this number </p>
+                             <p class="wait4otp1">wait for OTP</p>
+                            <input type="number" name="Otp" id="otp-Otp" placeholder="OTP">
+                           
+                            <p class="otp-Err1">Invalid OTP</p>
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </form>
 
                 </div>

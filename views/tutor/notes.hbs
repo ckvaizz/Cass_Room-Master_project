@@ -18,7 +18,7 @@
 <label for="">Pdf</label>
 <input type="file" name="File" id="File"><br>
 <label  for="">Video</label>
-<input type="url" name="Video" placeholder="Paste The Link">
+<input type="url" name="Video_Link" placeholder="Paste The Link">
 <button type="button" onclick="addVideo()">Add video</button>
 <button type="submit" id="uploadbtn">upload</button>
 </form>
@@ -30,6 +30,7 @@
     <tr>
         <th>Topic</th>
         <th>File</th>
+        <th>Video</th>
         <th>Option</th>
     </tr>
 </thead>
@@ -38,6 +39,7 @@
     <tr id="tr{{this._id}}">
         <td>{{this.Name}}</td>
         <td><a href="/admin/view-Notes?id={{this._id}}">{{this.fileName}}</a></td>
+        <td><a href="/admin/view-Video?id={{this._id}}">Click Me</a></td>
         <td class="assgnmtTable"><button onclick="deleteNotecnfrm('{{this._id}}')" class="btn-danger"><i  class="fa fa-trash"></i></button></td>
     <div class="deleteassignmentcnfrm1">
         <h3>Delete this Topic</h3>

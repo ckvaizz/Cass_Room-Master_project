@@ -633,6 +633,7 @@ border-radius: 20px;
   border: none;
   overflow: hidden;
   
+  
 }
 .assignmentForm>form>input:focus{
   outline: 0;
@@ -651,6 +652,8 @@ border-radius: 20px;
 .videoNoteform1{
   opacity: 0;
   margin-left: -900px;
+  pointer-events: none;
+  user-select: none;
 }
 .linkNoteform{
   opacity: 1;
@@ -658,6 +661,7 @@ border-radius: 20px;
   transition: .7s ease-in-out;
   transition-property: opacity ;
   transition-delay: .2s;
+  pointer-events: all;
 }
 .linkNoteform1{
   opacity: 0;
@@ -1168,7 +1172,7 @@ top: 210px;
   display: none;
 }
 .note{
-  height: 150px;
+  height: 165px;
   
   
   background-color: rgba(128, 230, 230, 0.685);

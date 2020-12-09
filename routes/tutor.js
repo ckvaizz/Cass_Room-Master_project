@@ -123,11 +123,11 @@ router.get('/notes',verifyLogin,async(req,res)=>{
 })
 router.post('/notes',verifyLogin,(req,res)=>{
     console.log("file",req.files.Video)
-    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
+    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:true}
   adminHelper.addNote(file).then((Id)=>{
       let video =req.files.Video
       video.mv(`./public/notes/${Id}.mp4`)
-    // res.redirect('/admin/notes') 
+         res.redirect('/admin/notes') 
   }) 
 })
 router.get('/deleteNote',verifyLogin,(req,res)=>{
@@ -140,5 +140,48 @@ router.get('/view-Notes',verifyLogin,async(req,res)=>{
     const buffer=note.file.buffer;
    res.type('application/pdf');
    res.end(buffer);
+})
+router.get('/view-Video',verifyLogin,async(req,res)=>{
+    let note= await adminHelper.getNote(req.query.id)
+    if(note.Video){
+      var path=`./public/notes/${req.query.id}.mp4`
+        var stat = fs.statSync(path);
+        var total = stat.size;
+      
+        if (req.headers.range) { 
+          var range = req.headers.range;
+          var parts = range.replace(/bytes=/, "").split("-");
+          var partialstart = parts[0];
+          var partialend = parts[1];
+       
+          var start = parseInt(partialstart, 10);
+          var end = partialend ? parseInt(partialend, 10) : total-1;
+          var chunksize = (end-start)+1;
+          console.log('RANGE: ' + start + ' - ' + end + ' = ' + chunksize);
+       
+          var file = fs.createReadStream(path, {start: start, end: end});
+          res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': chunksize, 'Content-Type': 'video/mp4' });
+          file.pipe(res);
+      
+        } else {
+      
+          console.log('ALL: ' + total);
+          res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' });
+          fs.createReadStream(path).pipe(res);
+        }
+    }else{
+       
+        res.redirect(`${note.VideoLink}`)  
+    
+    }
+})
+
+router.post('/linkNotes',verifyLogin,(req,res)=>{
+    
+    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:false,VideoLink:req.body.Video_Link}
+   adminHelper.addNote(file).then(response=>{
+       res.redirect('/admin/notes')
+   })
+
 })
 module.exports = router;

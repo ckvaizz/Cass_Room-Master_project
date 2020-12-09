@@ -114,12 +114,15 @@ deleteAssignment=()=>{
 }
 
    window.onbeforeunload=()=>{
-    console.log("loading")
+   
     $('.loading1').addClass('loading').removeClass('loading1')
-  setTimeout(()=>{
-console.log("loading......")
-$('.loading').addClass('loading1').removeClass('loading')
-  },7000) 
+   
+}
+window.onload=()=>{
+    $.ajax({
+        url:'/markattndc',
+        method:'get'
+    })
 }
 
 
@@ -310,3 +313,4 @@ addVideo=()=>{
     $('.linkNoteform').addClass('linkNoteform1').removeClass('linkNoteform')
     $('.videoNoteform1').addClass('videoNoteform').removeClass('videoNoteform1')
 }
+

@@ -102,6 +102,35 @@ module.exports={
                 resolve(note)
             })
         })
+       },
+       markAttendance:(note,stdId,status)=>{
+        
+
+        return new Promise(async(resolve,reject)=>{
+            let assgnmntObj={
+                Topic:note.Name,
+                Date:note.Date,
+                status:status,
+                TopicId:objectId(note._id)
+            }
+            console.log("*****")
+            const student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(stdId)})
+            student.Attendance.map(attendance=>{
+                console.log(attendance.TopicId,"--");
+                console.log(typeof(attendance.TopicId));
+                if(attendance.TopicId === objectId(note._id)){
+                    console.log("found===");
+                }
+            })   
+            console.log(note._id,"NoteId==")
+            console.log(typeof(note._id));
+           
+            //db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId)},{
+            //    $push:{Attendance:assgnmntObj}
+            //}).then(reponse=> resolve())
+        
+            
+            })
        }
 
 }

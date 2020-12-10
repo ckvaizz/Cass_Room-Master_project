@@ -7,9 +7,10 @@ let reloadPage=false;
 
 const markAttendance=(time,note,stdId)=>{
   console.log(time,"TiME",reloadPage,"studentId=",stdId);
-  setTimeout((()=>{
-    if(reloadPage) console.log("+++++++BREAK++++++")
-    else studentHelper.markAttendance(note,stdId,true)
+  setTimeout((async()=>{
+ 
+    if(reloadPage) await studentHelper.markAttendance(note,stdId,false) 
+    else await studentHelper.markAttendance(note,stdId,true)
  }),parseInt(time)*1000)
 }
 const verifyLogin=(req,res,next)=>{
@@ -92,10 +93,11 @@ router.get('/notes',verifyLogin,(req,res)=>{
     let note= await studentHelper.getNote(req.query.id)
     console.log("note",note)
     const buffer=note.file.buffer
-    res.setHeader('Content-Type', 'application/pdf');
+  
+  res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', 'attachment; filename=file.pdf');
-  res.send(buffer)
-  res.end("okke")
+  res.end(buffer)
+  
     
     })
     router.get('/viewVideo',verifyLogin,async(req,res)=>{
@@ -138,12 +140,20 @@ router.get('/notes',verifyLogin,(req,res)=>{
             fs.createReadStream(path).pipe(res);
           }
       }
-      else res.redirect(`${note.VideoLink}`)  
-      
+     
+      else{ 
+        studentHelper.markAttendance(note,req.session.student._id,true)
+        res.redirect(`${note.VideoLink}`)  
+    }
       
     })
      router.get('/markattndc',(req,res)=>{
        reloadPage=true;
-       console.log("====================calling==============")
+       
+     })
+     router.post('/searchNotes',verifyLogin,(req,res)=>{
+       studentHelper.search(req.body).then(data=>{
+         res.json(data)
+       })
      })
 module.exports = router;

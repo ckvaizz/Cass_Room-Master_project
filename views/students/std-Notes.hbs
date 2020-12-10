@@ -2,20 +2,25 @@
     <div style="height: 80vh;">
         <div class=" Notesboard col-md-12">
             <h1>Notes</h1>
-            <input type="search" name="search" placeholder="Search Topics..." id="noteSearch">
+            <input type="search"class="searchName" id="Searchnote" name="search" placeholder="Search Topics..." id="noteSearch">
+            <input type="date" class="searchDate1" name="date" id="SearchDate">
+            <p onclick="changeSearch()" class="searchwithdText">search with date</p>
+            <p onclick="changeSearch()" class="searchwithntext1">search with name</p>
             <div class="notes row">
                 {{#each notes}}
                 <div class="note col-md-3">
                     <i class="fa fa-book"></i> 
                    <h3>{{this.Name}}</h3>
-                   <p><a href="/viewNote?id={{this._id}}">Pdf</a> <a href="/downloadNote?id={{this._id}}"><i class="fa fa-download"></i></a></p>
+                   <p><a href="/viewNote?id={{this._id}}">Pdf</a> <a href="/downloadNote?id={{this._id}}"><i onclick="noteDwn()" class="fa fa-download"></i></a></p>
                     <a href="/viewVideo?id={{this._id}}" >Video <i class="fa fa-eye"></i></a>
                     <p>Date:{{this.Date}}</p>
                 </div>
                 {{/each}}
                 
             </div>
-            
+            <div class="searchNotes1" id="searchNote">
+
+            </div>
         </div>
     </div>
 

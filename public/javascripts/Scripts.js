@@ -119,12 +119,12 @@ deleteAssignment=()=>{
    
 }
 window.onload=()=>{
+  
     $.ajax({
         url:'/markattndc',
         method:'get'
     })
 }
-
 
 let deleteNoteId=''
 
@@ -314,3 +314,93 @@ addVideo=()=>{
     $('.videoNoteform1').addClass('videoNoteform').removeClass('videoNoteform1')
 }
 
+noteDwn=()=>{
+    setTimeout(()=>{
+        $('.loading').addClass('loading1').removeClass('loading')
+    },3000)
+}
+let searchType="name";
+$('#Searchnote').on('change keyup paste',()=>{
+    
+    let val = $('#Searchnote').val();
+    if(val){
+        $(".searchNotes1").addClass("searchNotes").removeClass("searchNotes1")
+    }else{
+        $(".searchNotes").addClass("searchNotes1").removeClass("searchNotes")
+    }
+   
+    $.ajax({
+        url:'/searchNotes',
+        method:'post',
+        data:{
+            val:val,
+            type:searchType
+        },
+        success:(data)=>{
+            if(data!=''){
+                document.getElementById('searchNote').innerHTML=`${data.map(note=>{
+                    return ` <div class="note col-md-3">
+                    <i class="fa fa-book"></i> 
+                   <h3>${note.Name}</h3>
+                   <p><a href="/viewNote?id=${note._id}">Pdf</a> <a href="/downloadNote?id=${note._id}"><i onclick="noteDwn()" class="fa fa-download"></i></a></p>
+                    <a href="/viewVideo?id=${note._id}" >Video <i class="fa fa-eye"></i></a>
+                    <p>Date:${note.Date}</p>
+                </div>`
+                })}`
+            }else{
+
+            }
+        }
+    })
+
+})
+$('#SearchDate').on('change keyup paste',()=>{
+    
+    let val = $('#SearchDate').val();
+    if(val){
+        $(".searchNotes1").addClass("searchNotes row").removeClass("searchNotes1")
+    }else{
+        $(".searchNotes").addClass("searchNotes1").removeClass("searchNotes row")
+    }
+   
+    $.ajax({
+        url:'/searchNotes',
+        method:'post',
+        data:{
+            val:val,
+            type:searchType
+        },
+        success:(data)=>{
+            if(data!=''){
+                document.getElementById('searchNote').innerHTML=`${data.map(note=>{
+                    return ` <div class="note col-md-3">
+                    <i class="fa fa-book"></i> 
+                   <h3>${note.Name}</h3>
+                   <p><a href="/viewNote?id=${note._id}">Pdf</a> <a href="/downloadNote?id=${note._id}"><i onclick="noteDwn()" class="fa fa-download"></i></a></p>
+                    <a href="/viewVideo?id=${note._id}" >Video <i class="fa fa-eye"></i></a>
+                    <p>Date:${note.Date}</p>
+                </div>`
+                })}`
+            }else{
+
+            }
+        }
+    })
+
+})
+changeSearch=()=>{
+    if(searchType=='name'){
+$('.searchName').addClass('searchName1').removeClass('searchName')
+$('.searchDate1').addClass('searchDate').removeClass('searchDate1')
+$('.searchwithntext1').addClass('searchwithntext').removeClass('searchwithntext1')
+    $('.searchwithdText').addClass('searchwithdText1').removeClass('searchwithdText')
+searchType='date'
+}else{
+    $('.searchName1').addClass('searchName').removeClass('searchName1')
+    $('.searchDate').addClass('searchDate1').removeClass('searchDate')
+    $('.searchwithntext').addClass('searchwithntext1').removeClass('searchwithntext')
+    $('.searchwithdText1').addClass('searchwithdText').removeClass('searchwithdText1')
+     
+    searchType='name'
+}
+}

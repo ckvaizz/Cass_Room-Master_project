@@ -93,7 +93,7 @@ router.get('/assignments',verifyLogin,async(req,res)=>{
 router.post('/assignment',(req,res)=>{
 
 
-    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
+    let file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
     
     adminHelper.addAssignment(file).then(()=>{
     res.redirect('/admin/assignments')
@@ -123,7 +123,7 @@ router.get('/notes',verifyLogin,async(req,res)=>{
 })
 router.post('/notes',verifyLogin,(req,res)=>{
     console.log("file",req.files.Video)
-    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:true}
+    let file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:true}
   adminHelper.addNote(file).then((Id)=>{
       let video =req.files.Video
       video.mv(`./public/notes/${Id}.mp4`)
@@ -178,7 +178,7 @@ router.get('/view-Video',verifyLogin,async(req,res)=>{
 
 router.post('/linkNotes',verifyLogin,(req,res)=>{
     
-    let file ={ Name:req.body.Name, Date:new Date().toDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:false,VideoLink:req.body.Video_Link}
+    let file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:false,VideoLink:req.body.Video_Link}
    adminHelper.addNote(file).then(response=>{
        res.redirect('/admin/notes')
    })

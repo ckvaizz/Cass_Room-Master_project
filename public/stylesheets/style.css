@@ -1153,7 +1153,7 @@ top: 210px;
 }
 .Notesboard>input{
   position: absolute;
-  top:17px ;
+  top:13px ;
   right: 25px;
   border: none;
   border-radius: 5px;
@@ -1202,8 +1202,57 @@ top: 210px;
 display: none;
 }
 
+.searchNotes{
+  position: absolute;
+  height: 75vh;
+  width: 75vw;
+  border: 3px solid black;
+  justify-content: center;
+  overflow-y: scroll;
+  background-color: rgb(139, 216, 247);
+  margin-top:55px ;
+}
+.searchNotes::-webkit-scrollbar{
+  display: none;
 
+}
+.searchNotes1{
+  display: none;
+  pointer-events: none;
+  user-select: none;
+}
+.searchwithdText{
+  position: absolute;
+  color:rgb(0, 0, 0);
+  right: 40px;
+  top: 35px;
+  text-decoration: underline;
+ 
+}
 
+.searchwithdText:hover,.searchwithntext:hover{
+  color: rgb(65, 206, 241);
+}
+.searchwithntext{
+  position: absolute;
+  color:rgb(0, 0, 0);
+  right: 40px;
+  top: 35px;
+  text-decoration: underline;
+}
+.searchDate,.searchName{
+  position: absolute;
+  width:200px;
+}
+.searchDate:focus,.searchName:focus{
+outline: 0;
+}
+.searchDate1,.searchwithntext1,.searchName1,.searchwithdText1{
+  z-index: -111;
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
 
 
 

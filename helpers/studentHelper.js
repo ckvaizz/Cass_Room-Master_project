@@ -111,26 +111,59 @@ module.exports={
                 Topic:note.Name,
                 Date:note.Date,
                 status:status,
-                TopicId:objectId(note._id)
+                TopicId:note._id
             }
-            console.log("*****")
-            const student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(stdId)})
-            student.Attendance.map(attendance=>{
-                console.log(attendance.TopicId,"--");
-                console.log(typeof(attendance.TopicId));
-                if(attendance.TopicId === objectId(note._id)){
-                    console.log("found===");
-                }
-            })   
-            console.log(note._id,"NoteId==")
-            console.log(typeof(note._id));
-           
-            //db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId)},{
-            //    $push:{Attendance:assgnmntObj}
-            //}).then(reponse=> resolve())
-        
             
-            })
+            const student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(stdId)})
+            if(student.Attendance){
+                let topicExist= student.Attendance.findIndex(att=>objectId(att.TopicId).toString()== objectId(note._id).toString())  
+                console.log("topic",topicExist)
+                if(topicExist!=-1){
+                
+                student.Attendance.map(attendance=>{
+                if(objectId(attendance.TopicId).toString() == objectId(note._id).toString()){
+                    console.log("found===");
+                    if(attendance.status){
+                       console.log("matching++");
+                         return ( resolve())
+                         
+                    }else{
+                        db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId),'Attendance.TopicId':objectId(note._id)},{
+                            $set:{'Attendance.$.status':status}
+                        }).then(response=> { 
+                            return (resolve())})
+                    }
+                } })}
+
+                else{    
+                db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId)},{
+                    $push:{Attendance:assgnmntObj}
+                 }).then(reponse=>{return ( resolve())})
+                } 
+             }else{
+                console.log("calling**")
+                db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId)},{
+                   $push:{Attendance:assgnmntObj}
+                }).then(reponse=>{return ( resolve())})
+
+            }  })
+       },
+       search:(Data)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log(Data);
+        if(Data.type=='name'){
+            let data = await db.get().collection(collections.NOTES_COLLECTION).find({ Name: { $regex: Data.val, $options: '$i' }}).toArray()
+            resolve(data)
+
+        }else{
+            let data = await db.get().collection(collections.NOTES_COLLECTION).find({ Date: { $regex: Data.val, $options: '$i' }}).toArray()
+           console.log(data)
+            resolve(data)
+
+        }
+        
+    })
+        
        }
 
 }

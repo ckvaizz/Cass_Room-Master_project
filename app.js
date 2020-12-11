@@ -33,7 +33,32 @@ app.use((req, res, next) => {
   next()
 })
 app.use(session({secret:"Key",cookie:{maxAge:600000}}))
-const exhbs=hbs.create({ extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials/'});
+const exhbs= hbs.create({
+  extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials/',
+
+
+  helpers:{
+    iff:(a,b,options)=>{
+     console.log("A,B",a,b)
+      a=a.toString();
+      b=b.toString();
+      if ( a === b ){
+       
+        return "<h2>"+ options.fn({status:true}) +"</h2>"
+      }
+    },
+    Inn:(array,day,options)=>{
+      let exits=array.findIndex(att=>att.Date==day)
+     
+      if(exits!=-1){
+        return "<h2>"+options.fn({inn:true}) +"</h2>"
+      }else{
+        return "<h2>"+options.fn({inn:false}) +"</h2>"
+      }
+    }
+  }
+
+})
 app.engine('hbs',exhbs.engine)
 app.use('/', usersRouter);
 app.use('/admin',tutorRouter);

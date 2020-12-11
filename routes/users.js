@@ -11,7 +11,7 @@ const markAttendance=(time,note,stdId)=>{
  
     if(reloadPage) await studentHelper.markAttendance(note,stdId,false) 
     else await studentHelper.markAttendance(note,stdId,true)
- }),parseInt(time)*1000)
+ }),parseInt(time)*1000/1.5)
 }
 const verifyLogin=(req,res,next)=>{
 if(req.session.studentLogin) next()
@@ -155,5 +155,8 @@ router.get('/notes',verifyLogin,(req,res)=>{
        studentHelper.search(req.body).then(data=>{
          res.json(data)
        })
+     })
+     router.get('/todayTask',verifyLogin,(req,res)=>{
+      res.render('students/std-todayTask',{studentLogin:req.session.studentLogin,login:true ,student:req.session.student})
      })
 module.exports = router;

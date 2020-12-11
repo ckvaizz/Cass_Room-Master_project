@@ -93,7 +93,7 @@ router.get('/assignments',verifyLogin,async(req,res)=>{
 router.post('/assignment',(req,res)=>{
 
 
-    let file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
+    let file ={ Name:req.body.Name,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
     
     adminHelper.addAssignment(file).then(()=>{
     res.redirect('/admin/assignments')
@@ -132,6 +132,7 @@ router.post('/notes',verifyLogin,(req,res)=>{
 })
 router.get('/deleteNote',verifyLogin,(req,res)=>{
     adminHelper.deleteNote(req.query.id).then(()=>{
+        fs.unlinkSync(`./public/notes/${req.query.id}.mp4`)
         res.json({status:true})
     })
 })
@@ -184,4 +185,25 @@ router.post('/linkNotes',verifyLogin,(req,res)=>{
    })
 
 })
+router.get('/attendance',verifyLogin,async(req,res)=>{
+    let date=new Date().toLocaleDateString()
+    let students=await adminHelper.getStudents()
+    await students.sort((a,b)=>{
+         return a['Roll-No']-b['Roll-No']
+     })
+    res.render('tutor/attendance',{adminLogin:req.session.adminLogin,login:true,students,date})
+})
+router.get('/attendanceD',verifyLogin,async(req,res)=>{
+    let day=req.query.date
+    let date=day.split("-").reverse().join("/")
+//   
+
+
+    let students=await adminHelper.getStudents()
+    await students.sort((a,b)=>{
+         return a['Roll-No']-b['Roll-No']
+    })
+    res.render('tutor/attendance',{adminLogin:req.session.adminLogin,login:true,students,date})
+})
+
 module.exports = router;

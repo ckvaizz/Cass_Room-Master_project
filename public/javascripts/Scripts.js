@@ -324,41 +324,8 @@ $('#Searchnote').on('change keyup paste',()=>{
     
     let val = $('#Searchnote').val();
     if(val){
-        $(".searchNotes1").addClass("searchNotes").removeClass("searchNotes1")
-    }else{
-        $(".searchNotes").addClass("searchNotes1").removeClass("searchNotes")
-    }
-   
-    $.ajax({
-        url:'/searchNotes',
-        method:'post',
-        data:{
-            val:val,
-            type:searchType
-        },
-        success:(data)=>{
-            if(data!=''){
-                document.getElementById('searchNote').innerHTML=`${data.map(note=>{
-                    return ` <div class="note col-md-3">
-                    <i class="fa fa-book"></i> 
-                   <h3>${note.Name}</h3>
-                   <p><a href="/viewNote?id=${note._id}">Pdf</a> <a href="/downloadNote?id=${note._id}"><i onclick="noteDwn()" class="fa fa-download"></i></a></p>
-                    <a href="/viewVideo?id=${note._id}" >Video <i class="fa fa-eye"></i></a>
-                    <p>Date:${note.Date}</p>
-                </div>`
-                })}`
-            }else{
-
-            }
-        }
-    })
-
-})
-$('#SearchDate').on('change keyup paste',()=>{
-    
-    let val = $('#SearchDate').val();
-    if(val){
         $(".searchNotes1").addClass("searchNotes row").removeClass("searchNotes1")
+        $(".searchLoad1").addClass("searchLoad").removeClass("searchLoad1")
     }else{
         $(".searchNotes").addClass("searchNotes1").removeClass("searchNotes row")
     }
@@ -371,9 +338,11 @@ $('#SearchDate').on('change keyup paste',()=>{
             type:searchType
         },
         success:(data)=>{
+            $(".searchLoad").addClass("searchLoad1").removeClass("searchLoad")
             if(data!=''){
                 document.getElementById('searchNote').innerHTML=`${data.map(note=>{
-                    return ` <div class="note col-md-3">
+                    return `  <div onclick="searchCancel()" class="searchCancel"><i class="fa fa-close"></i></div>
+                    <div class="note col-md-3">
                     <i class="fa fa-book"></i> 
                    <h3>${note.Name}</h3>
                    <p><a href="/viewNote?id=${note._id}">Pdf</a> <a href="/downloadNote?id=${note._id}"><i onclick="noteDwn()" class="fa fa-download"></i></a></p>
@@ -382,7 +351,50 @@ $('#SearchDate').on('change keyup paste',()=>{
                 </div>`
                 })}`
             }else{
+                document.getElementById('searchNote').innerHTML=`
+                <div onclick="searchCancel()" class="searchCancel"><i class="fa fa-close"></i></div>
+                <h3 class="noNotes">No Notes</h3>`
+            }
+        }
+    })
 
+})
+$('#SearchDate').on('change keyup paste',()=>{
+    
+    let val = $('#SearchDate').val();
+    if(val){
+        $(".searchNotes1").addClass("searchNotes row").removeClass("searchNotes1")
+        $(".searchLoad1").addClass("searchLoad").removeClass("searchLoad1")
+    }else{
+        $(".searchNotes").addClass("searchNotes1").removeClass("searchNotes row")
+    }
+   
+    $.ajax({
+        url:'/searchNotes',
+        method:'post',
+        data:{
+            val:val,
+            type:searchType
+        },
+        success:(data)=>{
+            $(".searchLoad").addClass("searchLoad1").removeClass("searchLoad")
+            if(data!=''){
+             
+                document.getElementById('searchNote').innerHTML=`${data.map(note=>{
+                    return ` <div onclick="searchCancel()" class="searchCancel"><i class="fa fa-close"></i></div>
+                     <div class="note col-md-3">
+                    <i class="fa fa-book"></i> 
+                   <h3>${note.Name}</h3>
+                   <p><a href="/viewNote?id=${note._id}">Pdf</a> <a href="/downloadNote?id=${note._id}"><i onclick="noteDwn()" class="fa fa-download"></i></a></p>
+                    <a href="/viewVideo?id=${note._id}" >Video <i class="fa fa-eye"></i></a>
+                    <p>Date:${note.Date}</p>
+                </div>`
+                })}`
+            }else{
+                
+                document.getElementById('searchNote').innerHTML=`
+                <div onclick="searchCancel()" class="searchCancel"><i class="fa fa-close"></i></div>
+                <h3 class="noNotes">No Notes</h3>`
             }
         }
     })
@@ -404,3 +416,15 @@ searchType='date'
     searchType='name'
 }
 }
+searchCancel=()=>{
+    $(".searchNotes").addClass("searchNotes1").removeClass("searchNotes row")
+    $("#Searchnote").val('')
+    $("#SearchDate").val('')
+    
+}
+
+$("#attendanceDate").on('change keyup paste',()=>{
+    let date= $('#attendanceDate').val();
+   
+    location.href="/admin/attendanceD?date="+date
+})

@@ -2,7 +2,7 @@
     <div style="height: 80vh;">
         <div class=" Notesboard col-md-12">
             <h1>Notes</h1>
-            <input type="search"class="searchName" id="Searchnote" name="search" placeholder="Search Topics..." id="noteSearch">
+            <input type="search"class="searchName" autocomplete="off" id="Searchnote" name="search" placeholder="Search Topics..." id="noteSearch">
             <input type="date" class="searchDate1" name="date" id="SearchDate">
             <p onclick="changeSearch()" class="searchwithdText">search with date</p>
             <p onclick="changeSearch()" class="searchwithntext1">search with name</p>
@@ -19,7 +19,8 @@
                 
             </div>
             <div class="searchNotes1" id="searchNote">
-
+                <div onclick="searchCancel()" class="searchCancel"><i class="fa fa-close"></i></div>
+               <p class="searchLoad1"> <i class="fa fa-spinner fa-spin" ></i></p>
             </div>
         </div>
     </div>

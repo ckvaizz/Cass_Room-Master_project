@@ -140,8 +140,8 @@ module.exports={
     },
     deleteNote:(Id)=>{
         return new Promise((resolve,reject)=>{
-            db.get().collection(collections.NOTES_COLLECTION).removeOne({_id:objectId(Id)}).then(()=>{
-                resolve()
+            db.get().collection(collections.NOTES_COLLECTION).removeOne({_id:objectId(Id)}).then((response)=>{
+               resolve()
             })
         })
     },
@@ -150,6 +150,7 @@ module.exports={
             let note=await db.get().collection(collections.NOTES_COLLECTION).findOne({_id:objectId(Id)});
             resolve(note)
         })
-    }
+    },
+    
 
 }

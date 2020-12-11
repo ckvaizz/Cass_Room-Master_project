@@ -818,6 +818,7 @@ pointer-events: none;
 .loading{
   height: 100vh;
   width: 98vw;
+  z-index: 1111111111;
   top: 0;
   left: 0;
   position: fixed;
@@ -1253,6 +1254,202 @@ outline: 0;
   user-select: none;
   pointer-events: none;
 }
+.searchLoad{
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  
+}
+.searchLoad>i{
+  font-size: 45px;
+}
+.searchLoad1{
+  display: none;
+  pointer-events: none;
+  user-select: none;
+}
+.searchCancel{
+  position: absolute;
+  z-index: 1111;
+  background-color: rgb(241, 77, 65);
+  top: 10px;
+  right: 10px;
+  height: 23px;
+  width: 23px;
+  border-radius: 10px;
+justify-content: center;
+align-items: center;
+text-align: center;
+
+}
+.searchCancel:hover{
+  background-color:rgba(255, 0, 0, 0.5);
+}
+.atdTablebg{
+position: relative;
+  text-align: center;
+
+height: 80vh;
+}
+.atdTablebg>input{
+  position: absolute;
+  top: 35px;
+  right: 30px;
+  border-radius:10px ;
+  border: none;
+  
+}
+.atdTablebg>input:focus{
+  outline: 0;
+}
+.attdDate{
+  position: absolute;
+  left: 10px;
+  top:50px;
+}
+.attendanceTable>table{
+  
+  
+  border: 1px solid black;
+}
+.taskbg
+{
+  background-color: rgb(165, 160, 170);
+  height: 80vh;
+  width: 100vhw;
+  position: relative;
+  box-shadow: 0px 0px 3px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+.asstask{
+  position: absolute;
+  height: 50vh;
+  width: 25vw;
+  background-color: rgb(255, 255, 255);
+  top: 20%;
+  left: 15%;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 10px 10px rgba(5, 0, 0, 0.37);
+}
+.asstask>h5,.notetask>h5{
+text-decoration:3px solid rgb(221, 97, 97) underline;
+font-size: 1.4rem;
+font-weight: bold;
+}
+.asstask>div,.notetask>div{
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 40vh;
+  width: 23vw;
+  margin: auto;
+  overflow-x: hidden;
+  
+}
+.notetask>div::-webkit-scrollbar{
+  display: none;
+}
+.asstask>div>p,.notetask>div>p{
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.asstask>div::-webkit-scrollbar{
+  display: none;
+}
+.asstask>div>button{
+  margin-top: 25px;
+  background-color: skyblue;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0px 0px 3px 5px solid rgba(0, 0, 0, 0.5);
+  transition: all 1s ease-in;
+}
+.asstask>div>button:hover{
+  background-color: rgb(24, 224, 228);
+  border: 2px solid rgb(116, 133, 133);
+  border-radius: 5px;
+}
+.asstask>div>form{
+  display: flex;
+  flex-direction: column;
+  height: 15vw;
+  
+}
+.asstask>div>form>input{
+  margin-top: 30px;
+  margin: auto;
+  width: 24vh;
+  overflow-x: hidden;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+
+}
+.asstask>div>form>button{
+  margin-top: 10px;
+  width: 24vh;
+  margin: auto  ;
+  border-radius: 10px;
+  background-color: green;
+  border: none;
+  box-shadow: 0px 0px 3px 3px solid rgba(0, 0, 0, 0.2) ;
+}
+.notetask{
+  position: absolute;
+  height: 50vh;
+  width: 25vw;
+  background-color: rgb(255, 255, 255);
+  top: 20%;
+  right: 15%;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 10px 10px rgba(5, 0, 0, 0.37);
+}
+.notetask>div>video{
+  width: 23vw;
+  height: 23vh;
+
+}
+.notetask>div>a{
+  position: absolute;
+  margin-top: -18px;
+  margin-left: 40px;
+}
+.notetask>div>button{
+  margin-top: 15px;
+  background-color: skyblue;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0px 0px 3px 5px solid rgba(0, 0, 0, 0.5);
 
 
+
+}
+.taskbg>h1{
+  position: absolute;
+  margin-left: 37%;
+  font-weight: bolder;
+  
+  
+  top: 20px;
+  transition: all 1s ease-in;
+  animation:color infinite;
+  animation-duration: 3s;
+}
+@keyframes color{
+  from{
+    background: linear-gradient(to left,rgb(135, 36, 228),rgb(62, 119, 243));  
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+  to{
+    background: linear-gradient(to left,rgb(62, 119, 243),rgb(135, 36, 228));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+}
 

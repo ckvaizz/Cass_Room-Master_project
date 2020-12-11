@@ -3,7 +3,7 @@ var collections=require('../config/collections');
 const bcrypt=require('bcrypt')
 var objectId=require('mongodb').ObjectId
 const accountSID ="ACad1ba650469ec2893ff472d077ef76f3"
-const authTOKEN = "a049e12e1b256546e07c082a9b600899"  
+const authTOKEN = "3f50afe920866c17fc5adb2f05f77d83"  
  const serviceId ="VA465cc0f99ed26a52dde7f6111fda0102"
 const otpclient = require('twilio')(accountSID,authTOKEN)
 
@@ -150,14 +150,16 @@ module.exports={
        },
        search:(Data)=>{
         return new Promise(async(resolve,reject)=>{
-            console.log(Data);
+            console.log(Data.val);
         if(Data.type=='name'){
             let data = await db.get().collection(collections.NOTES_COLLECTION).find({ Name: { $regex: Data.val, $options: '$i' }}).toArray()
             resolve(data)
 
         }else{
-            let data = await db.get().collection(collections.NOTES_COLLECTION).find({ Date: { $regex: Data.val, $options: '$i' }}).toArray()
-           console.log(data)
+            var newdate = Data.val.split("-").reverse().join("/")
+            console.log("date",newdate)
+            let data = await db.get().collection(collections.NOTES_COLLECTION).find({ Date: { $regex: newdate, $options: '$i' }}).toArray()
+              console.log(data)
             resolve(data)
 
         }

@@ -15,7 +15,7 @@
                  {{#each students}}
                  <tr id="tr{{this._id}}">
                  <td>{{this.Roll-No}}</td>
-                 <td>{{this.Name}}</td>
+                 <td><a href="/admin/viewStudent?id={{this._id}}">{{this.Name}}</a></td>
                  <td class="stdntactn"><a href="/admin/editstudent?id={{this._id}}" class="btn-primary"><i class="fa fa-edit"></i></a><button onclick="deleteStudentconfrm('{{this._id}}')" class="btn-danger"> <i class="fa fa-trash"></i></button></td>
                 <div class="deltestudentcnfrm1">
                    <h3> Are you sure to <h2>Delete</h2></h3>

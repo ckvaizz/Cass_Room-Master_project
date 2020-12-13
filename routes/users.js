@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const studentHelper = require('../helpers/studentHelper'); 
 const fs = require('fs')
+const mongodb=require('mongodb')
+const binary = mongodb.Binary
 const { getVideoDurationInSeconds } = require('get-video-duration')
 let reloadPage=false;
 
@@ -57,6 +59,8 @@ studentHelper.getStudent(req.query.num).then(student=>{
 })
   
 })
+
+
 router.post('/login',(req,res)=>{
 studentHelper.doLogin(req.body).then(response=>{
   req.session.student=response
@@ -66,6 +70,8 @@ studentHelper.doLogin(req.body).then(response=>{
   res.json({status:false})
 }) 
 })
+
+
 router.get('/logintrue',verifyLogin,(req,res)=>{
   if(req.session.studentLogin){
     res.render('students/std-Home',{student:req.session.student,studentLogin:req.session.studentLogin,login:true})
@@ -73,37 +79,48 @@ router.get('/logintrue',verifyLogin,(req,res)=>{
     res.redirect('/login')
   }
 })
+
+
 router.get('/logout',(req,res)=>{
   req.session.studentLogin=false
   req.session.student=''
   res.redirect('/login')
 }) 
+
+
 router.get('/notes',verifyLogin,(req,res)=>{
   studentHelper.getNotes().then(notes=>{
     res.render('students/std-Notes',{ student:req.session.student,studentLogin:req.session.studentLogin,login:true,notes})
   })
   })
+
+
   router.get('/viewNote',async(req,res)=>{
-    let note= await studentHelper.getNote(req.query.id)
-    const buffer=note.file.buffer;
-   res.type('application/pdf');
-   res.end(buffer);
+    let path=(`./public/datas/notePdfs/${req.query.id}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res); 
   })
+
+
   router.get('/downloadNote',async(req,res)=>{
-    let note= await studentHelper.getNote(req.query.id)
-    console.log("note",note)
-    const buffer=note.file.buffer
-  
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename=file.pdf');
-  res.end(buffer)
-  
-    
+    let path=(`./public/datas/notePdfs/${req.query.id}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res); 
     })
+
+
     router.get('/viewVideo',verifyLogin,async(req,res)=>{
       let note=await studentHelper.getNote(req.query.id)
-      if(note.Video){
-        var path=`./public/notes/${req.query.id}.mp4`
+      if(!note.VideoLink){
+        var path=`./public/datas/notes/${req.query.id}.mp4`
           var stat = fs.statSync(path);
           var total = stat.size;
           let Duration=''
@@ -116,7 +133,7 @@ router.get('/notes',verifyLogin,(req,res)=>{
             console.log(err)
           })
          
-          if (req.headers.range) { 
+          if (req.headers.range){ 
             var range = req.headers.range;
             var parts = range.replace(/bytes=/, "").split("-");
             var partialstart = parts[0];
@@ -134,7 +151,7 @@ router.get('/notes',verifyLogin,(req,res)=>{
             
           } else {
           
-            console.log('ALL: ' + total);
+           
             res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' });
             //markAttendance(Duration)
             fs.createReadStream(path).pipe(res);
@@ -144,19 +161,57 @@ router.get('/notes',verifyLogin,(req,res)=>{
       else{ 
         studentHelper.markAttendance(note,req.session.student._id,true)
         res.redirect(`${note.VideoLink}`)  
-    }
-      
-    })
+    } })
+
+
      router.get('/markattndc',(req,res)=>{
        reloadPage=true;
        
      })
+
+
      router.post('/searchNotes',verifyLogin,(req,res)=>{
        studentHelper.search(req.body).then(data=>{
          res.json(data)
        })
      })
-     router.get('/todayTask',verifyLogin,(req,res)=>{
-      res.render('students/std-todayTask',{studentLogin:req.session.studentLogin,login:true ,student:req.session.student})
+
+
+     router.get('/todayTask',verifyLogin,async(req,res)=>{
+      let assignments = await studentHelper.getAssignments()
+      let notes = await studentHelper.getNotes()
+      let date = new Date().toLocaleDateString()
+      let note=''
+      let assignment=''
+      notes.map(nte=>{
+        if(nte.Date == date){
+          note = nte
+        }
+      })
+      assignments.map(ass=>{
+        if(ass.Date == date){
+          assignment= ass
+        }
+      })
+      res.render('students/std-todayTask',{studentLogin:req.session.studentLogin,login:true ,student:req.session.student,assignment,note})
      })
+
+
+     router.get('/view-Assignment',verifyLogin,async(req,res)=>{
+        let path=(`./public/datas/assignments/${req.query.id}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res); 
+    })
+    router.post('/submitAssignment',verifyLogin,(req,res)=>{
+      let file={Topic:req.body.Topicname,TopicId:req.body.assId,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString()}
+      studentHelper.submitAssignment(file,req.session.student._id).then(respose=>{
+        let pdf = req.files.File
+        pdf.mv(`./public/datas/assignments/submited/${req.body.assId}.pdf`)
+        res.redirect('/todayTask')
+      })
+    })
 module.exports = router;

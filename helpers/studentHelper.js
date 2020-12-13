@@ -166,6 +166,29 @@ module.exports={
         
     })
         
+       },
+       getAssignments:()=>{
+           return new Promise(async(resolve,reject)=>{
+            let assignments= await db.get().collection(collections.ASSIGNMENTS_COLLECTION).find({}).toArray()
+            resolve(assignments)
+        })
+       },
+       getAssignment:(id)=>{
+           return new Promise(async(resolve,reject)=>{
+               let assignment=await  db.get().collection(collections.ASSIGNMENTS_COLLECTION).findOne({_id:objectId(id)})
+               resolve(assignment)
+
+       })
+       },
+       submitAssignment:(file,id)=>{
+           return new Promise(async(resolve,reject)=>{
+             db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(id)},{
+                 $push:{Assignments:file}
+             }).then(response=>{
+                 resolve()
+             })
+            
+           })
        }
 
 }

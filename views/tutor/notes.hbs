@@ -38,9 +38,9 @@
     {{#each notes}}
     <tr id="tr{{this._id}}">
         <td>{{this.Name}}</td>
-        <td><a href="/admin/view-Notes?id={{this._id}}">{{this.fileName}}</a></td>
-        <td><a href="/admin/view-Video?id={{this._id}}">Click Me</a></td>
-        <td class="assgnmtTable"><button onclick="deleteNotecnfrm('{{this._id}}')" class="btn-danger"><i  class="fa fa-trash"></i></button></td>
+        <td>{{#if this.fileName}}<a href="/admin/view-Notes?id={{this._id}}">{{this.fileName}}</a>{{else}}No pdf {{/if}}</td>
+        <td>{{#if this.video}}<a href="/admin/view-Video?id={{this._id}}">Click Me</a>{{else}}No video {{/if}}</td>
+        <td class="assgnmtTable"><button onclick="deleteNotecnfrm('{{this._id}}') " class="btn-danger"><i  class="fa fa-trash"></i></button></td>
     <div class="deleteassignmentcnfrm1">
         <h3>Delete this Topic</h3>
         <button onclick="deleteNote()" class="btn btn-success">Yes</button> <a class="btn btn-danger" href="/admin/notes"> No</a>

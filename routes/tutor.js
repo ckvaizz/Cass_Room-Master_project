@@ -64,6 +64,8 @@ router.get('/students',verifyLogin,async(req,res)=>{
     
     res.render('tutor/students',{adminLogin:req.session.adminLogin,students,login:true})
 })
+
+
 router.get('/addstudent',verifyLogin,(req,res)=>{
     res.render('tutor/addstudent',{adminLogin:req.session.adminLogin,login:true})
 })
@@ -93,10 +95,13 @@ router.get('/assignments',verifyLogin,async(req,res)=>{
 router.post('/assignment',(req,res)=>{
 
 
-    let file ={ Name:req.body.Name,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data) }
-    
-    adminHelper.addAssignment(file).then(()=>{
-    res.redirect('/admin/assignments')
+    let file ={ Name:req.body.Name,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name }
+    adminHelper.addAssignment(file).then((data)=>{
+        console.log(data._id)
+   
+        let pdf=req.files.File
+        pdf.mv(`./public/datas/assignments/${data._id}.pdf`)
+         res.redirect('/admin/assignments')
     })
 })
  
@@ -112,40 +117,67 @@ router.get('/deleteassignment',verifyLogin,(req,res)=>{
     })
 })
 router.get('/view-assignment',verifyLogin,async(req,res)=>{
-    let file=await adminHelper.getAssignment(req.query.id)
-    const buffer=file.file.buffer;
-   res.type('application/pdf');
-   res.end(buffer);
+   // let file=await adminHelper.getAssignment(req.query.id)
+   // const buffer=file.file.buffer;
+   let path=(`./public/datas/assignments/${req.query.id}.pdf`)
+   
+
+   var file = fs.createReadStream(path);
+var stat = fs.statSync(path);
+res.setHeader('Content-Length', stat.size);
+res.setHeader('Content-Type', 'application/pdf');
+//res.setHeader('Content-Disposition', 'attachment; file.pdf');
+file.pipe(res);
+
 })
 router.get('/notes',verifyLogin,async(req,res)=>{
     let notes= await adminHelper.getNotes()
     res.render('tutor/notes',{adminLogin:req.session.adminLogin,notes,login:true})
 })
-router.post('/notes',verifyLogin,(req,res)=>{
-    console.log("file",req.files.Video)
-    let file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:true}
-  adminHelper.addNote(file).then((Id)=>{
-      let video =req.files.Video
-      video.mv(`./public/notes/${Id}.mp4`)
-         res.redirect('/admin/notes') 
-  }) 
+router.post('/notes',verifyLogin,(req,res)=>{ 
+    let file=''
+   if(req.files.File) file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name}
+    else file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),noPdf:true}
+   if(req.files.Video) file.video=true
+    adminHelper.addNote(file).then((Id)=>{
+        if(req.files.Video){
+        let video =req.files.Video
+      video.mv(`./public/datas/notes/${Id}.mp4`)
+      //   res.redirect('/admin/notes') 
+        }
+        if(req.files.File){
+            let pdf = req.files.File
+            pdf.mv(`./public/datas/notePdfs/${Id}.pdf`)
+        }
+        res.redirect('/admin/notes')
+    }) 
 })
 router.get('/deleteNote',verifyLogin,(req,res)=>{
-    adminHelper.deleteNote(req.query.id).then(()=>{
-        fs.unlinkSync(`./public/notes/${req.query.id}.mp4`)
+
+    adminHelper.deleteNote(req.query.id).then((status)=>{
+        console.log(status,"=======")
+        if(status.video) fs.unlinkSync(`./public/datas/notes/${req.query.id}.mp4`)
+        if(status.pdf) fs.unlinkSync(`./public/datas/notePdfs/${req.query.id}.pdf`)
         res.json({status:true})
     })
 })
+
+
 router.get('/view-Notes',verifyLogin,async(req,res)=>{
-    let note= await adminHelper.getNote(req.query.id)
-    const buffer=note.file.buffer;
-   res.type('application/pdf');
-   res.end(buffer);
+
+    let path=(`./public/datas/notePdfs/${req.query.id}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res); 
+
 })
 router.get('/view-Video',verifyLogin,async(req,res)=>{
     let note= await adminHelper.getNote(req.query.id)
-    if(note.Video){
-      var path=`./public/notes/${req.query.id}.mp4`
+    if(!note.VideoLink){
+      var path=`./public/datas/notes/${req.query.id}.mp4`
         var stat = fs.statSync(path);
         var total = stat.size;
       
@@ -178,10 +210,18 @@ router.get('/view-Video',verifyLogin,async(req,res)=>{
 })
 
 router.post('/linkNotes',verifyLogin,(req,res)=>{
-    
-    let file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name,file:binary(req.files.File.data),Video:false,VideoLink:req.body.Video_Link}
+   
+    let file =' ';
+   
+   if(req.files) {file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name}}
+   else file ={ Name:req.body.Name, Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),noPdf:true}
+    if(req.body.Video_Link) file.VideoLink=req.body.Video_Link ,file.video=true
    adminHelper.addNote(file).then(response=>{
-       res.redirect('/admin/notes')
+    if(req.files){
+        let pdf=req.files.File
+        pdf.mv(`./public/datas/notePdfs/${response}.pdf`)
+    }   
+    res.redirect('/admin/notes')
    })
 
 })
@@ -196,14 +236,26 @@ router.get('/attendance',verifyLogin,async(req,res)=>{
 router.get('/attendanceD',verifyLogin,async(req,res)=>{
     let day=req.query.date
     let date=day.split("-").reverse().join("/")
-//   
+
 
 
     let students=await adminHelper.getStudents()
     await students.sort((a,b)=>{
-         return a['Roll-No']-b['Roll-No']
+         return a['Roll-No']-b['Roll-No'] 
     })
     res.render('tutor/attendance',{adminLogin:req.session.adminLogin,login:true,students,date})
 })
-
+router.get('/viewStudent',verifyLogin,async(req,res)=>{
+    let viewStudent= await adminHelper.getStudent(req.query.id)
+    
+    console.log(viewStudent);
+    res.render('tutor/studentDetails',{login:true,adminLogin:req.session.adminLogin,viewStudent})
+})
+router.get('/viewstudentAssignment',verifyLogin,async(req,res)=>{
+   console.log(req.query.id,req.query.std)
+    let assignment= await adminHelper.getStdAssignment(req.query.id,req.query.std)
+    //  const buffer=assignment.file.buffer;
+   //  res.type('application/pdf');
+   //  res.end(buffer);
+})
 module.exports = router;

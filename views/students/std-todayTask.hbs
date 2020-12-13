@@ -2,27 +2,49 @@
 <div class="container">
 <div class="taskbg">
     <h1>Today Tasks</h1>
+    {{#if assignment}}
     <div class="asstask">
         <h5>Assignment</h5>
         <div>
-            <p>Topic</p>
-            <button>View/Download</button>
-            <form action="" enctype="multipart/form-data">
-                <input type="file" name="Assignment">
+            <p>{{assignment.Name}}</p>
+            <a href="/view-Assignment?id={{assignment._id}}" class="btn">View/Download</a>
+            <form action="/submitAssignment" method="post" enctype="multipart/form-data">
+                <input type="file" name="File">
+                <input type="text" name="assId" value="{{assignment._id}}" hidden>
+                <input type="text" name="Topicname" value="{{assignment.Name}}" hidden>
                 <button type="submit">Submit</button>
             </form>
             
         </div>
     </div>
+    {{else}}
+    <div class="asstask">
+        <h5>Assignment</h5>
+        <div>
+            <p>No Assignments Today</p>
+                        
+        </div>
+    </div>
+    {{/if}}
+   {{#if note}}
     <div class="notetask">
         <h5>Note</h5>
             <div>
-                 <video src="/notes/5fd1f147e03705fe5bf835d4.mp4" controls autoplay></video>
-                 <p>Topic</p>
-                 <a href="">pdf</a>
-                 <button>View/Download</button>
+                 <video src="/datas/notes/{{note._id}}.mp4" muted autoplay></video>
+                 <p>{{note.Name}}</p>
+                {{#if note.noPdf}} <a href="">No Pdf</a> {{else}}<a href="/viewNote?id={{note._id}}">pdf</a>{{/if}}
+                {{#if note.video}}<a href="/viewVideo?id={{note._id}}" class="viewOrdwnload">View/Download</a>{{else}} <a href="" class="viewOrdwnload">No Video</a>{{/if}}
             </div>
     </div>
+    {{else}}
+        <div class="notetask">
+        <h5>Note</h5>
+            <div>
+                 <p>No Notes Today</p>
+            </div>
+            </div>
+  
+    {{/if}}
 </div>
 </div>
 

@@ -1356,7 +1356,7 @@ font-weight: bold;
 .asstask>div::-webkit-scrollbar{
   display: none;
 }
-.asstask>div>button{
+.asstask>div>a{
   margin-top: 25px;
   background-color: skyblue;
   border: none;
@@ -1367,7 +1367,7 @@ font-weight: bold;
 }
 .asstask>div>button:hover{
   background-color: rgb(24, 224, 228);
-  border: 2px solid rgb(116, 133, 133);
+
   border-radius: 5px;
 }
 .asstask>div>form{
@@ -1414,12 +1414,14 @@ font-weight: bold;
 .notetask>div>a{
   position: absolute;
   margin-top: -18px;
-  margin-left: 40px;
+  margin-left: -15px;
 }
-.notetask>div>button{
-  margin-top: 15px;
+.viewOrdwnload{
+  position: absolute;
+  bottom: 40px;
   background-color: skyblue;
   border: none;
+  right: 60px;
   border-radius: 10px;
   padding: 5px;
   box-shadow: 0px 0px 3px 5px solid rgba(0, 0, 0, 0.5);
@@ -1453,3 +1455,75 @@ font-weight: bold;
   }
 }
 
+.stdcardbg{
+  height: 90vh;
+  width: 90vw;
+ position: relative;
+}
+.studentdetails{
+  position: absolute;
+  height: 80vh;
+  width: 40vw;
+  background: linear-gradient(to top,rgb(44, 152, 224),rgb(246, 246, 246));
+  top:6%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px 5px rgba(255, 253, 253, 0.5);
+}
+.studentdetails>img{
+  margin-left: 90px;
+  border: 1px solid black;
+  opacity: 0.8;
+}
+.studentdetails>p{
+  font-size: 1.5rem;
+  margin-left: 100px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.studentattandance{
+  position: absolute;
+  height: 38vh;
+  width: 35vw;
+  background-color: rgb(255, 255, 255);
+  top:6%;
+  right: 6%;
+  background: linear-gradient(to top,rgba(177, 86, 86, 0.986),skyblue);
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px 5px rgba(255, 253, 253, 0.5);
+  overflow-x: scroll;
+}
+.studentattandance>h4{
+  margin-left: 120px;
+  text-decoration:2px skyblue underline;
+  font-weight: 700;
+}
+.studentassignments{
+  position: absolute;
+  height: 38vh;
+  width: 35vw;
+  background-color: rgb(255, 255, 255);
+  bottom: 6%;
+  right: 6%;
+  background: linear-gradient(to top,rgb(180, 176, 176),rgba(177, 86, 86, 0.986));
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px 5px rgba(255, 253, 253, 0.5);
+  overflow-x: scroll;
+}
+.studentassignments::-webkit-scrollbar,.studentattandance::-webkit-scrollbar{
+  display: none;
+
+}
+.studentassignments>h4{
+  margin-left: 120px;
+  text-decoration:2px skyblue underline;
+  font-weight: 700;
+}
+.Assignmentmark>input{
+  width: 50px;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+}
+.Assignmentmark>input:focus{
+  outline: 0;
+}

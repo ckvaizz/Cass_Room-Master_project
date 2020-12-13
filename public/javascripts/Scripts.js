@@ -127,20 +127,23 @@ window.onload=()=>{
 }
 
 let deleteNoteId=''
-
-deleteNotecnfrm=(Id)=>{
+let video=''
+let link=''
+deleteNotecnfrm=(id)=>{
     console.log("calling");
-    deleteNoteId=Id
+    deleteNoteId=id
+    
 $('.deleteassignmentcnfrm1').addClass('deleteassignmentcnfrm').removeClass('deleteassignmentcnfrm1')
 }
 deleteNote=()=>{
 $.ajax({
-    url:'/admin/deleteNote?id='+deleteNoteId,
+    url:`/admin/deleteNote?id=${deleteNoteId}`,
     method:'get',
     success:()=>{
         $('.deleteassignmentcnfrm').addClass('deleteassignmentcnfrm1').removeClass('deleteassignmentcnfrm')
         $('#tr'+deleteNoteId).remove()
         deleteNoteId='';
+        
     }
 })
 }

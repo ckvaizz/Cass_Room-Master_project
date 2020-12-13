@@ -93,8 +93,8 @@ module.exports={
         return new Promise((resolve,reject)=>{
             
             db.get().collection(collections.ASSIGNMENTS_COLLECTION).insertOne(file).then((response)=>{
-               
-                resolve()
+               console.log(response)
+                resolve(response.ops[0])
             })
         })
     },
@@ -139,9 +139,21 @@ module.exports={
         })
     },
     deleteNote:(Id)=>{
-        return new Promise((resolve,reject)=>{
+        return new Promise(async(resolve,reject)=>{
+            let note= await db.get().collection(collections.NOTES_COLLECTION).findOne({_id:objectId(Id)})
             db.get().collection(collections.NOTES_COLLECTION).removeOne({_id:objectId(Id)}).then((response)=>{
-               resolve()
+                let status={}
+                if(note.video && !note.VideoLink){
+                    status.video=true
+                }else{
+                    status.video=false
+                }
+                if(note.noPdf){
+                    status.pdf=false
+                }else {
+                    status.pdf=true
+                }
+                resolve(status)
             })
         })
     },
@@ -151,6 +163,15 @@ module.exports={
             resolve(note)
         })
     },
-    
+    getStdAssignment:(Id,stdId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(stdId)})
+            data.Assignments.map(std=>{
+                if(std.TopicId==Id){
+
+                }
+        })
+        })
+    }
 
 }

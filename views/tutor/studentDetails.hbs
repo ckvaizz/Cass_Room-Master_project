@@ -1,0 +1,60 @@
+<section style="height: 90vh; background-color: black; margin-top:-39px">
+<div class="container">
+    <div class="stdcardbg">
+        <div class="studentdetails">
+            <img src="/images/male1.png" alt="img">
+            <p>Name: {{viewStudent.Name}}</p>
+            <p>Email: {{viewStudent.Email}}</p>
+            <p>Mob :{{viewStudent.Mobile}}</p>
+            <p>Address:{{viewStudent.Address}}</p>
+        </div>
+        <div class="studentattandance">
+            <h4>Attandance</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each viewStudent.Attendance}}
+                    <tr>
+                        <td>{{this.Topic}}</td>
+                        <td>{{this.Date}}</td>
+                        <td>{{this.status}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="studentassignments">
+             <h4>Assignments</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Mark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each viewStudent.Assignments}}
+                    <tr>
+                        <td><a href="/admin/viewstudentAssignment?id={{this.TopicId}}&std={{../viewStudent._id}}">{{this.Topic}}</a></td>
+                        <td>{{this.Date}}</td>
+                        <td>{{this.Time}}</td>
+                        <td class="Assignmentmark"><input type="number" value=""></td>
+                    </tr>
+                     {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+</section>

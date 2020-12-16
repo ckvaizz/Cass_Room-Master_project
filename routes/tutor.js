@@ -253,9 +253,21 @@ router.get('/viewStudent',verifyLogin,async(req,res)=>{
 })
 router.get('/viewstudentAssignment',verifyLogin,async(req,res)=>{
    console.log(req.query.id,req.query.std)
-    let assignment= await adminHelper.getStdAssignment(req.query.id,req.query.std)
-    //  const buffer=assignment.file.buffer;
-   //  res.type('application/pdf');
-   //  res.end(buffer);
+
+   let path=(`./public/datas/assignments/submited/${req.query.id+req.query.std}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res); 
+
+})
+
+
+router.post('/Ass-Mark',verifyLogin,(req,res)=>{
+adminHelper.setMark(req.body).then(response=>{
+    res.json({status:true})
+})
 })
 module.exports = router;

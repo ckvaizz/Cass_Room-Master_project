@@ -1,6 +1,5 @@
 var createError = require('http-errors');
 var express = require('express');
-
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,16 +7,14 @@ var db=require('./config/connection');
 var hbs = require('express-handlebars');
 var usersRouter = require('./routes/users');
 var tutorRouter = require('./routes/tutor');
-var session=require('express-session')
 var app = express();
 const fileUpload = require('express-fileupload')
-const fs = require('fs')
-
-
+const session=require('express-session')
+const MongoStore = require('connect-mongo')(session)
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs')
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,11 +29,21 @@ app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store')
   next()
 })
-app.use(session({secret:"Key",cookie:{maxAge:600000}}))
+app.use(session({
+  store: new MongoStore({
+      url:'mongodb+srv://admin:CNojm0HyXo4iA9Z5@cluster0.shb7d.mongodb.net/classRoom?retryWrites=true&w=majority'
+  }),
+
+  secret: 'keyyyyyy',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7 * 2 // two weeks
+    }
+})); 
+
 const exhbs= hbs.create({
   extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials/',
-
-
   helpers:{
     iff:(a,b,options)=>{
      console.log("A,B",a,b)
@@ -59,6 +66,7 @@ const exhbs= hbs.create({
   }
 
 })
+
 app.engine('hbs',exhbs.engine)
 app.use('/', usersRouter);
 app.use('/admin',tutorRouter);

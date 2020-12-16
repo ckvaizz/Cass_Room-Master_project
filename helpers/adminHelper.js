@@ -6,7 +6,6 @@ var objectId=require('mongodb').ObjectId
 module.exports={
     doLogin:(userData)=>{
         return new Promise(async(resolve,reject)=>{
-            console.log("userData:",userData)
             let user=await db.get().collection(collections.ADMIN_COLLECTION).findOne({name:userData.name})
             if(user){
             bcrypt.compare(userData.password,user.password).then((status)=>{
@@ -27,7 +26,6 @@ module.exports={
     },
     editProfile:(details,admin)=>{
         return new Promise((resolve,reject)=>{
-            console.log(details,admin)
             db.get().collection(collections.ADMIN_COLLECTION).updateOne({_id:objectId(admin._id)},{
             $set:{
                 Profile:details
@@ -51,7 +49,6 @@ module.exports={
     addStudent:(data)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collections.STUDENTS_COLLECTION).insertOne(data).then((respo)=>{
-                console.log(respo);
                 resolve()
             })
         })
@@ -93,7 +90,6 @@ module.exports={
         return new Promise((resolve,reject)=>{
             
             db.get().collection(collections.ASSIGNMENTS_COLLECTION).insertOne(file).then((response)=>{
-               console.log(response)
                 resolve(response.ops[0])
             })
         })
@@ -172,6 +168,19 @@ module.exports={
                 }
         })
         })
+    },
+    setMark:(details)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(details)
+            db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(details.StdId),'Assignments.TopicId':details.AssId},{
+                $set:{'Assignments.$.Mark':details.Mark}
+            }).then(response=>{
+                console.log(response)
+                resolve()
+            })
+        
+
+    })
     }
 
 }

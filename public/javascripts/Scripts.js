@@ -431,3 +431,97 @@ $("#attendanceDate").on('change keyup paste',()=>{
    
     location.href="/admin/attendanceD?date="+date
 })
+
+changeMark=(Id,std)=>{
+    
+    let mark=$('#Mark-Ass').val()
+
+    $.ajax({
+        url:'/admin/Ass-Mark',
+        method:'post',
+        data:{
+            AssId:Id,
+            StdId:std,
+            Mark:mark
+        },
+        success:(response)=>{
+            alert(ooke)
+            $('#Mark-Ass').val(mark)
+        }
+    })
+}
+
+
+
+$(document).ready(function() {
+
+     $('#taskForm').submit(function(e) {
+       e.preventDefault()
+        $(this).ajaxSubmit({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        $('.progress1').addClass('progress').removeClass('progress1')
+                        var percentComplete = (evt.loaded / evt.total) * 100;
+                        // Place upload progress bar visibility code here
+                        $('.progress-bar').css("width",percentComplete+"%")
+                        console.log(percentComplete)
+                    }
+                }, false);
+                return xhr;
+            },
+
+            success: function(response) {
+                setTimeout(()=>{
+                    $('.progress').addClass('progress1').removeClass('progress')
+                    $('.uploadedstatus1').addClass('uploadedstatus').removeClass('uploadedstatus1')
+                   $('#assFile').val(' ')
+                    setTimeout(()=>{
+                        $('.uploadedstatus').addClass('uploadedstatus1').removeClass('uploadedstatus')
+                    },2000)
+                },2000)
+            }
+    });
+        
+    return false;
+    });    
+});
+closeback=(Id)=>{
+    let div =document.querySelector("#div"+Id)
+    div.style="transform:rotateY(0deg)"
+    
+}
+
+view_assdetails=(Id)=>{
+let div =document.querySelector("#div"+Id)
+
+div.style="transform:rotateY(180deg)"
+
+$.ajax({
+    url:'/getAssignment?id='+Id,
+    method:'get',
+    success:(data)=>{
+        $('.backload').addClass('backload1').removeClass('backload')
+        if(data!= ' '){
+        
+            document.getElementById('back'+Id).innerHTML =`
+            <div  class="closeback"><i onclick="closeback('${Id}')" class="fa fa-close"></i></div>
+            <div class="datadetails"><h5><a href="/view-Assignment?id=${data.TopicId}">${data.Topic}</a></h5>
+            <p>Date : ${data.Date}</p>
+            <p>Submited Time : ${data.Time}</p>
+            <a href="/viewsubmited?id=${data.TopicId}" class="btn btn-primary"> view submited </a> 
+            </div>
+            `
+        
+    }else{
+        document.getElementById('back'+Id).innerHTML = `
+        <div class="closeback"><i onclick="closeback('${Id}')" class="fa fa-close"></i></div>
+        <h5>Not Attend</h5>
+        `
+        }
+    }
+})
+
+
+}

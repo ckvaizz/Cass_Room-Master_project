@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{this.Topic}}</td>
                         <td>{{this.Date}}</td>
-                        <td>{{this.status}}</td>
+                        <td>{{#if this.status}}P{{else}}A{{/if}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -46,7 +46,7 @@
                         <td><a href="/admin/viewstudentAssignment?id={{this.TopicId}}&std={{../viewStudent._id}}">{{this.Topic}}</a></td>
                         <td>{{this.Date}}</td>
                         <td>{{this.Time}}</td>
-                        <td class="Assignmentmark"><input type="number" value=""></td>
+                        <td class="Assignmentmark"><input type="number" onchange="changeMark('{{this.TopicId}}','{{../viewStudent._id}}')" value="{{this.Mark}}" id="Mark-Ass"></td>
                     </tr>
                      {{/each}}
                 </tbody>

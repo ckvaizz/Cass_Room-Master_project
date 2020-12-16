@@ -209,9 +209,38 @@ router.get('/notes',verifyLogin,(req,res)=>{
     router.post('/submitAssignment',verifyLogin,(req,res)=>{
       let file={Topic:req.body.Topicname,TopicId:req.body.assId,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString()}
       studentHelper.submitAssignment(file,req.session.student._id).then(respose=>{
-        let pdf = req.files.File
-        pdf.mv(`./public/datas/assignments/submited/${req.body.assId}.pdf`)
-        res.redirect('/todayTask')
+       let pdf = req.files.File
+       pdf.mv(`./public/datas/assignments/submited/${req.body.assId+req.session.student._id}.pdf`)
+       res.json("okke")
       })
     })
+
+
+    router.get('/assignments',verifyLogin,async(req,res)=>{
+     let assignments = await studentHelper.getAssignments()
+      res.render('students/std-assignments',{assignments,login:true,student:req.session.student,studentLogin:req.session.studentLogin})
+     })
+
+
+
+router.get('/getAssignment',verifyLogin,async(req,res)=>{
+let student = await studentHelper.getStudentDetails(req.session.student._id);
+let assnment=' '
+await student.Assignments.map(ass=>{if(ass.TopicId == req.query.id){ assnment=ass } })
+res.json(assnment)
+
+})
+
+
+
+router.get('/viewsubmited',verifyLogin,(req,res)=>{
+  let path=(`./public/datas/assignments/submited/${req.query.id+req.session.student._id}.pdf`)
+  var file = fs.createReadStream(path);
+  var stat = fs.statSync(path);
+  res.setHeader('Content-Length', stat.size);
+  res.setHeader('Content-Type', 'application/pdf');
+  //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+  file.pipe(res); 
+})
+
 module.exports = router;

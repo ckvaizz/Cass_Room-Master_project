@@ -1527,3 +1527,113 @@ font-weight: bold;
 .Assignmentmark>input:focus{
   outline: 0;
 }
+
+.progress-bar{
+  transition: width 1s ease-in-out;
+}
+
+.progress1{
+  display: none;
+}
+.uploadedstatus{
+  position: absolute;
+  background-color: rgb(223, 81, 39);
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  top: 10%;
+  left: 40px;
+  animation: widthanimate ease-out;
+  animation-duration: 2s;
+  text-align: center;
+  transition: 1s ease-in ;
+  opacity: 0;
+}
+@keyframes widthanimate {
+  from{
+    width: 0px;
+    opacity: 0;
+  }
+  to{
+    width: 100px;
+    opacity: 1;
+  }
+}
+.uploadedstatus1{
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
+.ass-card{
+  background-color: transparent;
+  perspective: 1000px;
+}
+.ass-cardInner{
+  position: relative;
+  min-height: 200px;
+  max-height: 100%;
+  width: 200px;
+  background-color: rgba(26, 24, 24, 0.966);
+  margin-top: 20px;
+  padding: 15px;
+  transition: all .5s  ease-in;
+  transform-style: preserve-3d;
+}
+.ass-cardInner:hover{
+  border-bottom:3px solid skyblue;
+    border-top: 3px solid red;  
+}
+
+.front-ass>h5{
+  font-weight: 600;
+  color: skyblue;
+  margin-left: 10px;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  font-style:oblique;
+}
+.front-ass>p{
+  color: white;
+  margin-left: 15px;
+}
+.front-ass,.back-ass{
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+}
+.back-ass{
+   transform: rotateY(180deg);
+    color: white;
+    height: 100%;
+    width: 100%;
+    
+  }
+.backload{
+  position: absolute;
+  color: white;
+  margin-top: -50px;
+  margin-left: 65px;
+}
+.backload1{
+  display: none;
+  pointer-events: none;
+  user-select: none;
+}
+.closeback{
+  position: absolute;
+  margin-top: -100px;
+  margin-left: 150px;
+  background-color: red;
+  z-index: 111;
+  
+}
+.closeback:hover{
+  background-color: rgb(246, 168, 168);
+  color: black;
+}
+.datadetails{
+  position: absolute;
+  margin-top: -110px;
+}

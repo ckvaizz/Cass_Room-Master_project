@@ -2,16 +2,21 @@
 <div class="container">
 <div class="taskbg">
     <h1>Today Tasks</h1>
+     <div class="uploadedstatus1">Submited</div>
     {{#if assignment}}
     <div class="asstask">
         <h5>Assignment</h5>
         <div>
             <p>{{assignment.Name}}</p>
             <a href="/view-Assignment?id={{assignment._id}}" class="btn">View/Download</a>
-            <form action="/submitAssignment" method="post" enctype="multipart/form-data">
-                <input type="file" name="File">
+            <form   id="taskForm" action="/submitAssignment" method="post" enctype="multipart/form-data">
+                <input type="file" id="assFile" name="File">
                 <input type="text" name="assId" value="{{assignment._id}}" hidden>
                 <input type="text" name="Topicname" value="{{assignment.Name}}" hidden>
+               <div class="progress1">
+                <div class="progress-bar" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">uploading..</div>
+                    </div>
+                   
                 <button type="submit">Submit</button>
             </form>
             

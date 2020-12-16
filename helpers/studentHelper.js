@@ -116,11 +116,11 @@ module.exports={
             
             const student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(stdId)})
             if(student.Attendance){
-                let topicExist= student.Attendance.findIndex(att=>objectId(att.TopicId).toString()== objectId(note._id).toString())  
+                let topicExist=await student.Attendance.findIndex(att=>objectId(att.TopicId).toString()== objectId(note._id).toString())  
                 console.log("topic",topicExist)
                 if(topicExist!=-1){
                 
-                student.Attendance.map(attendance=>{
+               await student.Attendance.map(async attendance=>{
                 if(objectId(attendance.TopicId).toString() == objectId(note._id).toString()){
                     console.log("found===");
                     if(attendance.status){
@@ -128,7 +128,7 @@ module.exports={
                          return ( resolve())
                          
                     }else{
-                        db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId),'Attendance.TopicId':objectId(note._id)},{
+                       await db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId),'Attendance.TopicId':objectId(note._id)},{
                             $set:{'Attendance.$.status':status}
                         }).then(response=> { 
                             return (resolve())})
@@ -138,7 +138,7 @@ module.exports={
                 else{    
                 db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(stdId)},{
                     $push:{Attendance:assgnmntObj}
-                 }).then(reponse=>{return ( resolve())})
+                 }).then(reponse=>{return (resolve())})
                 } 
              }else{
                 console.log("calling**")
@@ -189,6 +189,12 @@ module.exports={
              })
             
            })
+       },
+       getStudentDetails:(Id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(Id)})
+            resolve(student)
+        })
        }
 
 }

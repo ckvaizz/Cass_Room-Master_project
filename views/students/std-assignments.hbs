@@ -1,5 +1,6 @@
 <section style="background-color: black; height: 99vh; margin-top:-39px">
     <div class="container">
+        <h1 class="ass-heading">Assignments</h1>
         <div class="col-md-12">
            <div class="row">
             {{#each assignments}}
@@ -9,7 +10,7 @@
                    <div class="front-ass">
                         <h5>{{this.Name}}</h5>
                     <p>Date : {{this.Date}}</p>
-                    <button onclick="view_assdetails('{{this._id}}')" class="btn btn-primary">View</button>
+                    <button onclick="view_assdetails('{{this._id}}')" class="btn btn-primary">More details</button>
                    </div>
                    <div id="back{{this._id}}" class="back-ass">
                        <h1 class="backload"><i class="fa fa-spinner fa-spin"></i></h1>

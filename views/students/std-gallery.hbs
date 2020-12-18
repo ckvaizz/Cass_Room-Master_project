@@ -1,0 +1,23 @@
+<section>
+<div class="container">
+    <h1 class="gallery-heading">Gallery</h1>
+<div class="col-md-12">
+    <div class="row">
+        {{#each Photos}}
+        <div class="col-md-4">
+            <div class="Imageback">
+                <div class="imageinner">
+                    <div class="images" style="background: url(/datas/photos/{{this._id}}.png); background-size:cover; background-position: center;">
+                        <h4>{{this.Caption}}</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+</div>
+
+</section>

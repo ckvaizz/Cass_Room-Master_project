@@ -1,0 +1,44 @@
+<section style="margin-top: -35px;">
+    <h1 class="photoHeading">Photos</h1>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="photo-upload-section">
+                <form  action="/admin/uploadphoto"  method="post" id="upload-Photo" enctype="multipart/form-data">
+                <input type="file" name="Photo" id="photo-file">
+                <input type="text" name="Caption" placeholder="Caption" >
+                <input type="url" name="croped"  id="croped-img" hidden>
+                <button type="submit" class="btn btn-secondary">Upload</button>
+                </form>
+                <div class="img-view" id="imgview">
+                    <img src="" id="croped" alt="">
+	            </div>
+                </div>
+            </div>
+            <div class="gallery-section col-md-12">
+                <div class="photodelete1">
+                    Are you sure ?
+                    <button onclick="deltePhoto()" class="btn btn-success"> Yes</button> <button onclick="cncldeltePhoto()" class="btn btn-danger">NO</button>
+                </div>
+                    <div class="row">
+                        {{#each photos}}
+                        <div id="div{{this._id}}" class="col-md-4">
+                            <div class="photoBack">
+                            <div class="photoInner">
+                                
+                                <div class="photo">
+                                    <img src="/datas/photos/{{this._id}}.png"></img>
+                                    <p>{{this.Caption}}</p>
+                                    <div onclick="photodeletecnfrm('{{this._id}}')" class="delete-photo"><i class="fa fa-trash"></i></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>

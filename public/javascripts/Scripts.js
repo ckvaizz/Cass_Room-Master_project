@@ -510,6 +510,7 @@ $.ajax({
             <div class="datadetails"><h5><a href="/view-Assignment?id=${data.TopicId}">${data.Topic}</a></h5>
             <p>Date : ${data.Date}</p>
             <p>Submited Time : ${data.Time}</p>
+            <p>Mark : ${data.Mark ? data.Mark : `Not valued` } </p>
             <a href="/viewsubmited?id=${data.TopicId}" class="btn btn-primary"> view submited </a> 
             </div>
             `
@@ -524,4 +525,138 @@ $.ajax({
 })
 
 
+}
+
+
+
+
+
+
+
+let img_view=document.querySelector('.img-view'),
+upload = document.querySelector('#photo-file'),
+cropper = '';
+
+// on change show image with crop options
+upload.addEventListener('change', (e) => {
+  if (e.target.files.length) {
+		// start file reader
+    const reader = new FileReader();
+    reader.onload = (e)=> {
+      if(e.target.result){
+				// create new image
+				let img = document.createElement('img');
+				img.id = 'image';
+				img.src = e.target.result
+       
+			
+				
+				// append new image
+               img_view.appendChild(img);
+				// show save btn and options
+			
+				// init cropper
+				cropper = new Cropper(img);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+});
+
+
+$('#upload-Photo').submit(e=>{
+    e.preventDefault()
+
+    let imgsrc = cropper.getCroppedCanvas({
+        width:"300"
+    }).toDataURL()
+   
+   $('#croped-img').val(imgsrc)
+    
+    $('#upload-Photo').ajaxSubmit({
+        success:()=>{
+           location.reload();
+        }
+    });
+    return false;
+})
+let deltePhotoId=''
+photodeletecnfrm=(Id)=>{
+deltePhotoId=Id
+    $('.photodelete1').addClass('photodelete').removeClass('photodelete1')
+}
+
+deltePhoto=()=>{
+   
+    $.ajax({
+        url:'/admin/deletePhoto?id='+deltePhotoId,
+        method:'get',
+        success:(response)=>{
+
+            if(response.status) $('#div'+deltePhotoId).remove()
+            deltePhotoId=''
+            $('.photodelete').addClass('photodelete1').removeClass('photodelete')
+        }
+    })
+}
+
+cncldeltePhoto=()=>{
+    $('.photodelete').addClass('photodelete1').removeClass('photodelete')
+    deltePhotoId=''
+}
+
+function takeAttmonth(){
+    let month = $('#attendancemonth').val()
+       location.href = '/attendanceM?month='+month
+
+}
+
+
+ function openOptions_ann(id){
+     
+    let div = document.querySelector('#frnt'+id)
+        div.style='transform:translate(70px)'
+        $('#btn'+id).addClass('optionbtnAnn1').removeClass('optionbtnAnn')
+        $('#btnc'+id).addClass('optioncnlAnn').removeClass('optioncnlAnn1')
+}
+function cancelOption_ann(id){
+    let div = document.querySelector('#frnt'+id)
+    div.style='transform:translate(0px)'
+    $('#btn'+id).addClass('optionbtnAnn').removeClass('optionbtnAnn1')
+    $('#btnc'+id).addClass('optioncnlAnn1').removeClass('optioncnlAnn')
+}   
+var delteAnnId=''
+
+function anndeleteCnfrm (Id){
+ delteAnnId = Id;
+$('.anndelete1').addClass('anndelete').removeClass('anndelete1')
+}
+
+function delteAnn(){
+    $.ajax({
+        url:'/admin/delteAnn?id='+delteAnnId,
+        method:'get',
+        success:(r)=>{
+            $('.anndelete').addClass('anndelete1').removeClass('anndelete')
+            $('#div'+delteAnnId).remove()
+
+        }
+    })
+}
+
+function cncldelteAnn(){
+    $('.anndelete').addClass('anndelete1').removeClass('anndelete')
+    delteAnnId = ' '
+}
+
+
+function openAnn(){
+    $('.anncontnt1').addClass('anncontnt').removeClass('anncontnt1')
+    $('.closeannbtn1').addClass('closeannbtn').removeClass('closeannbtn1')
+}
+
+function closeAnn(){
+    console.log("calling")
+    $('.anncontnt').addClass('anncontnt1').removeClass('anncontnt')
+    $('.closeannbtn').addClass('closeannbtn1').removeClass('closeannbtn')
 }

@@ -4,7 +4,8 @@ const studentHelper = require('../helpers/studentHelper');
 const fs = require('fs')
 const mongodb=require('mongodb')
 const binary = mongodb.Binary
-const { getVideoDurationInSeconds } = require('get-video-duration')
+const { getVideoDurationInSeconds } = require('get-video-duration');
+const { log } = require('util');
 let reloadPage=false;
 
 const markAttendance=(time,note,stdId)=>{
@@ -206,6 +207,8 @@ router.get('/notes',verifyLogin,(req,res)=>{
     //res.setHeader('Content-Disposition', 'attachment; file.pdf');
     file.pipe(res); 
     })
+
+
     router.post('/submitAssignment',verifyLogin,(req,res)=>{
       let file={Topic:req.body.Topicname,TopicId:req.body.assId,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString()}
       studentHelper.submitAssignment(file,req.session.student._id).then(respose=>{
@@ -243,4 +246,101 @@ router.get('/viewsubmited',verifyLogin,(req,res)=>{
   file.pipe(res); 
 })
 
+
+
+router.get('/gallery',verifyLogin,async(req,res)=>{
+  let Photos = await studentHelper.getPhotos()
+ res.render('students/std-gallery',{login:true,student:req.session.student,Photos})
+})
+
+
+router.get('/attendance',verifyLogin,async(req,res)=>{
+  let std =await studentHelper.getStudentDetails(req.session.student._id)
+  let stdAttedance = std.Attendance
+ res.render('students/std-attendance',{login:true,student:req.session.student,stdAttedance})
+})
+
+
+router.get('/attendanceM',verifyLogin,async(req,res)=>{
+  let std =await studentHelper.getStudentDetails(req.session.student._id)
+  let Attendance = std.Attendance
+  let m = req.query.month
+  let month =m.split("-").reverse()
+  let stdAttedance = []
+  Attendance.map(att=>{
+    let date = att.Date.split("/")
+    console.log(month)
+    console.log(date)
+    if(month[0]==date[1] && month[1]==date[2]){
+      stdAttedance.push(att)
+    }
+  })
+  console.log(stdAttedance,"===")
+  res.render('students/std-attendance',{login:true,student:req.session.student,stdAttedance,Date:req.query.month})
+})
+
+
+
+
+router.get('/announcements',verifyLogin,async(req,res)=>{
+
+let announcements= await studentHelper.getAnnouncements()
+res.render('students/std-announcements',{login:true,student:req.session.student,announcements})
+
+})
+
+
+router.get('/viewAnnVideo',verifyLogin,(req,res)=>{
+
+  var path=`./public/datas/announcements/videos/${req.query.id}.mp4`
+  var stat = fs.statSync(path);
+  var total = stat.size;
+
+  if (req.headers.range) { 
+    var range = req.headers.range;
+    var parts = range.replace(/bytes=/, "").split("-");
+    var partialstart = parts[0];
+    var partialend = parts[1];
+ 
+    var start = parseInt(partialstart, 10);
+    var end = partialend ? parseInt(partialend, 10) : total-1;
+    var chunksize = (end-start)+1;
+    console.log('RANGE: ' + start + ' - ' + end + ' = ' + chunksize);
+ 
+    var file = fs.createReadStream(path, {start: start, end: end});
+    res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': chunksize, 'Content-Type': 'video/mp4' });
+    file.pipe(res);
+
+  } else {
+
+    console.log('ALL: ' + total);
+    res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' });
+    fs.createReadStream(path).pipe(res);
+  }
+})
+
+
+
+router.get('/viewAnnPdf',verifyLogin,(req,res)=>{
+  let path=(`./public/datas/announcements/pdfs/${req.query.id}.pdf`)
+  var file = fs.createReadStream(path);
+  var stat = fs.statSync(path);
+  res.setHeader('Content-Length', stat.size);
+  res.setHeader('Content-Type', 'application/pdf');
+  //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+  file.pipe(res);
+})
+
+
+
+router.get('/viewAnnImage',verifyLogin,async(req,res)=>{
+  let ann = await studentHelper.getAnnouncement(req.query.id)
+  let path=(`./public/datas/announcements/images/${req.query.id}.${ann.ImgType}`)
+  var file = fs.createReadStream(path);
+  var stat = fs.statSync(path);
+  res.setHeader('Content-Length', stat.size);
+  res.setHeader('Content-Type', 'image/png');
+  //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+  file.pipe(res);
+})
 module.exports = router;

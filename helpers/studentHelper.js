@@ -195,6 +195,24 @@ module.exports={
             let student= await db.get().collection(collections.STUDENTS_COLLECTION).findOne({_id:objectId(Id)})
             resolve(student)
         })
+       },
+       getPhotos:()=>{
+           return new Promise(async(resolve,reject)=>{
+            let Photos = await db.get().collection(collections.PHOTOS_COLLECTIONS).find({}).toArray()
+            resolve(Photos)
+           })
+       },
+       getAnnouncements:()=>{
+           return new Promise(async(resolve,reject)=>{
+               let ann = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).find({}).toArray()
+               resolve(ann)
+           })
+       },
+       getAnnouncement:(id)=>{
+           return new Promise(async(resolve,reject)=>{
+               let ann = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).findOne({_id:objectId(id)})
+                resolve(ann)
+            })
        }
 
 }

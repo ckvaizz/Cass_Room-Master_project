@@ -181,6 +181,56 @@ module.exports={
         
 
     })
+    },
+    uploadPhoto:(photo)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.PHOTOS_COLLECTIONS).insertOne(photo).then(response=>{
+                resolve(response.ops[0]._id)
+        })
+        })
+    },
+    getPhotos:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let Photos = await db.get().collection(collections.PHOTOS_COLLECTIONS).find({}).toArray()
+            resolve(Photos)
+        })
+
+    },
+    deletePhoto:(Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.PHOTOS_COLLECTIONS).removeOne({_id:objectId(Id)}).then(response=>{
+                resolve()
+            })
+        })
+    },
+    uploadAnnouncements:(file)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).insertOne(file).then(response=>{
+                resolve(response.ops[0]._id)
+            })
+        })
+    },
+    getAnnouncements:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).find({}).toArray()
+            resolve(data)
+        })
+    },
+
+    deleteAnnouncement:(Id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let ann = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).findOne({_id:objectId(Id)})
+            db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).removeOne({_id:objectId(Id)}).then(r=>{
+                resolve(ann)
+            })
+
+        })
+    },
+    getAnnouncement:(Id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).findOne({_id:objectId(Id)})
+            resolve(data)
+        })
     }
 
 }

@@ -17,11 +17,15 @@
 </div>
 <div class="tutorannouncement">
 <h1>Announcements</h1>
+
 <ul>
+  {{#each announcement}}
   <li>
-     <p>* sample annoncement</p>
+     <p> * <a style="text-transform: capitalize;" href="/admin/announcement">{{this.Message}}</a></p>
   </li>
+  {{/each}}
 </ul>
+
 </div>
 <div class="tutorevents">
 <h1>Events</h1>

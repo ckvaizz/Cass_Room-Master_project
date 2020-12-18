@@ -1635,5 +1635,392 @@ font-weight: bold;
 }
 .datadetails{
   position: absolute;
-  margin-top: -110px;
+  margin-top: -100px;
 }
+.ass-heading{
+  margin-left: 35%;
+  color: rgb(251, 251, 251);
+  font-weight: bolder;
+  text-decoration:rgb(231, 50, 50)  underline;
+  font-style: italic;
+  
+}
+.photo-upload-section{
+  background-color: rgb(191, 230, 245);
+  min-height: 60px;
+  max-height: 100%;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.5);
+  transition: 1s ease-in;
+}
+.photoHeading{
+  margin-left: 45%;
+  font-weight: bold;
+  text-decoration:3px skyblue underline;
+
+}
+.photo-upload-section>form>input{
+  border: 2px solid black;
+  width: 150px;
+  overflow: hidden;
+  border-radius: 7px;
+}
+.photo-upload-section>form>button{
+  height: 30px;
+
+}
+.gallery-section{
+  margin-top: 30px;
+}
+.photoBack{
+  margin-top: 20px;
+  background-color: transparent;
+  perspective: 1000px;
+  box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  width: 250px;
+  height: 250px;
+}
+.photoInner{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  
+  transform-style: preserve-3d;
+}
+.photo{
+  transition:  .7s cubic-bezier(0.93,-1.4, 0, 2.74) ;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 5px;
+  
+}
+.photo:hover{
+  
+  transform: rotateZ(7deg);
+}
+.photo>img{
+height: 100%;
+width: 100%;
+border-radius: 5px;
+}
+.photo>p{
+  position: absolute;
+  margin-top: -30px;
+  color: rgb(13, 207, 255);
+  margin-left: 10px;
+  font-weight: bold;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.img-view>img{
+height: 350px;
+
+}
+.img-view{
+  margin: auto;
+  margin-top: 20px;
+  width: 400px;
+}
+
+.delete-photo{
+  background-color: rgb(255, 255, 255);
+  position:absolute;
+  margin-top: -30px;
+  margin-left:210px ;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  text-align: center;
+  
+}
+.delete-photo:hover{
+  background-color: cadetblue;
+  color: red;
+}
+
+.photodelete{
+  
+position: fixed;
+
+margin-left: 20%;
+  width: 400px;
+  background-color: rgb(141, 135, 197);
+  z-index: 111;
+  height: 100px;  
+  text-align: center;
+  padding-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+.photodelete1{
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+.Imageback{
+  background-color: transparent;
+  perspective: 1000px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.5);
+  width: 250px;
+  height: 250px; 
+}
+.imageinner{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+.images{
+  transition:  .93s cubic-bezier(0.93,-1.4, 0, 2.74) ;
+  height: 100%;
+  width: 100%;
+  opacity: .6;
+  margin-top: 30px;
+  
+}
+.images>h4{
+  position: absolute;
+  top: 40%;
+  left: 33%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #a816fd;
+  text-decoration: 2px underline;
+  transition: .8s ease;
+}
+.images:hover.images>h4{
+  top: 0%;
+  left: 0%;
+  font-size: 1.5rem;
+  
+}
+.images:hover{
+  transform: translateZ(100px);
+  opacity: 1;
+}
+.gallery-heading{
+  margin-left: 40%;
+  font-weight: 800;
+  text-decoration: underline;
+}
+.announcementBg{
+  
+  
+  min-height: 99vh;
+  max-height: 100%;
+  width: 100%;
+  background-color: rgb(0, 136, 255);
+  margin-top: -34px;
+  padding: 10px;
+}
+.announcementBg>h1{
+  margin-left: 33%;
+  font-weight: bolder;
+  text-decoration:rgb(65, 53, 53) underline;
+}
+.announcementform{
+ 
+  top: 10%;
+  width: 100%;
+}
+.announcementform>form{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  border: 3px solid black;
+  padding: 20px;
+  overflow: hidden;
+  
+}
+.announcementform>form>input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.announcementform>form>input:focus{
+  outline: 0;
+}
+.announcementform>form>label{
+  
+  margin-top: 10px;
+}
+.annSection{
+  margin-top: 100px;
+}
+.anncardBack{
+  background-color: transparent;
+  width: 250px;
+  height: 200px;
+  margin-top: 20px;
+  perspective: 1000px;
+  
+}
+.annInner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+
+.annFront, .annBack{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  
+}
+.annFront::-webkit-scrollbar , .annBack::-webkit-scrollbar{
+  display: none;
+}
+.annFront{
+  background-color: #bbb;
+  color: black;
+  padding: 20px;
+  z-index: 11;
+  transition: .6s ease-in;
+}
+.annBack{
+  background-color: #2980b9;
+  color: white;
+  text-align: left;
+ z-index: 0;
+}
+.optionbtnAnn, .optioncnlAnn {
+  position: fixed;
+
+  left: 10px;
+  top: 10px;
+  height: 30px ;
+  width: 30px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.452);
+  animation: rotate ease-in-out;
+  animation-duration: .6s;
+  transition: 1s ease;
+}
+@keyframes rotate{
+  form{
+    transform: rotate(0);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+.optionbtnAnn:focus,optioncnlAnn:focus{
+  outline: 0;
+}
+
+.annFront>p{
+  overflow-wrap: break-word;
+}
+.annFront>h4{
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+.optionbtnAnn1, .optioncnlAnn1{
+  position: fixed;
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.anndelete{
+  position: fixed;
+top: 40%;
+left: 30%;
+  width: 400px;
+  background-color: rgb(197, 155, 155);
+  z-index: 111;
+  height: 100px;  
+  text-align: center;
+  padding-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+.anndelete1{
+  display: none;
+  user-select: none;
+  pointer-events: none;
+
+}
+.annHeading{
+  font-weight: bolder;
+  text-decoration: underline;
+  margin-left: 33%;
+}
+
+.std-homebg{
+  height: 99vh;
+  width: 100%;
+  position: relative;
+  background-color:rgba(0, 0, 0, 0.582);
+}
+.annbtn{
+  position: absolute;
+  background-color: cadetblue;
+  top: 20px;
+  right: 20px;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0px 0px 3px 3px rgba(5, 141, 251, 0.5);
+  padding: 5px;
+  
+}
+.annbtn>p{
+  margin-top: 13px;
+}
+.anncontnt{
+  transition: all 1s ease-in;
+height: 200px;
+opacity: 1;
+overflow-y: scroll;
+overflow-wrap: break-word;
+}
+.anncontnt1{
+  height: 0px;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
+.anncontnt::-webkit-scrollbar{
+  display: none;
+
+}
+.closeannbtn{
+  border: none;
+  width: 30px ;
+  height: 30px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.5);
+  animation: rotate;
+  animation-duration: 1s;
+  z-index: 111;
+}
+.closeannbtn:focus{
+  outline: none;
+}
+.closeannbtn1{
+  display: none;
+}
+
+
+
+
+
+
+
+

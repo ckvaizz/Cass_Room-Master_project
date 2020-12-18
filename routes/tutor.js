@@ -10,18 +10,20 @@ if(req.session.adminLogin)next()
 else res.redirect('/admin')
 }
 
-router.get('/', function(req, res, next) {
-    if(req.session.adminLogin) res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin,login:true})
+router.get('/',async function(req, res, next) {
+    let announcement = await adminHelper.getAnnouncements()
+    if(req.session.adminLogin) res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin,login:true,announcement})
     else res.render('tutor/tutorlogin',{loginErr:req.session.adminLoginErr}) ,req.session.adminLoginErr=false
 });
-router.post('/login',(req,res)=>{
+router.post('/login',async(req,res)=>{
     console.log(req.body);
+    let announcement = await adminHelper.getAnnouncements()
     adminHelper.doLogin(req.body).then((response)=>{
         if(response.login){
             req.session.adminLogin=true
             req.session.admin=response.user
             
-            res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin,login:true})
+            res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin,login:true,announcement})
 
         }else{
             req.session.adminLoginErr='Invalid Login'
@@ -252,8 +254,6 @@ router.get('/viewStudent',verifyLogin,async(req,res)=>{
     res.render('tutor/studentDetails',{login:true,adminLogin:req.session.adminLogin,viewStudent})
 })
 router.get('/viewstudentAssignment',verifyLogin,async(req,res)=>{
-   console.log(req.query.id,req.query.std)
-
    let path=(`./public/datas/assignments/submited/${req.query.id+req.query.std}.pdf`)
     var file = fs.createReadStream(path);
     var stat = fs.statSync(path);
@@ -270,4 +270,144 @@ adminHelper.setMark(req.body).then(response=>{
     res.json({status:true})
 })
 })
+
+
+router.get('/photos',verifyLogin,async(req,res)=>{
+    let photos = await adminHelper.getPhotos()
+    res.render('tutor/photos',{login:true,adminLogin:req.session.adminLogin,photos})
+})
+
+
+router.post('/uploadphoto',verifyLogin,(req,res)=>{
+   
+    let photo={}
+    if(req.body.Caption) photo= {Caption:req.body.Caption ,uploaded_Date:new Date().toLocaleDateString()}
+    else photo= {uploaded_Date:new Date().toLocaleDateString()}
+    adminHelper.uploadPhoto(photo).then(Id=>{
+        
+    let base64 = req.body.croped.replace(/^data:image\/png;base64,/, "")
+    fs.writeFileSync(`./public/datas/photos/${Id}.png`, base64, 'base64')
+       res.json("okke")
+      })
+  
+  })
+
+
+  router.get('/deletePhoto',verifyLogin,(req,res)=>{
+      adminHelper.deletePhoto(req.query.id).then( r=>{
+        fs.unlinkSync(`./public/datas/photos/${req.query.id}.png`)
+        res.json({status:true})
+      })
+  })
+
+
+
+router.get('/announcement',verifyLogin,async(req,res)=>{
+    let announcements = await adminHelper.getAnnouncements();
+
+    res.render('tutor/announcements',{login:true,adminLogin:req.session.adminLogin ,announcements})
+})
+
+
+
+router.post('/uploadAnnouncement',verifyLogin,(req,res)=>{
+    console.log(req.body)
+    console.log(req.files)
+    let file={Message:req.body.Message,Description:req.body.Description,Date:new Date().toLocaleDateString()}
+    let type = []
+    if(req.files.Video) file.Video=true
+    if(req.files.Pdf) file.Pdf=true  
+    if(req.files.Image){ 
+        type = req.files.Image.mimetype.split("/")
+
+        file.Image=true
+        file.ImgType = type[1]
+    }
+    
+    adminHelper.uploadAnnouncements(file).then(Id=>{
+        if(file.Video){
+            let video= req.files.Video
+            video.mv(`./public/datas/announcements/videos/${Id}.mp4`)
+        }
+        if(file.Pdf){
+            let pdf= req.files.Pdf
+            pdf.mv(`./public/datas/announcements/pdfs/${Id}.pdf`)
+        }
+        if(file.Image){
+            let image= req.files.Image
+            
+            image.mv(`./public/datas/announcements/images/${Id}.${type[1]}`)
+        }
+        res.redirect('/admin/announcement')
+    })
+
+})
+
+
+router.get('/delteAnn',verifyLogin,(req,res)=>{
+    adminHelper.deleteAnnouncement(req.query.id).then(data=>{
+        if(data.Video) fs.unlinkSync(`./public/datas/announcements/videos/${req.query.id}.mp4`)
+        if(data.Pdf) fs.unlinkSync(`./public/datas/announcements/pdfs/${req.query.id}.pdf`)
+        if(data.Image) fs.unlinkSync(`./public/datas/announcements/images/${req.query.id}.${data.ImgType}`)
+        res.json(true)
+    })
+})
+
+
+router.get('/viewAnnVideo',verifyLogin,(req,res)=>{
+
+    var path=`./public/datas/announcements/videos/${req.query.id}.mp4`
+    var stat = fs.statSync(path);
+    var total = stat.size;
+  
+    if (req.headers.range) { 
+      var range = req.headers.range;
+      var parts = range.replace(/bytes=/, "").split("-");
+      var partialstart = parts[0];
+      var partialend = parts[1];
+   
+      var start = parseInt(partialstart, 10);
+      var end = partialend ? parseInt(partialend, 10) : total-1;
+      var chunksize = (end-start)+1;
+      console.log('RANGE: ' + start + ' - ' + end + ' = ' + chunksize);
+   
+      var file = fs.createReadStream(path, {start: start, end: end});
+      res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': chunksize, 'Content-Type': 'video/mp4' });
+      file.pipe(res);
+  
+    } else {
+  
+      console.log('ALL: ' + total);
+      res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' });
+      fs.createReadStream(path).pipe(res);
+    }
+})
+
+
+
+router.get('/viewAnnPdf',verifyLogin,(req,res)=>{
+    let path=(`./public/datas/announcements/pdfs/${req.query.id}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res);
+})
+
+
+
+router.get('/viewAnnImage',verifyLogin,async(req,res)=>{
+    let ann = await adminHelper.getAnnouncement(req.query.id)
+    let path=(`./public/datas/announcements/images/${req.query.id}.${ann.ImgType}`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'image/png');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res);
+})
+
+
+
 module.exports = router;

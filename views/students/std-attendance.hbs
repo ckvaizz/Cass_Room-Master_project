@@ -1,0 +1,39 @@
+<section>
+    <div class="container">
+        <div class="atdTablebg">
+            <h1>Attendance</h1> <br>
+            <input type="month" name="Date" onchange="takeAttmonth()" id="attendancemonth">
+
+        <div class="attendanceTable">
+            <h6 class="attdDate">{{#if Date}}Date:{{Date}}{{/if}}</h6>
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Topic</th>
+                        <th>Attendance</th>
+                    </tr>
+                </thead>
+                {{#if stdAttedance}}
+            {{#each stdAttedance}} 
+             <tbody>
+                 <tr>
+                     <td>{{this.Date}}</td>
+                     <td>{{this.Topic}}</td>
+                     <td>{{#if this.status}}P{{else}}A{{/if}}</td>
+                 </tr>
+             </tbody>
+             {{/each}}
+              {{else}}
+              <tbody>
+                  <td></td>
+                  <td>No Attendance In This Month</td>
+                  <td></td>
+              </tbody>
+              {{/if}}
+            </table>
+        </div>
+    </div>
+    </div>
+</section>

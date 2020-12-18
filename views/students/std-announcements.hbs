@@ -1,0 +1,31 @@
+<section>
+    <div style="background-color: rgb(165, 119, 119); padding: 30px;" class="container">
+        <h1 class="annHeading">Announcements</h1>
+        <div class="col-md-12">
+            <div class="row">
+                  {{#each announcements}}
+                <div id="div{{this._id}}" class="col-md-4">
+                    <div class="anncardBack">
+                        
+                        <div class="annInner">
+                           
+                            <div id="frnt{{this._id}}" class="annFront">
+                               <button id="btn{{this._id}}" class="optionbtnAnn" ><i onclick="openOptions_ann('{{this._id}}')" class="fa fa-clone"></i></button>
+                               <button id="btnc{{this._id}}"  class="optioncnlAnn1" onclick="cancelOption_ann('{{this._id}}')" > <i class="fa fa-close"></i></button>
+                                <h4>{{this.Message}}</h4>
+                                <p>{{this.Description}}</p>                                                          
+                            </div>
+                            <div class="annBack">
+                               <br> {{#if this.Video}}<a href="/viewAnnVideo?id={{this._id}}" style="text-decoration: none; color:whitesmoke">Video <i class="fa fa-play-circle-o"></i></a>{{else}}no Video{{/if}}<br><br>
+                                {{#if this.Pdf}}<a href="/viewAnnPdf?id={{this._id}}"style="text-decoration: none; color:whitesmoke">Pdf <i class="fa fa-file-pdf-o"></i></a>{{else}}no Pdf{{/if}}<br><br>
+                                {{#if this.Image}}<a href="/viewAnnImage?id={{this._id}}"style="text-decoration: none; color:whitesmoke">Image <i class="fa fa-file-image-o"></i></a>{{else}}no Images{{/if}}<br><br>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>

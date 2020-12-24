@@ -11,6 +11,7 @@ var app = express();
 const fileUpload = require('express-fileupload')
 const session=require('express-session')
 const MongoStore = require('connect-mongo')(session)
+var objectId=require('mongodb').ObjectId
 // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
@@ -62,7 +63,17 @@ const exhbs= hbs.create({
       }else{
         return "<h2>"+options.fn({inn:false}) +"</h2>"
       }
-    }
+    },ifId:(a,b,options)=>{
+      console.log("A,B",a,b)
+       
+       if ( objectId(a).toString() === objectId(b).toString() ){
+        console.log("trueeee")
+         return "<h2>"+ options.fn({status:true}) +"</h2>"
+       }else{
+         console.log("false...")
+        return "<h2>"+ options.fn({status:false}) +"</h2>"
+       }
+     }
   }
 
 })

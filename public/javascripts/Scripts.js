@@ -434,7 +434,7 @@ $("#attendanceDate").on('change keyup paste',()=>{
 
 changeMark=(Id,std)=>{
     
-    let mark=$('#Mark-Ass').val()
+    let mark=$('#Mark-Ass'+Id).val()
 
     $.ajax({
         url:'/admin/Ass-Mark',
@@ -648,15 +648,113 @@ function cncldelteAnn(){
     $('.anndelete').addClass('anndelete1').removeClass('anndelete')
     delteAnnId = ' '
 }
-
+var openann = false
 
 function openAnn(){
-    $('.anncontnt1').addClass('anncontnt').removeClass('anncontnt1')
-    $('.closeannbtn1').addClass('closeannbtn').removeClass('closeannbtn1')
+
+    if(openann){
+        $('.anncontnt').addClass('anncontnt1').removeClass('anncontnt')
+    $('.closeannbtn').addClass('closeannbtn1').removeClass('closeannbtn')
+        openann = false
+    }else{
+        $('.anncontnt1').addClass('anncontnt').removeClass('anncontnt1')
+     $('.closeannbtn1').addClass('closeannbtn').removeClass('closeannbtn1')
+        openann = true
+    }
 }
 
-function closeAnn(){
-    console.log("calling")
-    $('.anncontnt').addClass('anncontnt1').removeClass('anncontnt')
-    $('.closeannbtn').addClass('closeannbtn1').removeClass('closeannbtn')
+
+
+function showAttstatus(){
+    $('.todayTasktext').addClass('todayTasktext1').removeClass('todayTasktext')
+    $('.todayTaskstatus1').addClass('todayTaskstatus').removeClass('todayTaskstatus1')
 }
+
+var eventPayId= ''
+function PaywithRazorPay(id,price){
+    
+    eventPayId=id;
+    $.ajax({
+        url:'/payEventRazor',
+        method:'post',
+        data:{
+            EventId:id,
+            Price:price
+        },
+          success:(responce)=>{
+              
+              if(responce.paymentErr){
+                alert("payment error")
+                  
+              } else {
+                razorPayment(responce)
+              }
+            
+    }
+    })
+}
+
+function razorPayment(data){
+    var options = {
+        "key": "rzp_test_74IUoLSXBjLRXM", // Enter the Key ID generated from the Dashboard
+        "amount": data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Class Room",
+        "description": "Test Transaction",
+        "image": "https://lh3.googleusercontent.com/proxy/yqFfR8_Li7B6SorbTcnd_lCYrrh5i0oVYsdqRdUkxfIT8Dm0WHxie8SObIvM8iwVlV3TW8TAQ2-ebFsHcP3jd9TPZqInMPzrBN5P-WC_hHP_W-NNAAUaDzwwEQdpAurLTdEmCIPPb7thkbxilYAd5v3vnMJwYJNcLsgGR_sGt26Er-0owIKCs_SF8tSSpwFlLPWsXwIMPxJYiWkpWt0Nm84SDbFEVZiY_g",
+        "order_id":data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+            
+            verifyPayment(response,data)
+        },
+        "prefill": {
+            "name": "Class Room",
+            "email": "ClassRoom@gmail.com",
+            "contact": "9072956555"
+        },
+        "notes": {
+            "address": "ClassRoom Corporate Office"
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+}
+
+function  verifyPayment(payment,data){
+    $.ajax({
+        url:'/verify-payment-Razor',
+        data:{
+        payment,
+        data
+    },
+    method:'post',
+    success:(responce)=>{
+        if(responce.payment){
+            location.reload()
+        }else{
+            alert("payment error")
+        }
+
+    }
+    })
+}
+
+
+var openevnt= false
+function openhomeevnt(){
+    alert('okke')
+    if(openevnt){ 
+        $('.homeevnt-cntent1').addClass('homeevnt-cntent').removeClass('homeevnt-cntent1')
+        openevnt=true
+    }
+        else{
+             $('.homeevnt-cntent').addClass('homeevnt-cntent1').removeClass('homeevnt-cntent') 
+              openevnt=false
+        }
+            }
+
+

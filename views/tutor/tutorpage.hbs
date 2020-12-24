@@ -21,7 +21,7 @@
 <ul>
   {{#each announcement}}
   <li>
-     <p> * <a style="text-transform: capitalize;" href="/admin/announcement">{{this.Message}}</a></p>
+     <p> * <a style="text-transform: capitalize;" href="/admin/announcement-view?id={{this._id}}">{{this.Message}}</a></p>
   </li>
   {{/each}}
 </ul>
@@ -30,9 +30,11 @@
 <div class="tutorevents">
 <h1>Events</h1>
 <ul>
+  {{#each events}}
   <li>
-     <p>* sample events </p>
+     <p> *<a href="/admin/viewEvent?id={{this._id}}">{{this.Event}}</a>  {{#if this.Paid}}(Paid){{/if}}</p>
   </li>
+  {{/each}}
 </ul>
 </div>
 </section>

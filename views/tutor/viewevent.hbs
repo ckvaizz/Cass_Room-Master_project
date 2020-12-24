@@ -1,0 +1,54 @@
+<section>
+    <div class="container">
+        <div class="vieweventBg">
+            <div class="eventdetails">
+            <h1>{{event.Event}}</h1>
+            <h3>Topic -</h3><h4>{{event.Topic}}</h4>
+            <h3>conducting by -</h3><h4> {{event.Conducting}}</h4>
+            <h3>Date -</h3><h4>{{event.EventDate}}</h4>
+            {{#if event.Paid}}
+            <h3>Amount -</h3><h4>{{event.Amount}} Rs/-</h4>
+            {{/if}}
+            {{#if event.Image}}
+            <h4><a href="/admin/viewevntImg?id={{event._id}}">View Image</a></h4>
+            {{/if}}
+            {{#if event.Pdf}}
+            <h4><a href="/admin/viewevntPdf?id={{event._id}}">View Pdf</a></h4>
+            {{/if}}
+            {{#if event.Video}}
+            <h4><a href="/admin/viewevntVideo?id={{event._id}}">View Video</a></h4>
+            {{/if}}
+        </div>
+        {{#if event.Paid}}
+        <div class="eventPayment">
+            <h5>Paid Students</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>St Name</th>
+                        <th>Paid Date</th>
+                        <th>Paid Time</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    {{#if event.PaidStudents}}
+                    {{#each event.PaidStudents}}
+                    <tr>
+                        <td>{{this.Name}}</td>
+                        <td>{{this.PaidDate}}</td>
+                        <td>{{this.PaidTime}}</td>
+                    </tr>
+                    {{/each}}
+                    {{else}}
+                    <tr>
+                      <h6 style="color: red;">No students Paid </h6 >
+                    </tr>
+                    {{/if}}
+                </tbody>
+            </table>
+        </div>
+        {{/if}}
+        </div>
+    </div>
+</section>

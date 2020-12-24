@@ -1,39 +1,41 @@
 <section style="background: url(/images/std-homebg.jpg); background-size: cover; height:99vh; margin-top: -37px; ">
    <div class="std-homebg">
+      <div class="home-evnt">
+        <p>Events</p>
+        <div onclick="openhomeevnt()" class="homeevnt-cntent1">
+            <ul>
+                 
+                  <li>
+                     *<a href="/view-announcement?id=" style=" color:rgb(185, 32, 223);"> helloooo</a> 
+                  </li>
+                 
+
+
+              </ul>
+        </div>
+      </div>
+       <div class="attendaceStatus" onclick="showAttstatus()">
+          <p class="todayTasktext">Today's Attedance</p>
+          <p class="todayTaskstatus1">{{#if todayStatus}}Present{{else}} <a href="/todayTask" style="color: blue;">Not Present {{/if}}</a> </p>
+       </div>
        <div onclick="openAnn()" class="annbtn">
           <p>Announcements</p>
-          <button onclick="closeAnn()"  class="closeannbtn1"><i  class='fa fa-angle-double-up'></i></button>
+          <button   class="closeannbtn1"><i  class='fa fa-angle-double-up'></i></button>
           <div class="anncontnt1">
               <ul>
+                  {{#each announcements}}
                   <li>
-                      helllosafsdfffffff
+                     *<a href="/view-announcement?id={{this._id}}" style=" color:rgb(185, 32, 223);"> {{this.Message}}</a> 
                   </li>
-                  <li>
-                      helllosdfsafa
-                  </li>
-                  <li>
-                      helllosdfsd
-                  </li>
-                  <li>
-                      helllosdfsaf
-                  </li>
-                  <li>
-                      helllosdfsd
-                  </li>
-                  <li>
-                      helllosdfsdf
-                  </li>
-                  <li>
-                      helllosdfsdf
-                  </li>
-                  <li>
-                      helllodsfsdfsd
-                  </li>
+                 {{/each}}
 
 
               </ul>
 
           </div>
        </div>
+
+    
+
    </div>
 </section>

@@ -1,0 +1,58 @@
+<section>
+    <div class="container">
+        <div class="event-addsection">
+            <h3>Add Events</h3>
+            <form action="/admin/addevents" method="POST" enctype="multipart/form-data" id="evnForm">
+            <div class="evninputs">
+                <h4>Details</h4>
+            <input type="text" name="Event" id="eventname" placeholder="Event" >
+            <input type="text" name="Conducting" placeholder="Conducting by .." >
+            <input type="text"  name="Topic" placeholder="Topic">
+            <input type="date" name="Date">
+            <label for="paid"> Paid</label>
+            <input type="checkbox" type="radio" id="paid" name="Paid" >
+            <input type="number" name="Amount" placeholder=" Amount" class="amount-input">
+            </div>
+       <div class="evnFiles">
+            <h4>Files</h4>
+                <label for="evnImage">Photo</label>
+            <input type="file"   accept="image/x-png,image/gif,image/jpeg" name="Image" id="evnImage">
+             <label for="evnVideo">Video</label>
+            <input type="file" name="Video" accept="video/*" id="evnVideo">
+            <label for="evnPdf">Pdf</label>
+            <input type="file" name="Pdf" accept="application/pdf,application/vnd.ms-excel" id="evnPdf">
+            <button class="btn btn-secondary" style="width: 40%; margin-top:10px; margin-left:30%"  type="submit">Upload</button>
+       </div>
+            </form>
+        </div>
+        <div class="allevents">
+            <h3>All Events</h3>
+            <div class="col-md-12">
+                <div class="row">
+                    {{#each events}}
+                    <div class="col-md-4">
+                       <div class="event">
+                           <h4>{{this.Event}}</h4>
+                           <h5>Topic : {{this.Topic}}</h5>
+                           <h5>Conducted : {{this.Conducting}}</h5>
+                           <h5>Date  : {{this.EventDate}}</h5>
+                           {{#if this.Paid}}
+                           <h5>Amount: {{this.Amount}} Rs/-</h5>
+                           {{/if}}
+                           {{#if this.Image}}
+                            <h6><a href="/admin/viewevntImg?id={{this._id}}">view Image</a></h6>
+                           {{/if}}
+                           {{#if this.Video}}
+                           <h6><a href="/admin/viewevntVideo?id={{this._id}}">View Video</a></h6>
+                           {{/if}}
+                           {{#if this.Pdf}}
+                           <h6><a href="/admin/viewevntPdf?id={{this._id}}"> View Pdf</a></h6>
+                            {{/if}}
+                       </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

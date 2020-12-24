@@ -1,0 +1,13 @@
+<section>
+    <div class="container">
+        <div class="ann-box">
+            <h4>{{announcement.Message}}</h4>
+             <a href="/admin/viewAnnImage?id={{announcement._id}}" class="aImg"><img src="/datas/announcements/images/{{announcement._id}}.{{announcement.ImgType}}" alt="No Images"></a>
+              <video src="/datas/announcements/videos/{{announcement._id}}.mp4" autoplay controls muted ></video>
+                <p>{{announcement.Description}}</p>
+                {{#if announcement.Pdf}}
+            <a href="/admin/viewAnnPdf?id={{announcement._id}}" class="btn btn-secondary ann-btn">View-Pdf</a>
+            {{else}}<a href="" class="btn btn-secondary ann-btn"> No Pdf</a>{{/if}}
+        </div>
+    </div>
+</section>

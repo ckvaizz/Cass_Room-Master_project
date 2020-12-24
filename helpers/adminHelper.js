@@ -231,6 +231,28 @@ module.exports={
             let data = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).findOne({_id:objectId(Id)})
             resolve(data)
         })
+    },
+    addEvent:(file)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.EVENTS_COLLECTIONS).insertOne(file).then(response=>{
+                resolve(response.ops[0]._id)
+            }).catch(err=>{
+                reject(err)
+            })
+        })
+    },
+    getEvents:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collections.EVENTS_COLLECTIONS).find({}).toArray()
+            resolve(data)
+        })
+    },
+    getEvent:(Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.EVENTS_COLLECTIONS).findOne({_id:objectId(Id)}).then(data=>{
+                resolve(data)
+            })
+        })
     }
 
 }

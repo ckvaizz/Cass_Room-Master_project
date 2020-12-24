@@ -12,18 +12,20 @@ else res.redirect('/admin')
 
 router.get('/',async function(req, res, next) {
     let announcement = await adminHelper.getAnnouncements()
-    if(req.session.adminLogin) res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin,login:true,announcement})
+    let events = await adminHelper.getEvents()
+    if(req.session.adminLogin) res.render('tutor/tutorpage',{events,adminLogin:req.session.adminLogin,login:true,announcement})
     else res.render('tutor/tutorlogin',{loginErr:req.session.adminLoginErr}) ,req.session.adminLoginErr=false
 });
 router.post('/login',async(req,res)=>{
     console.log(req.body);
     let announcement = await adminHelper.getAnnouncements()
+    let events = await adminHelper.getEvents()
     adminHelper.doLogin(req.body).then((response)=>{
         if(response.login){
             req.session.adminLogin=true
             req.session.admin=response.user
             
-            res.render('tutor/tutorpage',{adminLogin:req.session.adminLogin,login:true,announcement})
+            res.render('tutor/tutorpage',{events,adminLogin:req.session.adminLogin,login:true,announcement})
 
         }else{
             req.session.adminLoginErr='Invalid Login'
@@ -145,7 +147,7 @@ router.post('/notes',verifyLogin,(req,res)=>{
         if(req.files.Video){
         let video =req.files.Video
       video.mv(`./public/datas/notes/${Id}.mp4`)
-      //   res.redirect('/admin/notes') 
+    
         }
         if(req.files.File){
             let pdf = req.files.File
@@ -406,6 +408,110 @@ router.get('/viewAnnImage',verifyLogin,async(req,res)=>{
     res.setHeader('Content-Type', 'image/png');
     //res.setHeader('Content-Disposition', 'attachment; file.pdf');
     file.pipe(res);
+})
+
+
+router.get('/announcement-view',verifyLogin,async(req,res)=>{
+    let announcement= await adminHelper.getAnnouncement(req.query.id)
+    res.render('tutor/view-announcement',{login:true,adminLogin:req.session.adminLogin,announcement})
+})
+
+router.get('/events',verifyLogin,async(req,res)=>{
+    let events=await adminHelper.getEvents()
+    res.render('tutor/events',{events,login:true,adminLogin:req.session.adminLogin})
+})
+
+
+router.post('/addevents',verifyLogin,(req,res)=>{
+    
+       let file= {Event:req.body.Event,Conducting:req.body.Conducting,Topic:req.body.Topic,EventDate:req.body.Date ,Paid:req.body.Paid ? true : false}
+        let type = []
+        if(req.body.Paid) file.Amount=req.body.Amount
+        if(req.files){
+        if(req.files.Image) {
+        type = req.files.Image.mimetype.split("/")
+        file.Image=true
+        file.ImgType=type[1]
+    }
+       if(req.files.Video) file.Video=true
+       if(req.files.Pdf) file.Pdf=true
+    }
+    adminHelper.addEvent(file).then(id=>{
+        if(file.Image) {
+           let  Images = req.files.Image
+           Images.mv(`./public/datas/events/images/${id}.${type[1]}`)
+        }
+        if(file.Video){
+            let video = req.files.Video
+            video.mv(`./public/datas/events/videos/${id}.mp4`)
+        }
+        if(file.Pdf){
+            let pdf= req.files.Pdf
+            pdf.mv(`./public/datas/events/pdfs/${id}.pdf`) 
+        }
+        res.redirect('/admin/events')
+    }).catch(err=> res.status(500).send("Server Error Try again letter"))
+    
+})
+
+
+
+router.get('/viewevntImg',verifyLogin,async(req,res)=>{
+    let event = await adminHelper.getEvent(req.query.id)
+    let path=(`./public/datas/events/images/${req.query.id}.${event.ImgType}`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'image/png');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res);
+
+})
+
+
+router.get('/viewevntVideo',verifyLogin,(req,res)=>{
+    var path=`./public/datas/events/videos/${req.query.id}.mp4`
+    var stat = fs.statSync(path);
+    var total = stat.size;
+  
+    if (req.headers.range) { 
+      var range = req.headers.range;
+      var parts = range.replace(/bytes=/, "").split("-");
+      var partialstart = parts[0];
+      var partialend = parts[1];
+   
+      var start = parseInt(partialstart, 10);
+      var end = partialend ? parseInt(partialend, 10) : total-1;
+      var chunksize = (end-start)+1;
+      console.log('RANGE: ' + start + ' - ' + end + ' = ' + chunksize);
+   
+      var file = fs.createReadStream(path, {start: start, end: end});
+      res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': chunksize, 'Content-Type': 'video/mp4' });
+      file.pipe(res);
+  
+    } else {
+  
+      console.log('ALL: ' + total);
+      res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' });
+      fs.createReadStream(path).pipe(res);
+    }
+})
+
+
+router.get('/viewevntPdf',verifyLogin,(req,res)=>{
+    let path=(`./public/datas/events/pdfs/${req.query.id}.pdf`)
+    var file = fs.createReadStream(path);
+    var stat = fs.statSync(path);
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    //res.setHeader('Content-Disposition', 'attachment; file.pdf');
+    file.pipe(res);
+})
+
+
+router.get('/viewEvent',verifyLogin,async(req,res)=>{
+    let event = await adminHelper.getEvent(req.query.id)
+    res.render('tutor/viewevent',{event,login:true,adminLogin:req.session.adminLogin})
 })
 
 

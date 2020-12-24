@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="photo-upload-section">
                 <form  action="/admin/uploadphoto"  method="post" id="upload-Photo" enctype="multipart/form-data">
-                <input type="file" name="Photo" id="photo-file">
+                <input type="file" name="Photo" accept="image/x-png,image/gif,image/jpeg" id="photo-file">
                 <input type="text" name="Caption" placeholder="Caption" >
                 <input type="url" name="croped"  id="croped-img" hidden>
                 <button type="submit" class="btn btn-secondary">Upload</button>

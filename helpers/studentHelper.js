@@ -3,10 +3,14 @@ var collections=require('../config/collections');
 const bcrypt=require('bcrypt')
 var objectId=require('mongodb').ObjectId
 const accountSID ="ACad1ba650469ec2893ff472d077ef76f3"
-const authTOKEN = "3f50afe920866c17fc5adb2f05f77d83"  
+const authTOKEN = "f62aac86b9da8deccff39e2b44cebd76"  
  const serviceId ="VA465cc0f99ed26a52dde7f6111fda0102"
 const otpclient = require('twilio')(accountSID,authTOKEN)
-
+var Razorpay=require('razorpay')
+var instance = new Razorpay({
+    key_id: 'rzp_test_74IUoLSXBjLRXM',
+    key_secret: 'o3po6jeg50ebWG1bvYNjfT1e',
+  });
 module.exports={
     checkMobile_NO:(Number)=>{
         return new Promise((resolve,reject)=>{
@@ -213,6 +217,72 @@ module.exports={
                let ann = await db.get().collection(collections.ANNOUNCEMENTS_COLLECTIONS).findOne({_id:objectId(id)})
                 resolve(ann)
             })
-       }
+       },
+       getEvents:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collections.EVENTS_COLLECTIONS).find({}).toArray()
+            resolve(data)
+        })
+       },
+       getEvent:(Id)=>{
+           return new Promise((resolve,reject)=>{
+               db.get().collection(collections.EVENTS_COLLECTIONS).findOne({_id:objectId(Id)})
+               .then(data=>resolve(data))
+           })
+       },
+       generateRazorepay:(details)=>{
+           return new Promise((resolve,reject)=>{
+            var options = {
+                amount: details.Price*100,  // amount in the smallest currency unit
+                currency: "INR",
+                receipt: ""+details.EventId
+              };
+              instance.orders.create(options, function(err,data) {
+                if (err) {
+                   reject(err)
+                }else{
+              resolve(data)
+                }
+           })
+        })
+    },
+    verifyPayment_Razor:(details)=>{
+        return new Promise((resolve,reject)=>{
+           
+            const crypto =require('crypto');
+            let hmac= crypto.createHmac('sha256','o3po6jeg50ebWG1bvYNjfT1e')
+
+            hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]'])
+            hmac=hmac.digest('hex')
+            if(hmac==details['payment[razorpay_signature]']){
+                resolve()
+            }else{
+                reject()
+            }
+        })
+    },
+    addPayedstatus:(student,eventId)=>{
+        return new Promise(async(resolve,reject)=>{
+            
+            let obj={
+                Student:student._id,
+                Name:student.Name,
+                PaidDate:new Date().toLocaleDateString(),
+                PaidTime:new Date().toLocaleTimeString()
+            }
+            db.get().collection(collections.EVENTS_COLLECTIONS).updateOne({_id:objectId(eventId)},{
+                $push:{PaidStudents:obj}
+            }).then(response=>{
+                db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(student._id)},{
+                    $push:{Paidevents:{
+                        EventId:eventId,
+                        PaidDate:new Date().toLocaleDateString()
+                    }}
+                }).then(response=> resolve())
+            })
+        })
+    }
+
+    
 
 }

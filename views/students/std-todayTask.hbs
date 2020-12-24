@@ -10,7 +10,7 @@
             <p>{{assignment.Name}}</p>
             <a href="/view-Assignment?id={{assignment._id}}" class="btn">View/Download</a>
             <form   id="taskForm" action="/submitAssignment" method="post" enctype="multipart/form-data">
-                <input type="file" id="assFile" name="File">
+                <input type="file" id="assFile" accept="application/pdf,application/vnd.ms-excel"  name="File">
                 <input type="text" name="assId" value="{{assignment._id}}" hidden>
                 <input type="text" name="Topicname" value="{{assignment.Name}}" hidden>
                <div class="progress1">

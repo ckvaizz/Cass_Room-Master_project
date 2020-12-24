@@ -1,0 +1,54 @@
+<section>
+    <div class="container">
+        <div class="allevents">
+            <h3>All Events</h3>
+            <div class="col-md-12">
+                <div class="row">
+                    {{#each events}}
+                    <div class="col-md-4">
+                       <div class="event">
+                           <h4>{{this.Event}}</h4>
+                           <h5>Topic : {{this.Topic}}</h5>
+                           <h5>Conducted : {{this.Conducting}}</h5>
+                           <h5>Date  : {{this.EventDate}}</h5>
+                           {{#if this.Paid}}
+                           <h5>Amount: {{this.Amount}} Rs/-</h5>
+                           {{/if}}
+                           {{#if this.Image}}
+                            <h6><a href="/viewevntImg?id={{this._id}}">view Image</a></h6>
+                           {{/if}}
+                           {{#if this.Video}}
+                           <h6><a href="/viewevntVideo?id={{this._id}}">View Video</a></h6>
+                           {{/if}}
+                           {{#if this.Pdf}}
+                           <h6><a href="/viewevntPdf?id={{this._id}}"> View Pdf</a></h6>
+                            {{/if}}
+                            {{#if this.Paid}}
+                            {{#if this.PaidStudents}}
+                            {{#each this.PaidStudents}}
+                            
+                            {{#ifId this.Student ../../student._id}}
+                            
+                            <h5 style="text-decoration: underline;"> You Paid this event</h5>
+                           {{else}}
+                           
+                             <h5>Payment Methods</h5>
+                            <p class="paymentMethod"><img src="/images/paypalIcon.webp" alt=""> <img  style="margin-left: 30%;" src="/images/Paytmicon.jpg" alt=""> <img onclick="PaywithRazorPay('{{this._id}}','{{this.Amount}}')"  src="/images/razorPayIcon.png" alt=""></p>
+                            
+                          
+                            {{/ifId}}
+                            
+                            {{/each}}
+                            {{else}}
+                            <h5>Payment Methods</h5>
+                            <p class="paymentMethod"> <a href="/payEventPal?id={{this._id}}&total={{this.Amount}}"><img  src="/images/paypalIcon.webp" alt=""></a> <a href="/payEventPaytm?id={{this._id}}&total={{this.Amount}}"> <img  style="margin-left: 30%;" src="/images/Paytmicon.jpg" alt=""></a> <img onclick="PaywithRazorPay('{{this._id}}','{{this.Amount}}')"  src="/images/razorPayIcon.png" alt=""></p>
+                            {{/if}}
+                            {{/if}}
+                       </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -670,10 +670,10 @@ function showAttstatus(){
     $('.todayTaskstatus1').addClass('todayTaskstatus').removeClass('todayTaskstatus1')
 }
 
-var eventPayId= ''
+
 function PaywithRazorPay(id,price){
     
-    eventPayId=id;
+   
     $.ajax({
         url:'/payEventRazor',
         method:'post',
@@ -682,7 +682,6 @@ function PaywithRazorPay(id,price){
             Price:price
         },
           success:(responce)=>{
-              
               if(responce.paymentErr){
                 alert("payment error")
                   
@@ -702,7 +701,7 @@ function razorPayment(data){
         "name": "Class Room",
         "description": "Test Transaction",
         "image": "https://lh3.googleusercontent.com/proxy/yqFfR8_Li7B6SorbTcnd_lCYrrh5i0oVYsdqRdUkxfIT8Dm0WHxie8SObIvM8iwVlV3TW8TAQ2-ebFsHcP3jd9TPZqInMPzrBN5P-WC_hHP_W-NNAAUaDzwwEQdpAurLTdEmCIPPb7thkbxilYAd5v3vnMJwYJNcLsgGR_sGt26Er-0owIKCs_SF8tSSpwFlLPWsXwIMPxJYiWkpWt0Nm84SDbFEVZiY_g",
-        "order_id":data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "order_id":data.id, 
         "handler": function (response){
             
             verifyPayment(response,data)
@@ -745,9 +744,9 @@ function  verifyPayment(payment,data){
 
 
 var openevnt= false
-function openhomeevnt(){
-    alert('okke')
-    if(openevnt){ 
+ function openhomeevnt(){
+    
+    if(!openevnt){ 
         $('.homeevnt-cntent1').addClass('homeevnt-cntent').removeClass('homeevnt-cntent1')
         openevnt=true
     }
@@ -756,5 +755,93 @@ function openhomeevnt(){
               openevnt=false
         }
             }
+var feeoption= false
+function openfee(){
+    if(feeoption){
+       $('.fees-methods').addClass('fees-methods1').removeClass('fees-methods')
+       feeoption= false 
+    }else{
+        $('.fees-methods1').addClass('fees-methods').removeClass('fees-methods1')
+       feeoption= true
+    }
+
+}
+
+
+function payfee_razor(amount){
+    $.ajax({
+        url:'/payfee-Razor',
+        method:'post',
+        data:{
+            amount:amount
+        },
+        success:(response)=>{
+            if(response.paymentErr){
+                alert("payment error")
+                  
+              } else {
+                razorFeePayment(response)
+              }
+        }
+    })
+
+}
+
+function razorFeePayment(data){
+    var options = {
+        "key": "rzp_test_74IUoLSXBjLRXM", // Enter the Key ID generated from the Dashboard
+        "amount": data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Class Room",
+        "description": "Fee Transaction",
+        "image": "https://lh3.googleusercontent.com/proxy/yqFfR8_Li7B6SorbTcnd_lCYrrh5i0oVYsdqRdUkxfIT8Dm0WHxie8SObIvM8iwVlV3TW8TAQ2-ebFsHcP3jd9TPZqInMPzrBN5P-WC_hHP_W-NNAAUaDzwwEQdpAurLTdEmCIPPb7thkbxilYAd5v3vnMJwYJNcLsgGR_sGt26Er-0owIKCs_SF8tSSpwFlLPWsXwIMPxJYiWkpWt0Nm84SDbFEVZiY_g",
+        "order_id":data.id, 
+        "handler": function (response){
+            
+            verifyFeePayment(response,data)
+        },
+        "prefill": {
+            "name": "Class Room",
+            "email": "ClassRoom@gmail.com",
+            "contact": "9072956555"
+        },
+        "notes": {
+            "address": "ClassRoom Corporate Office"
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+}
+function  verifyFeePayment(payment,data){
+    $.ajax({
+        url:'/verify-Feepayment-Razor',
+        data:{
+        payment,
+        data
+    },
+    method:'post',
+    success:(responce)=>{
+        if(responce.payment){
+           show_feeStatus()
+        }else{
+            alert("payment error")
+        }
+
+    }
+    })
+}
+
+function  show_feeStatus(){
+    
+    let div = document.querySelector('.paidStatus')
+    div.style="left:10%;"
+    setTimeout(() => {
+        div.style='left:-20%'
+    }, 4000);
+}
 
 

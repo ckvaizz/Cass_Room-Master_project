@@ -5,6 +5,9 @@ const mongodb=require('mongodb')
 const binary = mongodb.Binary
 const fs= require('fs')
 const path =require('path')
+const app = require('../app')
+const http = require('http')
+const server= http.createServer(app)
 const verifyLogin=(req,res,next)=>{
 if(req.session.adminLogin)next()
 else res.redirect('/admin')
@@ -32,7 +35,7 @@ router.post('/login',async(req,res)=>{
             res.redirect('/admin')
         }
     }).catch(()=>{
-        req.session.adminLoginErr='Invalid Login '
+        req.session.adminLoginErr='Invalid Login'
         res.redirect('/admin')
 
     })
@@ -96,11 +99,16 @@ router.get('/assignments',verifyLogin,async(req,res)=>{
     console.log("++",assignments);
     res.render('tutor/assignments',{adminLogin:req.session.adminLogin,assignments,login:true})
 })
+// io.on('connection', (socket) => {
+//     console.log('a user connected');
+//   });
 router.post('/assignment',(req,res)=>{
 
 
     let file ={ Name:req.body.Name,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name }
     adminHelper.addAssignment(file).then((data)=>{
+        
+        
         console.log(data._id)
    
         let pdf=req.files.File
@@ -108,7 +116,7 @@ router.post('/assignment',(req,res)=>{
          res.redirect('/admin/assignments')
     })
 })
- 
+
 
 router.get('/deletestudent',verifyLogin,(req,res)=>{
     adminHelper.deleteStudent(req.query.id).then(()=>{
@@ -515,5 +523,11 @@ router.get('/viewEvent',verifyLogin,async(req,res)=>{
 })
 
 
+//------
 
+
+router.get('/fee',verifyLogin,async(req,res)=>{
+    let fees= await adminHelper.getFees()
+    res.render('tutor/feeDetails',{login:true,fees, adminLogin:req.session.adminLogin})
+})
 module.exports = router;

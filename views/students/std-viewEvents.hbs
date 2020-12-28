@@ -1,0 +1,55 @@
+<section>
+    <div class="container">
+        <div class="event-box">
+            <h3>{{event.Event}}</h3>
+            
+            <h5>Topic :</h5>
+            <p>{{event.Topic}}</p>
+            <h5>Conducting :</h5>
+            <p>{{event.Conducting}}</p>
+            <h5>Date :</h5>
+            <p>{{event.EventDate}}</p>
+            {{#if event.Paid}}
+            <h5>Amount :</h5>
+            <p>{{event.Amount}} RS</p>
+            {{/if}}
+            {{#if event.Image}}
+           <a href="/viewevntImg?id={{event._id}}"><img  src="/datas/events/images/{{event._id}}.{{event.ImgType}}" alt="No Image"></a>
+            {{/if}}
+            {{#if event.Pdf}}
+            <a href="/viewevntPdf?id={{event._id}}" class="btn btn-secondary event-btn">Read-Pdf</a>
+            {{/if}}
+            {{#if event.Video}}
+            <video src="/datas/events/videos/{{event._id}}.mp4" controls muted autoplay></video>
+            {{/if}}
+            {{#if event.Paid}}
+            {{#if event.Image}}
+            {{else}}{{#if event.Video}}{{else}} <h4>ScrollDown for payment..</h4>{{/if}}{{/if}}
+            {{#if event.PaidStudents}}
+            {{#each event.PaidStudents}}
+           
+           <div class="event-pay">
+                {{#ifId this.Student ../student._id}}
+            <h3 style="text-decoration: underline;">Paid this Event</h3>
+           {{else}}
+               <h3>Payment Method</h3>
+              <a href="/payEventPaytm?id={{event._id}}&total={{event.Amount}}"> <img src="/images/Paytmicon.jpg" alt="Paytm Icon"> </a>
+               <img onclick="PaywithRazorPay('{{../event._id}}','{{../event.Amount}}')" src="/images/razorPayIcon.png" alt="Razorpay Icon">
+              <a href="/payEventPal?id={{event._id}}&total={{event.Amount}}"><img src="/images/paypalIcon.webp" alt="Paypal Icon"> </a>
+           {{/ifId}}
+           </div>
+            
+           {{/each}}
+           {{else}}
+           <div class="event-pay">
+            <h3 style="text-decoration: underline;">Paid this Event</h3>
+               <h3>Payment Method</h3>
+              <a href="/payEventPaytm?id={{event._id}}&total={{event.Amount}}"> <img src="/images/Paytmicon.jpg" alt=""></a>
+               <img onclick="PaywithRazorPay('{{event._id}}','{{event.Amount}}')" src="/images/razorPayIcon.png" alt="">
+              <a href="/payEventPal?id={{event._id}}&total={{event.Amount}}"> <img src="/images/paypalIcon.webp" alt=""></a>
+           </div>
+           {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</section>

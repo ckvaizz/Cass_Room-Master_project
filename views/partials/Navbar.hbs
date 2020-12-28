@@ -5,10 +5,12 @@
     <span>Hi Tutor</span>
     {{else}}
     <span>Hi {{student.Name}}</span>
+    <span class="notification1"> New Assignment Added</span>
     {{/if}}
 </li>
 <li class="NavbarLogout">
     {{#if adminLogin}}
+    
    <a href="/admin/logout"><button>Logout</button></a>
     {{else}}
     <a href="/logout"><button>Logout</button></a>

@@ -1,0 +1,26 @@
+<section>
+    <div class="container">
+        <div class="feeTable">
+             <h3>Fee Details</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Paid date</th>
+                    <th>Paid time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each fees}}
+                <tr>
+                    <td>{{this.Name}}</td>
+                    <td>{{this.PaidDate}}</td>
+                    <td>{{this.PaidTime}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+        
+    </div>
+</section>

@@ -1,14 +1,28 @@
 <section style="background: url(/images/std-homebg.jpg); background-size: cover; height:99vh; margin-top: -37px; ">
    <div class="std-homebg">
-      <div class="home-evnt">
+      <div class="paidStatus">
+         <p>Payment Success</p>
+      </div>
+      <div onclick="openfee()" class="fees-div"> 
+         <p>Pay fee</p>
+         <div class="fees-methods1">
+            <h6>25000</h6>
+            <a href="/payfee-Paypal?amount=25000">Paypal</a>
+            <a href="/payfee-Paytm?amount=25000">Paytm</a>
+            <p onclick="payfee_razor('25000')">Razorpay</p>
+         </div>
+
+
+      </div>
+      <div onclick="openhomeevnt()" class="home-evnt">
         <p>Events</p>
-        <div onclick="openhomeevnt()" class="homeevnt-cntent1">
+        <div  class="homeevnt-cntent1">
             <ul>
-                 
+                 {{#each events}}
                   <li>
-                     *<a href="/view-announcement?id=" style=" color:rgb(185, 32, 223);"> helloooo</a> 
+                     *<a href="/view-event?id={{this._id}}" style=" color:rgb(185, 32, 223);"> {{this.Event}} </a> {{#if this.Paid}}(Paid){{/if}} 
                   </li>
-                 
+                 {{/each}}
 
 
               </ul>

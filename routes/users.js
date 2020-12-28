@@ -42,7 +42,7 @@ router.get('/login',(req,res)=>{
 
 
 router.post('/checkNumber',(req,res)=>{
-  console.log(req.body);
+  
   studentHelper.checkMobile_NO(req.body).then((response)=>{
     res.json(response)
   }).catch(response=>{
@@ -66,6 +66,7 @@ router.post('/newPassword',(req,res)=>{
   })
 })
 router.get('/loginstd-otp',async(req,res)=>{
+  let events = await studentHelper.getEvents()
  let announcements = await studentHelper.getAnnouncements()
 studentHelper.getStudent(req.query.num).then(student=>{
   let date = new Date().toLocaleDateString()
@@ -79,7 +80,7 @@ studentHelper.getStudent(req.query.num).then(student=>{
   })
   req.session.student=student
   req.session.studentLogin=true
-  res.render('students/std-Home',{todayStatus,student,studentLogin:req.session.studentLogin,login:true,announcements})
+  res.render('students/std-Home',{events,todayStatus,student,studentLogin:req.session.studentLogin,login:true,announcements})
 })
   
 })
@@ -97,6 +98,7 @@ studentHelper.doLogin(req.body).then(response=>{
 
 
 router.get('/logintrue',verifyLogin,async(req,res)=>{
+  let events =await studentHelper.getEvents()
   let announcements = await studentHelper.getAnnouncements()
   let student = await studentHelper.getStudentDetails(req.session.student._id)
   let date = new Date().toLocaleDateString()
@@ -109,7 +111,7 @@ router.get('/logintrue',verifyLogin,async(req,res)=>{
     }
   })
   if(req.session.studentLogin){
-    res.render('students/std-Home',{student:req.session.student,studentLogin:req.session.studentLogin,login:true,announcements,todayStatus})
+    res.render('students/std-Home',{events,student:req.session.student,studentLogin:req.session.studentLogin,login:true,announcements,todayStatus})
   }else{
     res.redirect('/login')
   }
@@ -459,8 +461,12 @@ router.post('/payEventRazor',verifyLogin,async(req,res)=>{
   payedEventId=req.body.EventId
   console.log(req.body)
   studentHelper.generateRazorepay(req.body).then(data=>{
+    
     res.status(200).json(data)
-  }).catch(err=> payedEventId='',res.status(500).json({paymentErr:true}))
+  }).catch(err=>{
+    console.log(err,"--") 
+    payedEventId=''
+     res.status(200).json({paymentErr:true})})
 })
 
 router.post('/verify-payment-Razor',verifyLogin,(req,res)=>{
@@ -475,19 +481,21 @@ router.post('/verify-payment-Razor',verifyLogin,(req,res)=>{
 
 
 // paypal Payment gateway --
-
+let paytmstd= ''
+let payamount=''
 router.get('/payEventPal',verifyLogin,async(req,res)=>{
-  console.log(req.query.total,"++")
+  paytmstd = req.session.student
+  payedEventId = req.query.id 
   let total= parseFloat(req.query.total)
-  
+  payamount= total
   const create_payment_json = {
     "intent": "authorize",
 "payer": {
 "payment_method": "paypal"
 },
 "redirect_urls": {
-"return_url": "http://localhost:3000/success",
-"cancel_url": "http://127.0.0.1:3000/err"
+"return_url": "http://localhost:3000/paypalsuccess",
+"cancel_url": "http://localhost:3000/paypalErr'"
 },
 "transactions": [{
 "amount": {
@@ -516,7 +524,33 @@ paypal.payment.create(create_payment_json, function (error, payment) {
 
 });
 
-let paytmstd= ''
+
+
+
+router.get('/paypalsuccess',(req,res)=>{
+  
+  studentHelper.addPayedstatus(paytmstd,payedEventId).then(r=>{
+  paytmstd= ''
+  payedEventId= ''
+  let rep = {
+    Trn_id:req.query.paymentId,
+    Method:"PAYPAL",
+    Date:new Date().toLocaleDateString(),
+    Amount:payamount
+  }
+  payamount=''
+  res.render('students/paymentSuccess',{rep}) 
+})
+  })
+
+
+
+router.get('/paypalErr',(req,res)=>{
+  paytmstd= ''
+  payedEventId= ''
+  res.send('<center>Payment Error Try again..</center></br> <a href="/events">Go Back To Events</a>')
+})
+
 //payment Gateway of paytm --
 var check_sum = require('../config/paytm/checksum')
 
@@ -564,9 +598,15 @@ router.post('/paytmresponse',async (req, res) => {
   let data= req.body
   if(data.STATUS == 'TXN_SUCCESS'){
      await studentHelper.addPayedstatus(paytmstd,payedEventId).then(r=>{
-      payedEventId=''
-      res.redirect('/events')
-
+      paytmstd= ''
+      payedEventId= ''
+      let rep = {
+        Trn_id:data.ORDERID,
+        Method:"PAYTM",
+        Date:new Date().toLocaleDateString(),
+        Amount:data.TXNAMOUNT
+      }
+      res.render('students/paymentSuccess',{rep}) 
     })
 
   }else{
@@ -577,6 +617,163 @@ router.post('/paytmresponse',async (req, res) => {
   
 })
 
+//-------
+
+router.get('/view-event',verifyLogin,async(req,res)=>{
+  let event =  await studentHelper.getEvent(req.query.id)
+  res.render('students/std-viewEvents',{event,login:true,student:req.session.student})
+})
+
+
+//fee payment with PAYPAL
+
+router.get('/payfee-Paypal',verifyLogin,(req,res)=>{
+paytmstd= req.session.student
+  let amount= parseFloat(req.query.amount)
+  
+  const create_payment_json = {
+    "intent": "authorize",
+"payer": {
+"payment_method": "paypal"
+},
+"redirect_urls": {
+"return_url": "http://localhost:3000/paypalFeesuccess",
+"cancel_url": "http://localhost:3000/paypalFeeerr"
+},
+"transactions": [{
+"amount": {
+"total": amount,
+"currency": "INR"
+},
+"description": " a book on mern stack "
+}]
+}
+  
+
+paypal.payment.create(create_payment_json, function (error, payment) {
+  if (error) {
+
+      console.log("error on paypal",error)
+  } else {
+    payment.links.map(link=>{
+      
+      if(link.rel==='approval_url'){
+       
+        res.redirect(`${link.href}`);
+      }
+    })
+  }
+});
+})
+
+router.get('/paypalFeesuccess',(req,res)=>{
+  studentHelper.addFeeStatus(paytmstd).then(r=>{
+   
+    let rep = {
+      Trn_id:req.query.paymentId,
+      Method:"PAYPAL",
+      Date:new Date().toLocaleDateString(),
+      Amount:"25,000"
+    }
+    res.render('students/paymentSuccess',{rep}) 
+  })
+})
+//fee payment with PAYTM
+
+router.get('/payfee-Paytm',verifyLogin,(req,res)=>{
+  paytmstd = req.session.student
+ 
+
+  var params = {};
+  params['MID'] = "bqHsko02713256491688";
+  params['WEBSITE'] = "WEBSTAGING";
+  params['CHANNEL_ID'] = "WEB";
+  params['INDUSTRY_TYPE_ID'] = "Retail";
+  params['ORDER_ID'] = 'TEST_' + new Date().getTime();
+  params['CUST_ID'] = req.session.student._id;
+  params['TXN_AMOUNT'] = req.query.amount.toString();
+  params['CALLBACK_URL'] = "http://localhost:3000/paytmFEEresponse";
+  params['EMAIL'] = req.session.student.Email;
+  params['MOBILE_NO'] = req.session.student.Mobile;
+
+  
+let key = "giy3zEXhio&jFRj%"
+
+  check_sum.genchecksum(params,key, function (err, checksum) {
+    var txn_url = "https://securegw-stage.paytm.in/order/process"; // for staging
+    // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
+    if(err) console.log("error"+err)
+
+    var form_fields = "";
+    for (var x in params) {
+      
+      form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+    }
+    form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('<center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form><script type="text/javascript">document.f1.submit();</script>');
+    res.end();
+  })
+})
+
+
+//paytm payment response
+
+router.post('/paytmFEEresponse',async (req, res) => {
+   let data= req.body
+  if(data.STATUS == 'TXN_SUCCESS'){
+     await studentHelper.addFeeStatus(paytmstd).then(r=>{
+      payedEventId=''
+      
+      let rep = {
+        Trn_id:data.ORDERID,
+        Method:"PAYTM",
+        Date:new Date().toLocaleDateString(),
+        Amount:data.TXNAMOUNT
+      }
+      res.render('students/paymentSuccess',{rep}) 
+
+    })
+
+  }else{
+    console.log(data)
+    payedEventId= ''
+    res.send('<center><h2>Payment Failled</h2></br> '+data.RESPMSG+'</br><a href="/login">Go Back..</a></center>')
+  }
+  
+})
+
+// fee Payment with RAZORPAY
+
+router.post('/payfee-Razor',verifyLogin,(req,res)=>{
+  let data ={
+    Price:req.body.amount,
+    EventId:req.session.student._id
+  }  
+
+  studentHelper.generateRazorepay(data).then(data=>{
+    
+    res.status(200).json(data)
+  }).catch(err=>{
+      console.log(err,"--") 
+     res.status(200).json({paymentErr:true})})
+
+})
+
+router.post('/verify-Feepayment-Razor',verifyLogin,(req,res)=>{
+  studentHelper.verifyPayment_Razor(req.body).then(async response=>{
+    await studentHelper.addFeeStatus(req.session.student).then(r=>{
+      
+      res.status(200).json({payment:true})
+
+    })
+  }).catch(err=> res.status(500).json({payment:false}))
+
+})
+
+
+ 
 
 
 module.exports = router;

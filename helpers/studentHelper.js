@@ -2,10 +2,10 @@ var db=require('../config/connection');
 var collections=require('../config/collections');
 const bcrypt=require('bcrypt')
 var objectId=require('mongodb').ObjectId
-const accountSID ="ACad1ba650469ec2893ff472d077ef76f3"
-const authTOKEN = "f62aac86b9da8deccff39e2b44cebd76"  
- const serviceId ="VA465cc0f99ed26a52dde7f6111fda0102"
-const otpclient = require('twilio')(accountSID,authTOKEN)
+ process.env.accountSID ="ACad1ba650469ec2893ff472d077ef76f3"
+ process.env.authTOKEN = "45d99cb24aa3e93837f5158540dddda2"  
+ process.env.serviceId ="VA465cc0f99ed26a52dde7f6111fda0102"
+const otpclient = require('twilio')(process.env.accountSID,process.env.authTOKEN)
 var Razorpay=require('razorpay')
 var instance = new Razorpay({
     key_id: 'rzp_test_74IUoLSXBjLRXM',
@@ -19,7 +19,7 @@ module.exports={
                 if(response){
                     const number = parseInt(Number.Mobile) 
                     console.log("calling");
-                  otpclient.verify.services(serviceId).verifications.create({
+                  otpclient.verify.services(process.env.serviceId).verifications.create({
                     to:`+91${number}`,
                     channel:"sms"
                     
@@ -40,7 +40,7 @@ module.exports={
     checkOtp:(data,mob)=>{
         console.log(data,mob);
         return new Promise((resolve,reject)=>{
-            otpclient.verify.services(serviceId).verificationChecks.create({
+            otpclient.verify.services(process.env.serviceId).verificationChecks.create({
                 to:`+91${mob}`,
                 code:data.OTP
             }).then(data=>{
@@ -237,10 +237,13 @@ module.exports={
                 currency: "INR",
                 receipt: ""+details.EventId
               };
+              console.log(options,"==")
               instance.orders.create(options, function(err,data) {
                 if (err) {
+                    console.log("err",err)
                    reject(err)
                 }else{
+                    
               resolve(data)
                 }
            })
@@ -279,6 +282,19 @@ module.exports={
                         PaidDate:new Date().toLocaleDateString()
                     }}
                 }).then(response=> resolve())
+            })
+        })
+    },
+    addFeeStatus:(std)=>{
+        return new Promise(async(resolve,reject)=>{
+            let data ={
+                Name:std.Name,
+                StdId:std._id,
+                PaidDate:new Date().toLocaleDateString(),
+                PaidTime:new Date().toLocaleTimeString()
+            }
+            db.get().collection(collections.FEE_COLLECTIONS).insertOne(data).then(reponse=>{
+                resolve(reponse)
             })
         })
     }

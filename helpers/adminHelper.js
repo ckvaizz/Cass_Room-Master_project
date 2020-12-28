@@ -253,6 +253,12 @@ module.exports={
                 resolve(data)
             })
         })
+    },
+    getFees:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let fees = await db.get().collection(collections.FEE_COLLECTIONS).find({}).toArray()
+            resolve(fees)
+        })
     }
 
 }

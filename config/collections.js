@@ -5,5 +5,6 @@ module.exports={
     NOTES_COLLECTION:'notesCollection',
     PHOTOS_COLLECTIONS:'photoCollection',
     ANNOUNCEMENTS_COLLECTIONS:'announcementCollection',
-    EVENTS_COLLECTIONS:'eventCollection'
+    EVENTS_COLLECTIONS:'eventCollection',
+    FEE_COLLECTIONS:'feecollecction'
 }

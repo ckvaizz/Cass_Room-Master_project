@@ -1570,6 +1570,7 @@ font-weight: bold;
   pointer-events: none;
 }
 .ass-card{
+  overflow-y: scroll;
   background-color: transparent;
   perspective: 1000px;
 }
@@ -1579,14 +1580,15 @@ font-weight: bold;
   max-height: 100%;
   width: 200px;
   background-color: rgba(26, 24, 24, 0.966);
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 15px;
   transition: all .5s  ease;
   transform-style: preserve-3d;
+  
 }
 .ass-cardInner:hover{
  
-    border-top: 3px solid red;  
+    border-top: 2px solid red;  
 }
 
 .front-ass>h5{
@@ -1614,6 +1616,7 @@ font-weight: bold;
     height: 100%;
     width: 100%;
     
+    
   }
 .backload{
   position: absolute;
@@ -1640,7 +1643,8 @@ font-weight: bold;
 }
 .datadetails{
   position: absolute;
-  margin-top: -100px;
+  margin-top: -110px;
+  
 }
 .ass-heading{
   margin-left: 35%;
@@ -2492,4 +2496,206 @@ margin-top: -10px;
 .notification1{
   opacity: 0;
   width: 0;
+}
+.chat-box1{
+  height: 10px;
+  position:absolute;
+  left:-1000px;
+  
+  transition: all 1s ease;
+
+}
+.chat-btn{
+  position: absolute;
+  background-color: teal;
+  height: 50px ;
+  width: 125px;
+  right: 40px ;
+  bottom: 100px;
+  border-radius: 40%;
+  text-align: center;
+  color: #f0f0f0;
+}
+.chat-btn>h4{
+  margin-top: 10px;
+}
+.chat-box{
+  position: absolute;
+  height: 400px;
+  width: 350px;
+  background-color: #fdfeff;
+  right: 30px;
+  bottom: 70px;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  border-radius: 10px;
+  transition: all 1s ease;
+}
+.chat-head{
+  text-align: center;
+  
+  border-bottom: 2px solid black;
+}
+.chat-head>h4{
+  margin-top: 3px;
+  text-decoration: skyblue underline;
+}
+.chat-body{
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  overflow-y: scroll;
+}
+.chat-body::-webkit-scrollbar{
+  display: none;
+}
+.chat-input{
+  text-align: center;
+  margin-top: 6px;
+}
+.chat-input>input{
+  border-radius: 30px;
+  padding-left: 4px;
+}
+.chat-input>button{
+  background-color: transparent;
+  border: none;
+}
+.chat-input>input:focus,.chat-input>button:focus,.chat-close:focus{
+  outline: 0;
+}
+
+.message-r{
+  box-shadow: 3px 3px 9px rgba(251, 251, 251, 0.5),3px 3px 5px rgba(0, 0, 0, 0.2);
+  padding: 2px;
+  width: 150px;
+  border-radius: 10px;
+  text-align: center;
+}
+.message-s{
+  padding: 4px;
+  box-shadow:inset 3px 3px 5px rgba(0, 0, 0, 0.2),inset 5px 5px 5px rgba(251, 251, 251, 0.534);
+  width: 150px;
+  border-radius: 10px;
+  text-align: center;
+ 
+  margin-left: 175px;
+
+}
+.message-r>p,.message-s>p{
+  overflow-wrap: break-word;
+}
+
+.chat-close{
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  width: 25px;
+  margin-top: -40px;
+  border: none;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3),inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+.adchat-box{
+  position: relative;
+  background-color: rgba(0,0,0,0.2);
+  height: 80vh;
+  text-align: center; 
+  border-radius: 10px ;
+  overflow: hidden;
+  
+}
+.studentchat-list{
+  position: absolute;
+  width: 30%;
+  height: 73vh;
+  background-color: rgba(177, 174, 174, 0.4);
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid black;
+  overflow-y: scroll;
+}
+.studentchat-list::-webkit-scrollbar{
+  display: none;
+}
+.studentchat-message{
+  position: absolute;
+    right: 0px;
+    width: 70%;
+    height: 73vh;
+    background-color: rgba(226, 189, 189, 0.986);
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+.message-body{
+  height: 60vh;
+  overflow-y: scroll;
+}
+.message-body::-webkit-scrollbar{
+  display: none;
+}
+.messge-input{
+  height: 7.3vh;
+}
+.messge-input>input{
+  border-radius: 10px;
+   margin-top:8px ;
+   padding-left: 5px;
+}
+.messge-input>input:focus,.messge-input>button:focus{
+  outline: 0;
+}
+.messge-input>button{
+  border: none;
+  background-color: transparent;
+
+}
+.chat-user{
+  height: 50px;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.2) ,inset -3px -3px 5px rgba(0, 0, 0, 0.2);  
+  transition:box-shadow 1s ease;
+  border-radius: 10px;
+}
+.selctmsg{
+  font-weight: 500;
+  font-size: 1.5rem;
+  
+}
+.selctmsg1{
+  display: none;
+  
+}
+.studentchat-message1,.loadingmsg1{
+  display: none;
+}
+
+.chat-user>h4{
+  margin-top: 10px;
+  user-select: none;
+}
+.chat-user:hover{
+  background-color: rgba(168, 205, 235, 0.911);
+}
+.admsg-r{
+  background-color: rgba(138, 116, 116, 0.986);
+  width: 250px;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 10px;
+  
+}
+.admsg-r>p,.admsg-s>p{
+  overflow-wrap: break-word;
+
+}
+.admsg-s{
+  width: 250px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+  margin-left: 60%;
 }

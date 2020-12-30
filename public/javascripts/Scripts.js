@@ -1,5 +1,6 @@
 
 
+
 $(function(){
     $('.edittutorprofile').on('submit', function(event){
         event.preventDefault();
@@ -844,4 +845,129 @@ function  show_feeStatus(){
     }, 4000);
 }
 
+function showchat_box(){
+    $('.chat-box1').addClass('chat-box').removeClass('chat-box1')
+    var height = 0;
+   $('#chat-body div').each(function(i, value){
+    height += parseInt($(this).height());
+    
+    });
+
+height += '';
+
+$('#chat-body').animate({scrollTop: height*height});
+}
+
+function hidechat_box(){
+    $('.chat-box').addClass('chat-box1').removeClass('chat-box')
+}
+
+
+function stdsend_Message(){
+ let msg = $('#msg').val()
+ $('#msg').val('')
+    $.ajax({
+        url:'/sendMessage',
+        method:'post',
+        data:{
+            message: msg
+        },
+        success:(data)=>{
+            if(data.status){
+                document.getElementById('chat-body').innerHTML +=`
+                <div class="message-s">
+                  <p>${msg}</p>
+               </div>`
+               var height = 0;
+               $('#chat-body div').each(function(i, value){
+                height += parseInt($(this).height());
+                
+                });
+            
+            height += '';
+            
+            $('#chat-body').animate({scrollTop: height*height});
+            
+            }else {
+                alert('sending failed') }
+        }
+    })
+}
+var selectedStd = '';
+function show_stdmsg(id){
+    selectedStd = ''
+    $('.selctmsg').addClass('selctmsg1').removeClass('selctmsg')
+    $('.studentchat-message1').addClass('studentchat-message').removeClass('studentchat-message1')
+    $.ajax({
+        url:'/admin/getMessages',
+        method:'post',
+        data:{
+            Id:id
+        },
+        success:(data)=>{
+            $('.loadingmsg').addClass('loadingmsg1').removeClass('loadingmsg')
+            if(data){
+                selectedStd = data.Id;
+                document.getElementById('msg-head').innerHTML = `<h4>${data.Name}</h4>`
+                if(data.Messages){
+                document.getElementById('msg-body').innerHTML = 
+               
+                data.Messages.map(msg=>{
+                    return `
+                        <div class=${msg.Tutor ? "admsg-s" : "admsg-r"}>
+                        <p>${msg.Message}</p>
+                        </div>                   
+                    `
+                })
+
+                var height = 0;
+                $('#msg-body div').each(function(i, value){
+                 height += parseInt($(this).height());
+                 
+                 });
+             
+             height += '';
+             
+             $('#msg-body').animate({scrollTop: height*height});
+
+            }else{
+                document.getElementById('msg-body').innerHTML = ' '
+            }
+            }else{
+                location.reload()
+            }
+
+        }
+    })
+}
+
+function sendMessage_admin(){
+    let msg = $('#adminmsg').val()
+    $('#adminmsg').val('')
+    $.ajax({
+        url:'/admin/sendMessage',
+        method:'post',
+        data:{
+            message:msg,
+            Id:selectedStd
+        },
+        success:(data)=>{
+            if(data.status){
+                document.getElementById('msg-body').innerHTML +=`
+                <div class=admsg-s>
+                <p>${msg}</p>
+                `   
+                var height = 0;
+                $('#msg-body div').each(function(i, value){
+                 height += parseInt($(this).height());
+                 
+                 });
+             
+             height += '';
+             
+             $('#msg-body').animate({scrollTop: height*height});             
+            }else alert('sending failed')
+        }
+    })
+}
 

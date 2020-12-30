@@ -5,12 +5,11 @@ const mongodb=require('mongodb')
 const binary = mongodb.Binary
 const fs= require('fs')
 const path =require('path')
-const app = require('../app')
-const http = require('http')
-const server= http.createServer(app)
+const Socket = require('../config/socketio')
+
 const verifyLogin=(req,res,next)=>{
-if(req.session.adminLogin)next()
-else res.redirect('/admin')
+if(req.session.adminLogin) next()
+else res.redirect('/admin') 
 }
 
 router.get('/',async function(req, res, next) {
@@ -24,7 +23,7 @@ router.post('/login',async(req,res)=>{
     let announcement = await adminHelper.getAnnouncements()
     let events = await adminHelper.getEvents()
     adminHelper.doLogin(req.body).then((response)=>{
-        if(response.login){
+        if(response.login){ 
             req.session.adminLogin=true
             req.session.admin=response.user
             
@@ -99,16 +98,17 @@ router.get('/assignments',verifyLogin,async(req,res)=>{
     console.log("++",assignments);
     res.render('tutor/assignments',{adminLogin:req.session.adminLogin,assignments,login:true})
 })
-// io.on('connection', (socket) => {
-//     console.log('a user connected');
-//   });
-router.post('/assignment',(req,res)=>{
+
+ 
+
+
+  router.post('/assignment',(req,res)=>{
 
 
     let file ={ Name:req.body.Name,Date:new Date().toLocaleDateString(),Time:new Date().toLocaleTimeString(),fileName:req.files.File.name }
     adminHelper.addAssignment(file).then((data)=>{
         
-        
+        Socket.NewAssignmentAdded(data)        
         console.log(data._id)
    
         let pdf=req.files.File
@@ -529,5 +529,31 @@ router.get('/viewEvent',verifyLogin,async(req,res)=>{
 router.get('/fee',verifyLogin,async(req,res)=>{
     let fees= await adminHelper.getFees()
     res.render('tutor/feeDetails',{login:true,fees, adminLogin:req.session.adminLogin})
+})
+
+
+
+router.get('/chat-box',verifyLogin,async(req,res)=>{
+    let students = await adminHelper.getStudents();
+    res.render('tutor/chat',{students,login:true,adminLogin:req.session.adminLogin})
+})
+
+router.post('/getMessages',verifyLogin,(req,res)=>{
+adminHelper.getStudent(req.body.Id).then(data=>{
+   res.json({Name:data.Name,Messages:data.Messages,Id:req.body.Id})
+}).catch(e=>res.json(false))
+})
+
+router.post('/sendMessage',verifyLogin,(req,res)=>{
+    let msg={
+        Message:req.body.message,
+        Time:new Date().toLocaleTimeString(),
+        Date: new Date().toLocaleDateString(),
+        Tutor:true
+    }
+    adminHelper.sendMessage(msg,req.body.Id).then(data=>{
+        Socket.AdmSendMsg(msg)
+        res.json({status:true})
+    }).catch(e=> res.json({status:false}))
 })
 module.exports = router;

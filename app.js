@@ -8,13 +8,15 @@ var hbs = require('express-handlebars');
 var usersRouter = require('./routes/users');
 var tutorRouter = require('./routes/tutor');
 var app = express();
-
+ app.io = require('socket.io')();
 const fileUpload = require('express-fileupload')
 const session=require('express-session')
 const MongoStore = require('connect-mongo')(session)
 var objectId=require('mongodb').ObjectId
-// view engine setup
 
+
+
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs')
 app.use(logger('dev'));
@@ -27,10 +29,12 @@ db.connect((err)=>{
   if(err) console.log("connection error:",err)
   else console.log("Database Connected*")
 })
+
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store')
   next()
 })
+
 app.use(session({
   store: new MongoStore({
       url:'mongodb+srv://admin:CNojm0HyXo4iA9Z5@cluster0.shb7d.mongodb.net/classRoom?retryWrites=true&w=majority'
@@ -100,5 +104,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;

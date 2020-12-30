@@ -5,7 +5,7 @@
     <span>Hi Tutor</span>
     {{else}}
     <span>Hi {{student.Name}}</span>
-    <span class="notification1"> New Assignment Added</span>
+    <span class="notification1"><a href="/assignments">New Assignment Added </a></span>
     {{/if}}
 </li>
 <li class="NavbarLogout">
@@ -18,3 +18,13 @@
 </li>
 </ul>
 </nav>
+
+
+    <script>
+      var socket = io.connect();
+       socket.on('connect', () => {
+        });
+        socket.on('AssignmentAdded',(data)=>{
+            $('.notification1').addClass('notification').removeClass('notification1')
+        })
+    </script>

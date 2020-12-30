@@ -2,10 +2,10 @@ var db=require('../config/connection');
 var collections=require('../config/collections');
 const bcrypt=require('bcrypt')
 var objectId=require('mongodb').ObjectId
- process.env.accountSID ="ACad1ba650469ec2893ff472d077ef76f3"
- process.env.authTOKEN = "45d99cb24aa3e93837f5158540dddda2"  
- process.env.serviceId ="VA465cc0f99ed26a52dde7f6111fda0102"
-const otpclient = require('twilio')(process.env.accountSID,process.env.authTOKEN)
+ 
+ const twilo = require('../config/twiloConfig')  
+ 
+const otpclient = require('twilio')(twilo.accountSID,twilo.authTOKEN)
 var Razorpay=require('razorpay')
 var instance = new Razorpay({
     key_id: 'rzp_test_74IUoLSXBjLRXM',
@@ -19,7 +19,7 @@ module.exports={
                 if(response){
                     const number = parseInt(Number.Mobile) 
                     console.log("calling");
-                  otpclient.verify.services(process.env.serviceId).verifications.create({
+                  otpclient.verify.services(twilo.serviceId).verifications.create({
                     to:`+91${number}`,
                     channel:"sms"
                     
@@ -29,6 +29,7 @@ module.exports={
 
                   }).catch((err)=>{
                       console.log("err",err);
+                      reject({status:false})
                   })  
                 }else{
                     reject({status:false})
@@ -40,7 +41,7 @@ module.exports={
     checkOtp:(data,mob)=>{
         console.log(data,mob);
         return new Promise((resolve,reject)=>{
-            otpclient.verify.services(process.env.serviceId).verificationChecks.create({
+            otpclient.verify.services(twilo.serviceId).verificationChecks.create({
                 to:`+91${mob}`,
                 code:data.OTP
             }).then(data=>{
@@ -52,6 +53,7 @@ module.exports={
                 }
             }).catch(err=>{
                 console.log("error in verification",err)
+                reject({status:false})
             })
         })
     },
@@ -297,6 +299,14 @@ module.exports={
                 resolve(reponse)
             })
         })
+    },
+    sendMessage:(msg,Id)=>{
+        return new Promise((resolve,reject)=>{
+
+        db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(Id)},{
+            $push:{Messages:msg}
+        }).then(reponse=> resolve()).catch(err=> reject())
+    })
     }
 
     

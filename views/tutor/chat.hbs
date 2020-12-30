@@ -1,0 +1,54 @@
+<section>
+    <div class="container">
+           <div class="adchat-box">
+               <h2>Chat-Box</h2>
+               <div class="studentchat-list">
+                   {{#each students}}
+                   <div onclick="show_stdmsg('{{this._id}}')" class="chat-user">
+                       <h4>{{this.Name}}</h4>
+                   </div>
+                   {{/each}}
+               </div>
+               <p  class="selctmsg">Select message</p>
+               <div  class="studentchat-message1">
+
+                   <div id="msg-head" class="message-head">
+                        
+
+                   </div>
+                   <div id="msg-body" class="message-body">
+                       <div class="loadingmsg"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
+                       
+                     
+
+                   </div>
+                   <div class="messge-input">
+                       <input id="adminmsg" type="text" name="message" >
+                       <button onclick="sendMessage_admin()"><i class="fa fa-send"></i></button>
+                   </div>
+               </div>
+           </div> 
+    </div>
+</section>
+<script>
+    var socket = io.connect();
+socket.on('stdmsg',(data)=>{
+    
+   
+   
+   document.getElementById('msg-body').innerHTML += `
+   <div class="admsg-r">
+               <p>${data.data.Message}</p>
+    </div>`
+    var height = 0;
+            $('#msg-body div').each(function(i, value){
+             height += parseInt($(this).height());
+             
+             });
+        
+         height += '';
+         
+         $('#msg-body').animate({scrollTop: height*height});
+   
+})   
+</script>

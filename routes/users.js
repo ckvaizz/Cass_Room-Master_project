@@ -71,6 +71,7 @@ router.get('/loginstd-otp',async(req,res)=>{
 studentHelper.getStudent(req.query.num).then(student=>{
   let date = new Date().toLocaleDateString()
   let todayStatus = false
+  let Messages = student.Messages
   student.Attendance.map(att=>{
     if(att.Date == date){
       if(att.status){
@@ -80,7 +81,8 @@ studentHelper.getStudent(req.query.num).then(student=>{
   })
   req.session.student=student
   req.session.studentLogin=true
-  res.render('students/std-Home',{events,todayStatus,student,studentLogin:req.session.studentLogin,login:true,announcements})
+  
+  res.render('students/std-Home',{Messages,events,todayStatus,student,studentLogin:req.session.studentLogin,login:true,announcements})
 })
   
 })
@@ -101,6 +103,7 @@ router.get('/logintrue',verifyLogin,async(req,res)=>{
   let events =await studentHelper.getEvents()
   let announcements = await studentHelper.getAnnouncements()
   let student = await studentHelper.getStudentDetails(req.session.student._id)
+  let Messages = student.Messages
   let date = new Date().toLocaleDateString()
   let todayStatus = false
   student.Attendance.map(att=>{
@@ -111,7 +114,7 @@ router.get('/logintrue',verifyLogin,async(req,res)=>{
     }
   })
   if(req.session.studentLogin){
-    res.render('students/std-Home',{events,student:req.session.student,studentLogin:req.session.studentLogin,login:true,announcements,todayStatus})
+    res.render('students/std-Home',{Messages,events,student:req.session.student,studentLogin:req.session.studentLogin,login:true,announcements,todayStatus})
   }else{
     res.redirect('/login')
   }
@@ -771,8 +774,20 @@ router.post('/verify-Feepayment-Razor',verifyLogin,(req,res)=>{
   }).catch(err=> res.status(500).json({payment:false}))
 
 })
-
-
+const Socket = require('../config/socketio')
+router.post('/sendMessage',verifyLogin,(req,res)=>{
+console.log(req.body)
+let msg ={
+  Message:req.body.message,
+  Time:new Date().toLocaleTimeString(),
+  Date:new Date().toLocaleDateString(),
+  Tutor:false
+}
+   studentHelper.sendMessage(msg,req.session.student._id).then(data=>{
+     Socket.StdSendMsg(msg,req.session.student._id)
+     res.json({status:true})
+   }).catch(e=> res.json({status:false})) 
+})
  
 
 

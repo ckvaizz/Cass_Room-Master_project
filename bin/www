@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('classroom-management:server');
 var http = require('http');
+var socketC = require('../config/socketio') 
 /**
  * Get port from environment and store in Express.
  */
@@ -19,8 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -31,6 +30,11 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
+
+var io = app.io;
+io.listen(server);
+
+socketC.scktioC(io);
 
 function normalizePort(val) {
   var port = parseInt(val, 10);

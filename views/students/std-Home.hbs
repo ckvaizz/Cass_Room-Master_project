@@ -48,8 +48,51 @@
 
           </div>
        </div>
-
+      <div class="chat-btn" onclick="showchat_box()">
+         <h4>Chat-Box</h4>
+      </div>
+      <div class="chat-box1">
+         <div class="chat-head"><h4>Chat-Box</h4> <button class="chat-close" onclick="hidechat_box()"><i class="fa fa-times-circle"></i></button></div>
+         <div id="chat-body" class="chat-body">
+               {{#each Messages}}
+               {{#if this.Tutor}}
+               <div class="message-r">
+                     <p>{{this.Message}}</p>
+               </div>
+               {{else}}
+               <div class="message-s">
+                  <p>{{this.Message}}</p>
+               </div>
+               {{/if}}
+              {{/each}}
+         </div>
+         <div class="chat-input">
+            <input type="text" name="message" id="msg">
+            <button onclick="stdsend_Message()" > <i class="fa fa-send"></i></button>
+         </div>
+      </div>
     
 
    </div>
 </section>
+
+<script>
+   var socket = io.connect();
+   socket.on('admmsg',(data)=>{
+      console.log(data)
+      document.getElementById('chat-body').innerHTML += `
+      <div class="message-r">
+                  <p>${data.Message}</p>
+       </div>`
+       var height = 0;
+               $('#chat-body div').each(function(i, value){
+                height += parseInt($(this).height());
+                
+                });
+           
+            height += '';
+            
+            $('#chat-body').animate({scrollTop: height*height});
+            
+   })
+</script>

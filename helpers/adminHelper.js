@@ -259,6 +259,13 @@ module.exports={
             let fees = await db.get().collection(collections.FEE_COLLECTIONS).find({}).toArray()
             resolve(fees)
         })
+    },
+    sendMessage:(msg,Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.STUDENTS_COLLECTION).updateOne({_id:objectId(Id)},{
+                $push:{Messages:msg}
+            }).then(d=> resolve()).catch(e=> reject())
+    })
     }
 
 }

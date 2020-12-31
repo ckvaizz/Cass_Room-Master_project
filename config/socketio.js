@@ -1,23 +1,26 @@
- let Socket;
  
+ let IO;
  module.exports ={
     scktioC:(io)=>{
         
         io.on('connection', (socket) => {
-            Socket= socket
+            IO=io
+           
             console.log('a user connected');
           
         }); 
     },
     NewAssignmentAdded:(data)=>{
-        
-        Socket.emit('AssignmentAdded',{message:'helllo'})
+       
+        IO.emit('AssignmentAdded',{message:'helllo'})
     },
-    StdSendMsg:(data,Id)=>{
-        Socket.emit('stdmsg',{data:data,Id:Id})
+    StdSendMsg:(data,id)=>{
+        console.log(id,"Id")
+        IO.emit('stdmsg',{data:data,Id:id})
     },
-    AdmSendMsg:(data)=>{
-        Socket.emit('admmsg',data)
+    AdmSendMsg:(data,id)=>{
+
+        IO.emit('admmsg',{data:data,Id:id})
     }
 
 

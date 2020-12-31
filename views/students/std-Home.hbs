@@ -48,8 +48,9 @@
 
           </div>
        </div>
+       <div class="newmsgicon1"><i class="fa fa-exclamation-circle" style="font-size:35px;color:red"></i></div>
       <div class="chat-btn" onclick="showchat_box()">
-         <h4>Chat-Box</h4>
+         <img src="/images/chaticon1.png" alt="">
       </div>
       <div class="chat-box1">
          <div class="chat-head"><h4>Chat-Box</h4> <button class="chat-close" onclick="hidechat_box()"><i class="fa fa-times-circle"></i></button></div>
@@ -58,10 +59,12 @@
                {{#if this.Tutor}}
                <div class="message-r">
                      <p>{{this.Message}}</p>
+                     <i>{{this.Time}}</i>
                </div>
                {{else}}
                <div class="message-s">
                   <p>{{this.Message}}</p>
+                  <i>{{this.Time}}</i>
                </div>
                {{/if}}
               {{/each}}
@@ -77,12 +80,33 @@
 </section>
 
 <script>
+var openstatus = false
+   showchat_box1=()=>{
+     openstatus = true
+     $('.newmsg').addClass('newmsg1').removeClass('newmsg')
+      $('.newmsgicon').addClass('newmsgicon1').removeClass('newmsgicon')
+  }
+  function hidechat_box1(){
+     openstatus=false
+     
+  }
    var socket = io.connect();
    socket.on('admmsg',(data)=>{
-      console.log(data)
-      document.getElementById('chat-body').innerHTML += `
+      
+
+      $.ajax({
+         url:'/verifySelectedstd',
+         method:'post',
+         data:{
+            Id:data.Id
+         },success:(res)=>{
+            if(res.status){
+               if(openstatus){
+
+               document.getElementById('chat-body').innerHTML += `
       <div class="message-r">
-                  <p>${data.Message}</p>
+                  <p>${data.data.Message}</p>
+                  <i>${data.data.Time}</i>
        </div>`
        var height = 0;
                $('#chat-body div').each(function(i, value){
@@ -93,6 +117,30 @@
             height += '';
             
             $('#chat-body').animate({scrollTop: height*height});
+         
+               }else{
+
+               document.getElementById('chat-body').innerHTML += `
+      <div class="message-r">
+                  <p>${data.data.Message}</p>
+                  <i>${data.data.Time}</i>
+       </div>`
+       var height = 0;
+               $('#chat-body div').each(function(i, value){
+                height += parseInt($(this).height());
+                
+                });
+           
+            height += '';
             
+            $('#chat-body').animate({scrollTop: height*height});
+                  $('.newmsg1').addClass('newmsg').removeClass('newmsg1')
+                  $('.newmsgicon1').addClass('newmsgicon').removeClass('newmsgicon1')
+
+               }
+            }
+         }
+      })
+         
    })
 </script>

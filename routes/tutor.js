@@ -532,15 +532,28 @@ router.get('/fee',verifyLogin,async(req,res)=>{
 })
 
 
+var newMgs ={}
 
 router.get('/chat-box',verifyLogin,async(req,res)=>{
     let students = await adminHelper.getStudents();
-    res.render('tutor/chat',{students,login:true,adminLogin:req.session.adminLogin})
+    console.log(newMgs)
+ if(newMgs.status){
+     console.log("======================")
+    res.render('tutor/chat',{newMsgId:newMgs.Id,students,login:true,adminLogin:req.session.adminLogin})
+    newMgs ={}
+}else  res.render('tutor/chat',{students,login:true,adminLogin:req.session.adminLogin})
 })
 
+
+let selectedstdId = null;
+
+
 router.post('/getMessages',verifyLogin,(req,res)=>{
+    
 adminHelper.getStudent(req.body.Id).then(data=>{
-   res.json({Name:data.Name,Messages:data.Messages,Id:req.body.Id})
+    selectedstdId = req.body.Id
+   
+    res.json({Name:data.Name,Messages:data.Messages,Id:req.body.Id})
 }).catch(e=>res.json(false))
 })
 
@@ -552,8 +565,30 @@ router.post('/sendMessage',verifyLogin,(req,res)=>{
         Tutor:true
     }
     adminHelper.sendMessage(msg,req.body.Id).then(data=>{
-        Socket.AdmSendMsg(msg)
+        Socket.AdmSendMsg(msg,req.body.Id)
         res.json({status:true})
     }).catch(e=> res.json({status:false}))
 })
+
+
+router.post('/verifySelectedstd',verifyLogin,(req,res)=>{
+    console.log(selectedstdId,"+++++")
+    if(selectedstdId !=null){
+    if(req.body.Id == selectedstdId){
+        res.json({status:true})
+    }else{
+        res.json({status:false})
+        }
+    }else{
+        newMgs.status=true
+        newMgs.Id=req.body.Id
+        
+     res.json({status:false})
+    }
+})
+
+router.get('/reloaded',(req,res)=>{
+    selectedstdId = null
+})
+
 module.exports = router;

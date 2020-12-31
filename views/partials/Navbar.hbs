@@ -3,9 +3,11 @@
 <li class="navText">
     {{#if adminLogin}}
     <span>Hi Tutor</span>
+    <span class="adnewmsg1"><a href="/admin/chat-box"> New Message</a> <i class="fa fa-envelope-open"></i></span>
     {{else}}
     <span>Hi {{student.Name}}</span>
-    <span class="notification1"><a href="/assignments">New Assignment Added </a></span>
+    <span class="notification1"><a href="/todayTask">New Assignment Added </a></span>
+    <span class="newmsg1"><a href="/login"> New Message</a> <i class="fa fa-envelope-open"></i></span>
     {{/if}}
 </li>
 <li class="NavbarLogout">
@@ -25,6 +27,62 @@
        socket.on('connect', () => {
         });
         socket.on('AssignmentAdded',(data)=>{
+            console.log(data)
             $('.notification1').addClass('notification').removeClass('notification1')
         })
+
+         socket.on('admmsg',(data)=>{
+      
+
+      $.ajax({
+         url:'/verifySelectedstd',
+         method:'post',
+         data:{
+            Id:data.Id
+         },success:(res)=>{
+            if(res.status){
+               $('.newmsg1').addClass('newmsg').removeClass('newmsg1')
+            }
+         }
+      })
+         
+   })
+    
+    socket.on('stdmsg',(data)=>{
+        Id = data.Id
+        $('.adnewmsg1').addClass('adnewmsg').removeClass('adnewmsg1')
+        $.ajax({
+           url:'/admin/verifySelectedstd',
+           method:'post',
+           data:{
+              Id:data.Id
+           }
+        })
+       
+    })
+
+
+     socket.on('admmsg',(data)=>{
+      
+
+      $.ajax({
+         url:'/verifySelectedstd',
+         method:'post',
+         data:{
+            Id:data.Id
+         },success:(res)=>{
+            if(res.status){
+                 $('.newmsg1').addClass('newmsg').removeClass('newmsg1')
+                  //$('.newmsgicon1').addClass('newmsgicon').removeClass('newmsgicon1')
+
+               }
+            }
+         })
+      })
+         
+   
+
+
+
+   
     </script>

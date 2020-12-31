@@ -4,9 +4,23 @@
                <h2>Chat-Box</h2>
                <div class="studentchat-list">
                    {{#each students}}
-                   <div onclick="show_stdmsg('{{this._id}}')" class="chat-user">
+                   {{#if ../newMsgId}}
+                   {{#ifId ../newMsgId this._id}}
+                   {{#if status}}
+                   <div style="border-bottom: 2px solid red;" id="std{{../this._id}}" onclick="show_stdmsg('{{../this._id}}')" class="chat-user">
+                       <h4>{{../this.Name}}</h4>
+                   </div>
+                  {{else}}
+                   <div id="std{{../this._id}}" onclick="show_stdmsg('{{../this._id}}')" class="chat-user">
+                       <h4>{{../this.Name}}</h4>
+                   </div>
+                   {{/if}}
+                   {{/ifId}}
+                   {{else}}
+                   <div id="std{{this._id}}" onclick="show_stdmsg('{{this._id}}')" class="chat-user">
                        <h4>{{this.Name}}</h4>
                    </div>
+                   {{/if}}
                    {{/each}}
                </div>
                <p  class="selctmsg">Select message</p>
@@ -33,12 +47,18 @@
 <script>
     var socket = io.connect();
 socket.on('stdmsg',(data)=>{
-    
-   
-   
-   document.getElementById('msg-body').innerHTML += `
+    $('.adnewmsg1').addClass('adnewmsg').removeClass('adnewmsg1')
+   $.ajax({
+       url:'/admin/verifySelectedstd',
+       method:'post',
+       data:{
+           Id:data.Id
+       },success:(res)=>{
+           if(res.status){
+               document.getElementById('msg-body').innerHTML += `
    <div class="admsg-r">
                <p>${data.data.Message}</p>
+               <i>${data.data.Time}</i>
     </div>`
     var height = 0;
             $('#msg-body div').each(function(i, value){
@@ -50,5 +70,14 @@ socket.on('stdmsg',(data)=>{
          
          $('#msg-body').animate({scrollTop: height*height});
    
-})   
+    }else{
+        let div = document.querySelector('#std'+data.Id)
+        div.style = 'border-bottom:2px solid red;'
+    }
+
+           }
+       })
+   })
+   
+     
 </script>

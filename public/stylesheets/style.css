@@ -2508,16 +2508,16 @@ margin-top: -10px;
 .chat-btn{
   position: absolute;
   background-color: teal;
-  height: 50px ;
-  width: 125px;
+  height: 100px ;
+  width: 100px;
   right: 40px ;
   bottom: 100px;
-  border-radius: 40%;
+  border-radius: 50%;
   text-align: center;
-  color: #f0f0f0;
 }
-.chat-btn>h4{
-  margin-top: 10px;
+.chat-btn>img{
+  height: 100px ;
+  width: 100px;
 }
 .chat-box{
   position: absolute;
@@ -2532,6 +2532,7 @@ margin-top: -10px;
   border-radius: 10px;
   transition: all 1s ease;
 }
+
 .chat-head{
   text-align: center;
   
@@ -2586,7 +2587,16 @@ margin-top: -10px;
 .message-r>p,.message-s>p{
   overflow-wrap: break-word;
 }
-
+.message-r>i,.message-s>i{
+  float: right;
+  margin-right: 4px;
+  font-size: .9rem;
+}
+.admsg-r>i,.admsg-s>i{
+  float: right;
+  font-size: .9rem;
+  margin-top: -15px;
+}
 .chat-close{
   border-radius: 50%;
   position: absolute;
@@ -2698,4 +2708,30 @@ margin-top: -10px;
   padding: 5px;
   border-radius: 10px;
   margin-left: 60%;
+}
+
+.newmsg,.adnewmsg{
+  background-color: #a7d9f0;
+  color: black;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 10px;
+  transition: all 1s ease;
+}
+.newmsg1,.adnewmsg1{
+  opacity: 0;
+  font-size: .05rem;
+  user-select: none;
+  pointer-events: none;
+}
+
+.newmsgicon{
+  position: absolute;
+  right: 40px;
+  bottom: 160px;
+  z-index: 1;
+}
+.newmsgicon1{
+  display: none;
+
 }

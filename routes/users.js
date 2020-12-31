@@ -789,6 +789,10 @@ let msg ={
    }).catch(e=> res.json({status:false})) 
 })
  
-
+router.post('/verifySelectedstd',verifyLogin,(req,res)=>{
+  if(req.body.Id == req.session.student._id){
+    res.json({status:true})
+  }else res.json({status:false})
+})
 
 module.exports = router;

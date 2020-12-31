@@ -125,6 +125,10 @@ window.onload=()=>{
         url:'/markattndc',
         method:'get'
     })
+    $.ajax({
+        url:'/admin/reloaded',
+        method:'get'
+    })
 }
 
 let deleteNoteId=''
@@ -844,8 +848,10 @@ function  show_feeStatus(){
         div.style='left:-20%'
     }, 4000);
 }
-
+var opaenStatus= false
 function showchat_box(){
+
+    showchat_box1()
     $('.chat-box1').addClass('chat-box').removeClass('chat-box1')
     var height = 0;
    $('#chat-body div').each(function(i, value){
@@ -859,6 +865,7 @@ $('#chat-body').animate({scrollTop: height*height});
 }
 
 function hidechat_box(){
+    hidechat_box1()
     $('.chat-box').addClass('chat-box1').removeClass('chat-box')
 }
 
@@ -866,6 +873,7 @@ function hidechat_box(){
 function stdsend_Message(){
  let msg = $('#msg').val()
  $('#msg').val('')
+ let Time = new Date().toLocaleTimeString()
     $.ajax({
         url:'/sendMessage',
         method:'post',
@@ -877,6 +885,7 @@ function stdsend_Message(){
                 document.getElementById('chat-body').innerHTML +=`
                 <div class="message-s">
                   <p>${msg}</p>
+                  <i>${Time}</i>
                </div>`
                var height = 0;
                $('#chat-body div').each(function(i, value){
@@ -895,7 +904,10 @@ function stdsend_Message(){
 }
 var selectedStd = '';
 function show_stdmsg(id){
+    let div = document.querySelector('#std'+id)
     selectedStd = ''
+    div.style = 'border-bottom:none;';
+    $('.adnewmsg').addClass('adnewmsg1').removeClass('adnewmsg')
     $('.selctmsg').addClass('selctmsg1').removeClass('selctmsg')
     $('.studentchat-message1').addClass('studentchat-message').removeClass('studentchat-message1')
     $.ajax({
@@ -916,6 +928,7 @@ function show_stdmsg(id){
                     return `
                         <div class=${msg.Tutor ? "admsg-s" : "admsg-r"}>
                         <p>${msg.Message}</p>
+                        <i>${msg.Time}</i>
                         </div>                   
                     `
                 })
@@ -943,6 +956,7 @@ function show_stdmsg(id){
 
 function sendMessage_admin(){
     let msg = $('#adminmsg').val()
+   let Time = new Date().toLocaleTimeString()
     $('#adminmsg').val('')
     $.ajax({
         url:'/admin/sendMessage',
@@ -956,6 +970,7 @@ function sendMessage_admin(){
                 document.getElementById('msg-body').innerHTML +=`
                 <div class=admsg-s>
                 <p>${msg}</p>
+                <i>${Time}</i>
                 `   
                 var height = 0;
                 $('#msg-body div').each(function(i, value){

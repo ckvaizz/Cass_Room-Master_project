@@ -131,7 +131,7 @@ window.onload=()=>{
     })
 }
 
-let deleteNoteId=''
+let deleteNoteId='' 
 let video=''
 let link=''
 deleteNotecnfrm=(id)=>{
@@ -985,4 +985,7 @@ function sendMessage_admin(){
         }
     })
 }
+
+// video call connections
+
 

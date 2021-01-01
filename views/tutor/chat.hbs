@@ -46,6 +46,7 @@
 </section>
 <script>
     var socket = io.connect();
+
 socket.on('stdmsg',(data)=>{
     $('.adnewmsg1').addClass('adnewmsg').removeClass('adnewmsg1')
    $.ajax({

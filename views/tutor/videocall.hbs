@@ -1,0 +1,75 @@
+ 
+<section>
+    <h3 class="VideocallHeading">Video Call</h3>    
+    <div class="container">
+        <div class="videoCall-DivBg">
+        <div id="jitsi-container" class="videocall-div">
+        <button id="VideocallStart" class="btn btn-secondary">Start Video Call</button> 
+        <button id="VideocallEnd" class="btn btn-danger" style="display: none;">End Video call</button>
+        </div>
+        <div class="shareLink-div">
+            <h5>Share link with students</h5>
+            <input id="videoCallLink" type="text" placeholder="Paste Link Here">
+            <button id="ShareVideoCallLink"  class="btn btn-primary">Share</button>
+            <p class="wait4stdLink1" >Link shared . Wait for the students..</p>
+        </div>
+    </div>
+</div>   
+</section>
+
+      <script>
+  var button = document.querySelector('#VideocallStart');
+  var container = document.querySelector('#jitsi-container');
+  var Endbutton = document.querySelector('#VideocallEnd');
+  var ShareButton = document.querySelector('#ShareVideoCallLink');
+  var api = null;
+  
+  button.addEventListener('click', () => {
+      button.remove()
+      Endbutton.style ='display:flex;'
+      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var stringLength = 30;
+  
+      function pickRandom() {
+      return possible[Math.floor(Math.random() * possible.length)];
+      }
+  
+  var randomString = Array.apply(null, Array(stringLength)).map(pickRandom).join('');
+  
+      var domain = "meet.jit.si";
+      var options = {
+          "roomName": randomString,
+          "parentNode": container,
+          "width": 450,
+          "height": 450,
+      };
+      api = new JitsiMeetExternalAPI(domain, options);
+  });
+
+  Endbutton.addEventListener('click',()=> location.reload())
+  ShareButton.addEventListener('click',()=>{
+      let Link = $('#videoCallLink').val()
+      if(Link.length >6 ){
+      $('#videoCallLink').val('')
+        show_wait4student()      
+      $.ajax({
+          url:'/admin/ShareLink',
+          method:'post',
+          data:{
+              Link:Link
+          },
+          
+      })
+      }
+  })
+
+  function show_wait4student(){
+      $('.wait4stdLink1').addClass('wait4stdLink').removeClass('wait4stdLink1')
+      setTimeout(()=>{
+     $('.wait4stdLink').addClass('wait4stdLink1').removeClass('wait4stdLink')
+          
+      },4000)
+  }
+  </script>
+
+  

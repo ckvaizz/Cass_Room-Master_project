@@ -21,6 +21,9 @@
     AdmSendMsg:(data,id)=>{
 
         IO.emit('admmsg',{data:data,Id:id})
+    },
+    sharevideoLink:(Link)=>{
+        IO.emit('VideoCall',Link)
     }
 
 

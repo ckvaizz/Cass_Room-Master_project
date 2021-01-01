@@ -591,4 +591,16 @@ router.get('/reloaded',(req,res)=>{
     selectedstdId = null
 })
 
+//video call route
+
+
+  router.get('/videocallPage',verifyLogin,(req, res) => {
+     res.render('tutor/videocall', {login:true,adminLogin:req.session.adminLogin})
+  })
+
+  router.post('/ShareLink',(req,res)=>{
+      Socket.sharevideoLink(req.body.Link)
+  })
+
+
 module.exports = router;

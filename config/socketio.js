@@ -1,5 +1,7 @@
  
  let IO;
+ let VideoCall={}
+
  module.exports ={
     scktioC:(io)=>{
         
@@ -23,7 +25,20 @@
         IO.emit('admmsg',{data:data,Id:id})
     },
     sharevideoLink:(Link)=>{
+        VideoCall.status=true
+        VideoCall.Link=Link
         IO.emit('VideoCall',Link)
+    },
+    getVideoLink:()=>{
+        return new Promise((resolve,reject)=>{
+            resolve(VideoCall)
+        })
+    },
+    VideocallEnded:()=>{
+        if(VideoCall.status){
+            VideoCall={}
+        IO.emit('VideocallEnded')
+        }
     }
 
 

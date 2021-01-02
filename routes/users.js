@@ -7,7 +7,7 @@ const binary = mongodb.Binary
 const paypal = require('paypal-rest-sdk');
 const { getVideoDurationInSeconds } = require('get-video-duration');
 let reloadPage=false;
-
+const Socket = require('../config/socketio')
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
   'client_id': 'AZxmIss0kurFWl7jACnwAocWcWAJ5ruCJK-9VEjGmDgBhTyvknVYnMajGycuJwPdbDRKmzNUDitwAwDK',
@@ -114,8 +114,11 @@ router.get('/logintrue',verifyLogin,async(req,res)=>{
     }
   })
   if(req.session.studentLogin){
-    res.render('students/std-Home',{Messages,events,student:req.session.student,studentLogin:req.session.studentLogin,login:true,announcements,todayStatus})
-  }else{
+    Socket.getVideoLink().then(link=>{
+      res.render('students/std-Home',{VideocallLink:link.status?link.Link:false,Messages,events,student:req.session.student,studentLogin:req.session.studentLogin,login:true,announcements,todayStatus})
+
+    })
+      }else{
     res.redirect('/login')
   }
 })
@@ -774,7 +777,7 @@ router.post('/verify-Feepayment-Razor',verifyLogin,(req,res)=>{
   }).catch(err=> res.status(500).json({payment:false}))
 
 })
-const Socket = require('../config/socketio')
+
 router.post('/sendMessage',verifyLogin,(req,res)=>{
 console.log(req.body)
 let msg ={

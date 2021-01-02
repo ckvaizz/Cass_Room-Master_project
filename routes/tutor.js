@@ -589,6 +589,7 @@ router.post('/verifySelectedstd',verifyLogin,(req,res)=>{
 
 router.get('/reloaded',(req,res)=>{
     selectedstdId = null
+    Socket.VideocallEnded()
 })
 
 //video call route
@@ -601,6 +602,8 @@ router.get('/reloaded',(req,res)=>{
   router.post('/ShareLink',(req,res)=>{
       Socket.sharevideoLink(req.body.Link)
   })
+
+ 
 
 
 module.exports = router;

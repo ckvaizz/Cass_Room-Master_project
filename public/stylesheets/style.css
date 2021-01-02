@@ -1574,6 +1574,9 @@ font-weight: bold;
   background-color: transparent;
   perspective: 1000px;
 }
+.ass-card::-webkit-scrollbar{
+  display: none;
+}
 .ass-cardInner{
   position: relative;
   min-height: 200px;
@@ -2807,6 +2810,31 @@ outline: 0;
 }
 .wait4stdLink1{
   opacity: 0;
+  user-select: none;
+  pointer-events: none;
+
+}
+.Videocallnot,.showVideocallEnded{
+font-size: 1.0rem;
+animation: changebg infinite;
+padding: 5px;
+border-radius: 10px;
+font-weight: 700;
+animation-duration: 1s ;
+transition: all 2s ease;
+}
+@keyframes changebg {
+  from{
+    background: linear-gradient(to left,red,black );
+  }
+  to{
+    background: linear-gradient(to left,black,red);
+  }
+}
+
+.Videocallnot1,.showVideocallEnded1{
+  opacity: 0;
+  display: none;
   user-select: none;
   pointer-events: none;
 

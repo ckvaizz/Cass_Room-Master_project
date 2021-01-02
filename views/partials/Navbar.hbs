@@ -8,7 +8,13 @@
     <span>Hi {{student.Name}}</span>
     <span class="notification1"><a href="/todayTask">New Assignment Added </a></span>
     <span class="newmsg1"><a href="/login"> New Message</a> <i class="fa fa-envelope-open"></i></span>
+    <span id="Videocallspn" class="Videocallnot1">Join Videocall </span>
+    <span class="showVideocallEnded1">Videocall Ended..</span>
+   {{#if VideocallLink}}
+    <span class="Videocallnot"><a href={{VideocallLink}}>Join Videocall</a></span>
+    
     {{/if}}
+   {{/if}}
 </li>
 <li class="NavbarLogout">
     {{#if adminLogin}}
@@ -23,6 +29,7 @@
 
 
     <script>
+
       var socket = io.connect();
        socket.on('connect', () => {
         });
@@ -79,10 +86,29 @@
             }
          })
       })
-         
+    var VideocallLink =''     
    
+   socket.on('VideoCall',(Link)=>{
+      VideocallLink = Link
+      $('.Videocallnot1').addClass('Videocallnot').removeClass('Videocallnot1')
+   })
+   let span = document.querySelector('#Videocallspn')
+
+   span.addEventListener('click',()=>{
+      location.href=VideocallLink;
+   })
+
+   socket.on('VideocallEnded',()=>{
+   $('.Videocallnot').addClass('Videocallnot1').removeClass('Videocallnot')
+      show_videoCallEnded()
+   })
+  function show_videoCallEnded(){
+     $('.showVideocallEnded1').addClass('showVideocallEnded').removeClass('showVideocallEnded1')
+     setTimeout(()=>{
+        $('.showVideocallEnded').addClass('showVideocallEnded1').removeClass('showVideocallEnded')
+     },5000)
+  }
 
 
-
-   
-    </script>
+   </script>
+    

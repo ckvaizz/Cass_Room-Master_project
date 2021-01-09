@@ -585,8 +585,8 @@ router.get("/payEventPal", verifyLogin, async (req, res) => {
       payment_method: "paypal",
     },
     redirect_urls: {
-      return_url: "http://localhost:3000/paypalsuccess",
-      cancel_url: "http://localhost:3000/paypalErr'",
+      return_url: "https://classroom-m.herokuapp.com/paypalsuccess",
+      cancel_url: "https://classroom-m.herokuapp.com/paypalErr'",
     },
     transactions: [
       {
@@ -650,7 +650,7 @@ router.get("/payEventPaytm", verifyLogin, (req, res) => {
   params["ORDER_ID"] = "TEST_" + new Date().getTime();
   params["CUST_ID"] = req.session.student._id;
   params["TXN_AMOUNT"] = req.query.total.toString();
-  params["CALLBACK_URL"] = "http://localhost:3000/paytmresponse";
+  params["CALLBACK_URL"] = "https://classroom-m.herokuapp.com/paytmresponse";
   params["EMAIL"] = req.session.student.Email;
   params["MOBILE_NO"] = req.session.student.Mobile;
 
@@ -731,8 +731,8 @@ router.get("/payfee-Paypal", verifyLogin, (req, res) => {
       payment_method: "paypal",
     },
     redirect_urls: {
-      return_url: "http://localhost:3000/paypalFeesuccess",
-      cancel_url: "http://localhost:3000/paypalFeeerr",
+      return_url: "https://classroom-m.herokuapp.com/paypalFeesuccess",
+      cancel_url: "https://classroom-m.herokuapp.com/paypalFeeerr",
     },
     transactions: [
       {
@@ -782,7 +782,7 @@ router.get("/payfee-Paytm", verifyLogin, (req, res) => {
   params["ORDER_ID"] = "TEST_" + new Date().getTime();
   params["CUST_ID"] = req.session.student._id;
   params["TXN_AMOUNT"] = req.query.amount.toString();
-  params["CALLBACK_URL"] = "http://localhost:3000/paytmFEEresponse";
+  params["CALLBACK_URL"] = "https://classroom-m.herokuapp.com/paytmFEEresponse";
   params["EMAIL"] = req.session.student.Email;
   params["MOBILE_NO"] = req.session.student.Mobile;
 

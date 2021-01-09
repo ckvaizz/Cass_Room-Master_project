@@ -1,13 +1,13 @@
-*{
+* {
   margin: 0;
   list-style: none;
   text-decoration: none;
-padding: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-.adminloginform{
-  background:url(/images/classroom2.jpg);
+.adminloginform {
+  background: url(/images/classroom2.jpg);
   background-size: cover;
   position: relative;
   height: 90vh;
@@ -20,13 +20,13 @@ padding: 0;
   box-shadow: 0px 0px 5px 5px rgba(177, 174, 174, 0.4);
 }
 
-.adminloginform>form{
+.adminloginform > form {
   z-index: 1;
   display: flex;
   flex-direction: column;
   margin-top: 130px;
 }
-.adminloginform>form>input{
+.adminloginform > form > input {
   width: 50%;
   margin: auto;
   border: 2px solid black;
@@ -34,39 +34,38 @@ padding: 0;
   text-align: center;
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
-.adminloginform>form>button{
+.adminloginform > form > button {
   z-index: 1;
   width: 150px;
   margin: auto;
   border-radius: 10px;
 }
-.adminloginform>form>legend{
-  background:linear-gradient(to left,rgb(112,101,214),rgb(230,106,213));
+.adminloginform > form > legend {
+  background: linear-gradient(to left, rgb(112, 101, 214), rgb(230, 106, 213));
   font-size: 3rem;
   font-weight: 900;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline;
-
 }
 
-.adminloginform>form>input:hover{
+.adminloginform > form > input:hover {
   border-radius: 20px;
   width: 250px;
   transition-duration: 1s;
 }
-.adminloginform>form>input:focus{
+.adminloginform > form > input:focus {
   outline: 0;
   border-radius: 20px;
   width: 250px;
 }
-.adminloginform>form>button:focus{
+.adminloginform > form > button:focus {
   outline: 0;
 }
-.adminloginform>form>button:hover{
-  background-color:skyblue;
+.adminloginform > form > button:hover {
+  background-color: skyblue;
 }
-.Navbar{
+.Navbar {
   display: flex;
   background-color: rgb(9, 19, 49);
   height: 60px;
@@ -75,23 +74,20 @@ padding: 0;
   justify-content: space-between;
   width: 100%;
 }
-.navText{
-  
+.navText {
   margin-top: 4px;
   display: inline-block;
   color: azure;
   list-style: none;
   font-size: 1.8rem;
-  
 }
 
-.NavbarLogout{
- 
+.NavbarLogout {
   display: inline-block;
   list-style: none;
   justify-self: end;
 }
-.NavbarLogout>a>button{
+.NavbarLogout > a > button {
   border-radius: 30px;
   background-color: red;
   border: none;
@@ -99,17 +95,15 @@ padding: 0;
   height: 50px;
   margin-top: 3px;
   width: 90px;
-
 }
-.NavbarLogout>a>button:hover{
+.NavbarLogout > a > button:hover {
   background-color: teal;
 }
-.NavbarLogout>a>button:focus{
+.NavbarLogout > a > button:focus {
   outline: 0;
 }
 
-
-.sidebar{
+.sidebar {
   margin-top: -39px;
   position: fixed;
   left: -250px;
@@ -117,14 +111,13 @@ padding: 0;
   height: 90vh;
   overflow-y: scroll;
   background-color: teal;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   z-index: 1;
 }
-.sidebar::-webkit-scrollbar{
+.sidebar::-webkit-scrollbar {
   display: none;
-
 }
-.sidebar ul a{
+.sidebar ul a {
   display: block;
   height: 100%;
   width: 100%;
@@ -133,63 +126,61 @@ padding: 0;
   color: white;
   padding-left: 40px;
   box-sizing: border-box;
-  border-top: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-top: 1px solid black;
   text-decoration: none;
-  transition: .4s;
+  transition: 0.4s;
 }
-.sidebar ul a:hover{
+.sidebar ul a:hover {
   padding-left: 50px;
 }
-#check{
+#check {
   display: none;
 }
-label #btn,label #cancel{
+label #btn,
+label #cancel {
   position: absolute;
   cursor: pointer;
   background-color: #042331;
   border-radius: 3px;
 }
-label #btn{
+label #btn {
   left: 20px;
   top: 70px;
   font-size: 28px;
   color: white;
-padding: 6px 12px;
-transition: all .5s;
-z-index: 1;
+  padding: 6px 12px;
+  transition: all 0.5s;
+  z-index: 1;
 }
-label #cancel{
+label #cancel {
   position: fixed;
   z-index: 1111;
- left: -195px;
- top: 65px;
- font-size: 25px;
- color: #0a5275;
- padding: 4px 9px;
- transition: all .5s ease;
+  left: -195px;
+  top: 65px;
+  font-size: 25px;
+  color: #0a5275;
+  padding: 4px 9px;
+  transition: all 0.5s ease;
 }
-#check:checked ~ .sidebar{
+#check:checked ~ .sidebar {
   left: 0;
 }
-#check:checked ~ label #btn{
+#check:checked ~ label #btn {
   left: 250px;
   opacity: 0;
   pointer-events: none;
-
 }
-#check:checked ~ label #cancel{
+#check:checked ~ label #cancel {
   left: 208px;
-  
-
 }
-.tutorhomeimg{
+.tutorhomeimg {
   margin-top: -38px;
   height: 60vh;
   width: 100vw;
   z-index: -1;
 }
-.tutorannouncement{
+.tutorannouncement {
   position: absolute;
   height: 40vh;
   width: 45%;
@@ -200,10 +191,11 @@ label #cancel{
   border-radius: 20px;
   overflow-y: scroll;
 }
-.tutorannouncement::-webkit-scrollbar,.tutorevents::-webkit-scrollbar{
+.tutorannouncement::-webkit-scrollbar,
+.tutorevents::-webkit-scrollbar {
   display: none;
 }
-.tutorevents{
+.tutorevents {
   position: absolute;
   height: 40vh;
   width: 45%;
@@ -214,25 +206,24 @@ label #cancel{
   background-color: rgb(251, 251, 251);
   overflow-y: scroll;
 }
-.tutorannouncement>h1{
+.tutorannouncement > h1 {
   text-align: center;
   text-decoration: underline;
   font-size: 2rem;
 }
-.tutorevents>h1{
+.tutorevents > h1 {
   text-align: center;
   text-decoration: underline;
   font-size: 2rem;
-
 }
-.landingpage{
-  background:url(/images/classroom2.jpg);
+.landingpage {
+  background: url(/images/classroom2.jpg);
   background-size: cover;
   height: 100%;
   min-height: 100vh;
-
 }
-.tutorselection>img,.studentselection>img{
+.tutorselection > img,
+.studentselection > img {
   height: 40vh;
   width: 40vw;
   border-radius: 50%;
@@ -240,25 +231,26 @@ label #cancel{
   padding: 0px 10px;
   margin-left: 20px;
 }
-.tutorselection>h1,.studentselection>h1{
+.tutorselection > h1,
+.studentselection > h1 {
   color: rgb(227, 243, 137);
   text-align: center;
   font-size: 2.9rem;
   font-weight: 900;
-  
 }
-.tutorselection>h1:hover,.studentselection>h1:hover{
-color: red;
+.tutorselection > h1:hover,
+.studentselection > h1:hover {
+  color: red;
 }
-.backtohome{
-position: absolute;
-left: 30px;
-top: 30px;
+.backtohome {
+  position: absolute;
+  left: 30px;
+  top: 30px;
 }
-.backtohome>a>i{
+.backtohome > a > i {
   font-size: 2rem;
 }
-.edittutorprofile{
+.edittutorprofile {
   margin: auto;
   padding: 20px;
   background-color: rgb(130, 204, 246);
@@ -267,31 +259,28 @@ top: 30px;
   text-align: center;
   align-items: center;
 }
-.edittutorprofile>div>button{
+.edittutorprofile > div > button {
   border-radius: 10px;
   border: none;
   box-shadow: 0px 0px 3px 4px rgba(0, 0, 0, 0.2);
   margin: 0 15px;
 }
-.edittutorprofile>div{
+.edittutorprofile > div {
   margin: 15px 0;
   border: 2px solid rgb(0, 0, 0);
   text-align: center;
-
 }
-.profilebg{
+.profilebg {
   display: flex;
-position: relative;
+  position: relative;
   height: 75vh;
   margin: auto;
   top: 60px;
   background-color: rgb(161, 125, 125);
   opacity: 0.6;
   border-radius: 30px;
-
 }
-.profilecard{
-  
+.profilecard {
   height: 70vh;
   width: 450px;
   margin-top: 15px;
@@ -300,97 +289,93 @@ position: relative;
   background-color: white;
   text-align: center;
 }
-.profilecard>img{
+.profilecard > img {
   height: 30vh;
   width: 20vw;
-
 }
-.myprofilecard{
+.myprofilecard {
   height: 40vh;
   padding-top: 10px;
 }
-.myprofilecard>h2{
-font-size: 1.4rem;
-text-align: left;
-margin:25px;
-margin-left: 100px;
-font-weight: bold;  
-background:linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
+.myprofilecard > h2 {
+  font-size: 1.4rem;
+  text-align: left;
+  margin: 25px;
+  margin-left: 100px;
+  font-weight: bold;
+  background: linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
   -webkit-background-clip: text;
--webkit-text-fill-color:transparent;
-transition: all 1s ease-in;
+  -webkit-text-fill-color: transparent;
+  transition: all 1s ease-in;
 }
-.myprofilecard>h1{
+.myprofilecard > h1 {
   font-size: 1.8rem;
   font-weight: bolder;
   text-decoration: underline;
-  background:linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
+  background: linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
   -webkit-background-clip: text;
   margin-left: -150px;
-  -webkit-text-fill-color:transparent;
+  -webkit-text-fill-color: transparent;
   display: inline;
-
-  
 }
-.myadrsscard{
+.myadrsscard {
   position: absolute;
   top: 25px;
- left: 500px;
+  left: 500px;
   height: 40vh;
   width: 55vh;
   background-color: white;
   border-radius: 20px;
   overflow-y: scroll;
 }
-.myadrsscard::-webkit-scrollbar{
+.myadrsscard::-webkit-scrollbar {
   display: none;
 }
-.myadrsscard>h2{
+.myadrsscard > h2 {
   text-align: left;
   font-size: 1.3rem;
   font-weight: bold;
   margin-left: 40px;
   margin-top: 18px;
-  background: linear-gradient(to left ,red,black);
+  background: linear-gradient(to left, red, black);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.myadrsscard>h1{
+.myadrsscard > h1 {
   font-size: 1.7rem;
   font-weight: bolder;
   margin-top: 15px;
 }
-.profileeditcard{
-  
+.profileeditcard {
   position: absolute;
   top: 300px;
   right: 150px;
   width: 20vw;
   height: 20vh;
-  background: linear-gradient(to left,rgba(255, 0, 0, 0.637),rgba(0, 0, 0, 0.89));
+  background: linear-gradient(
+    to left,
+    rgba(255, 0, 0, 0.637),
+    rgba(0, 0, 0, 0.89)
+  );
   border-radius: 20px;
-  
 }
-.profileeditcard>h1{
-  background: linear-gradient(to left,rgb(45, 206, 255),rgb(255, 244, 238));
+.profileeditcard > h1 {
+  background: linear-gradient(to left, rgb(45, 206, 255), rgb(255, 244, 238));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
- 
-  font-size: 1.7rem ;
+
+  font-size: 1.7rem;
   font-weight: bolder;
   margin-top: 15px;
 }
-.addProfile{
+.addProfile {
   margin: auto;
-
 }
-.addProfile>a{
-  
-  height: 9vh; 
+.addProfile > a {
+  height: 9vh;
   width: 13vw;
 }
-.editconfirm{
-
+.editconfirm {
   position: absolute;
   z-index: 11111;
   min-height: 30vh;
@@ -402,28 +387,26 @@ transition: all 1s ease-in;
   border-radius: 20px;
   text-align: center;
   border: 2px solid red;
-  
 }
-.editconfirm>h1{
+.editconfirm > h1 {
   margin-top: 20px;
   color: #0a5275;
 }
-.editconfirm>button{
+.editconfirm > button {
   margin-top: 25px;
   margin: 25px 20px;
   height: 50px;
   width: 90px;
   border-radius: 10px;
   border: none;
-
 }
-.editconfirm1{
- display: none;
- position: absolute;
-}
-.editsuccess{
+.editconfirm1 {
+  display: none;
   position: absolute;
-  background:linear-gradient(to left, skyblue,rgb(218, 168, 168));
+}
+.editsuccess {
+  position: absolute;
+  background: linear-gradient(to left, skyblue, rgb(218, 168, 168));
   z-index: 11111;
   min-height: 30vh;
   max-height: 100%;
@@ -434,36 +417,34 @@ transition: all 1s ease-in;
   border: 2px solid red;
   text-align: center;
   padding: 20px;
-
 }
-.editsuccess>h1{
+.editsuccess > h1 {
   font-weight: 900;
 }
-.editsuccess>a{
+.editsuccess > a {
   margin-top: 20px;
   width: 90px;
   text-align: center;
 }
-.editsuccess1{
+.editsuccess1 {
   display: none;
 }
-.addstudentbg{
+.addstudentbg {
   width: 80%;
   height: 80vh;
   position: relative;
   margin: auto;
-background-color: rgb(0, 0, 0);
-top: 48px;
-opacity: 0.7;
-text-align: center;
-
+  background-color: rgb(0, 0, 0);
+  top: 48px;
+  opacity: 0.7;
+  text-align: center;
 }
-.addstudentbg>form>legend{
+.addstudentbg > form > legend {
   font-size: 2rem;
   color: aqua;
   font-weight: 900;
 }
-.addstudentbg>form>input{
+.addstudentbg > form > input {
   margin-top: 30px;
   border-top: none;
   border-left: none;
@@ -473,101 +454,101 @@ text-align: center;
   width: 40%;
   color: red;
 }
-.addstudentbg>form>input::placeholder{
-  
+.addstudentbg > form > input::placeholder {
   color: rgba(128, 230, 230, 0.685);
-  
 }
-.addstudentbg>form>input:focus{
+.addstudentbg > form > input:focus {
   outline: 0;
 }
-.addstudentbg>form>h3{
+.addstudentbg > form > h3 {
   color: aqua;
   margin-left: -30%;
   font-size: 1.3rem;
   margin-top: 10px;
 }
-.addstudentbg>form>label{
+.addstudentbg > form > label {
   color: aqua;
   margin-left: -18%;
-  padding-right:10px ;
+  padding-right: 10px;
 }
-#male,#female{
+#male,
+#female {
   display: none;
 }
-.gndr-dv{
+.gndr-dv {
   position: absolute;
   height: 10px;
   width: 10px;
   border-radius: 50%;
   background-color: rgb(170, 255, 72);
-  top :160px;
+  top: 160px;
   left: 0px;
-  transition: .7s;
+  transition: 0.7s;
 }
-#female:checked ~ .gndr-dv{
+#female:checked ~ .gndr-dv {
   left: 290px;
 }
-#male:checked ~ .gndr-dv{
+#male:checked ~ .gndr-dv {
   left: 360px;
 }
-.addstudentbg>form>button , .addstudentbg>form>a{
+.addstudentbg > form > button,
+.addstudentbg > form > a {
   margin-top: 30px;
   background-color: transparent;
-  width: 18%; 
+  width: 18%;
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom:3px solid ;
+  border-bottom: 3px solid;
   text-decoration: none;
   color: aqua;
 }
-.addstudentbg>form>a:hover{
+.addstudentbg > form > a:hover {
   background-color: red;
 }
-.addstudentbg>form>button{
+.addstudentbg > form > button {
   border-bottom: 3px solid rgb(98, 235, 63);
 }
-.addstudentbg>form>a{
+.addstudentbg > form > a {
   border-bottom: 3px solid red;
 }
-.studentstablebg{
+.studentstablebg {
   position: relative;
   min-height: 90vh;
   max-height: 100%;
   width: 75vw;
   margin: auto;
-  background-color: rgb(41, 40, 40) ;
+  background-color: rgb(41, 40, 40);
   top: 30px;
   overflow-y: scroll;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
-  padding: 9px; 
+  padding: 9px;
 }
-.studentstablebg::-webkit-scrollbar{
+.studentstablebg::-webkit-scrollbar {
   display: none;
 }
-.studentstablebg>table{
+.studentstablebg > table {
   color: aliceblue;
 }
-.stdntactn>a{
-border: none;
-padding: 0px 10px;
-margin-left: 5px;
-border-radius: 20px;
-}
-.stdntactn>button{
+.stdntactn > a {
   border: none;
   padding: 0px 10px;
   margin-left: 5px;
   border-radius: 20px;
-  }
-.stdntactn>a:focus{
+}
+.stdntactn > button {
+  border: none;
+  padding: 0px 10px;
+  margin-left: 5px;
+  border-radius: 20px;
+}
+.stdntactn > a:focus {
   outline: 0;
 }
-.studnteditconfirm{
+.studnteditconfirm {
   position: fixed;
-  background: linear-gradient(to left,rgb(240, 85, 85),skyblue);
+  background: linear-gradient(to left, rgb(240, 85, 85), skyblue);
   height: 30vh;
   width: 30vw;
   top: 200px;
@@ -577,31 +558,29 @@ border-radius: 20px;
   opacity: 1;
   transition: 1s;
 }
-.studnteditconfirm>h3{
+.studnteditconfirm > h3 {
   margin-top: 20px;
   font-weight: bolder;
-
 }
-.studnteditconfirm>button{
+.studnteditconfirm > button {
   margin-top: 30px;
   width: 70px;
   height: 40px;
   border: none;
   border-radius: 5px;
-  background-color: green;  
+  background-color: green;
 }
-.studnteditconfirm>a{
+.studnteditconfirm > a {
   height: 40px;
   text-align: center;
-  margin-top:-1px;
+  margin-top: -1px;
 }
-.studnteditconfirm1{
+.studnteditconfirm1 {
   opacity: 0;
   pointer-events: none;
   user-select: none;
-
 }
-.assignmentForm{
+.assignmentForm {
   position: absolute;
   background-color: rgb(48, 48, 65);
   width: 300px;
@@ -615,65 +594,61 @@ border-radius: 20px;
   color: rgb(243, 110, 110);
   transition: 1s ease;
 }
-.assignmentForm:hover{
+.assignmentForm:hover {
   box-shadow: 0px 0px 7px 7px rgba(255, 0, 0, 0.82);
 }
-.assignmentForm>form>i{
+.assignmentForm > form > i {
   position: absolute;
   margin-top: 20px;
-
 }
-.assignmentForm>form>h3{
+.assignmentForm > form > h3 {
   font-weight: bolder;
-  background: linear-gradient(to left, red,skyblue);
+  background: linear-gradient(to left, red, skyblue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
 }
-.assignmentForm>form>input{
+.assignmentForm > form > input {
   margin-top: 10px;
   background-color: rgb(114, 98, 98);
   width: 210px;
   border-radius: 7px;
   border: none;
   overflow: hidden;
-  
-  
 }
-.assignmentForm>form>input:focus{
+.assignmentForm > form > input:focus {
   outline: 0;
 }
-.assignmentForm>form>input::placeholder{
+.assignmentForm > form > input::placeholder {
   color: rgb(176, 246, 85);
   text-align: center;
 }
-.videoNoteform{
+.videoNoteform {
   opacity: 1;
-  transition:  .7s ease-in-out ;
-  transition-property: opacity ;
-  transition-delay: .2s;
+  transition: 0.7s ease-in-out;
+  transition-property: opacity;
+  transition-delay: 0.2s;
 }
 
-.videoNoteform1{
+.videoNoteform1 {
   opacity: 0;
   margin-left: -900px;
   pointer-events: none;
   user-select: none;
 }
-.linkNoteform{
+.linkNoteform {
   opacity: 1;
   margin-top: -119px;
-  transition: .7s ease-in-out;
-  transition-property: opacity ;
-  transition-delay: .2s;
+  transition: 0.7s ease-in-out;
+  transition-property: opacity;
+  transition-delay: 0.2s;
   pointer-events: all;
 }
-.linkNoteform1{
+.linkNoteform1 {
   opacity: 0;
   margin-left: -900px;
 }
-.assignmentForm>form>button{
-  
+.assignmentForm > form > button {
   margin-top: 9px;
   border-radius: 10px;
   border: none;
@@ -683,11 +658,11 @@ border-radius: 20px;
   color: skyblue;
   transition: 2s;
 }
-.assignmentForm>form>button:hover{
-  background: linear-gradient(to left , skyblue,black);
+.assignmentForm > form > button:hover {
+  background: linear-gradient(to left, skyblue, black);
   box-shadow: 0px 0px 5px 7px rgba(250, 37, 37, 0.2);
 }
-.assignmentTable{
+.assignmentTable {
   width: 80vh;
   position: absolute;
   background-color: darkgray;
@@ -701,18 +676,18 @@ border-radius: 20px;
   overflow-y: scroll;
   transition: 2s ease;
 }
-.assignmentTable::-webkit-scrollbar{
+.assignmentTable::-webkit-scrollbar {
   display: none;
 }
-.assignmentTable:hover{
+.assignmentTable:hover {
   box-shadow: 0px 0px 7px 7px rgba(241, 4, 4, 0.6);
 }
-.assgnmtTable>button{
-width: 30px;
-border-radius: 5px;
+.assgnmtTable > button {
+  width: 30px;
+  border-radius: 5px;
 }
 
-.assignmentbg{
+.assignmentbg {
   background-color: rgba(255, 255, 255, 0.87);
   height: 80vh;
   top: 30px;
@@ -720,13 +695,13 @@ border-radius: 5px;
   border-radius: 20px;
   box-shadow: 0px 0px 7px 7px rgba(77, 55, 55, 0.9);
 }
-.assignmentTable>h4{
-text-align: center;
-text-decoration: underline;
-font-weight: 900;
+.assignmentTable > h4 {
+  text-align: center;
+  text-decoration: underline;
+  font-weight: 900;
 }
 
-.deltestudentcnfrm{
+.deltestudentcnfrm {
   z-index: 111;
   background-color: rgb(246, 243, 243);
   position: absolute;
@@ -739,28 +714,28 @@ font-weight: 900;
   margin-left: 23%;
   margin-top: 20%;
   opacity: 1;
-  transition: .5s;
+  transition: 0.5s;
 }
-.deltestudentcnfrm>h3{
+.deltestudentcnfrm > h3 {
   display: inline;
-  transition: .5s;
-  
+  transition: 0.5s;
 }
-.deltestudentcnfrm>h2{
+.deltestudentcnfrm > h2 {
   color: red;
-  transition: .5s;
+  transition: 0.5s;
 }
-.deltestudentcnfrm>button, .deltestudentcnfrm>a{
-  width:60px;
-  height:40px;
+.deltestudentcnfrm > button,
+.deltestudentcnfrm > a {
+  width: 60px;
+  height: 40px;
   border: none;
   border-radius: 10px;
-  transition: .5s;
+  transition: 0.5s;
 }
-.deltestudentcnfrm>button{
+.deltestudentcnfrm > button {
   background-color: green;
 }
-.deltestudentcnfrm1{
+.deltestudentcnfrm1 {
   height: 200px;
   width: 20px;
   border-radius: 50%;
@@ -773,24 +748,24 @@ font-weight: 900;
   user-select: none;
   pointer-events: none;
 }
-.studentremovedalert{
+.studentremovedalert {
   padding: 5px;
   width: 50px;
   background-color: rgb(241, 220, 99);
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: rgb(250, 4, 4);
   border-radius: 3px;
   opacity: 1;
-  transition:  1s;
+  transition: 1s;
 }
-.studentremovedalert1{
+.studentremovedalert1 {
   width: 0px;
   height: 0px;
   opacity: 0;
-user-select: none;
-pointer-events: none;
+  user-select: none;
+  pointer-events: none;
 }
-.deleteassignmentcnfrm{
+.deleteassignmentcnfrm {
   position: fixed;
   z-index: 111;
   min-height: 20vh;
@@ -804,23 +779,23 @@ pointer-events: none;
   margin-left: 7%;
   margin-top: 50px;
   opacity: 1;
-  transition: .5s;
+  transition: 0.5s;
   border: 2px solid red;
 }
-.deleteassignmentcnfrm>h3{
+.deleteassignmentcnfrm > h3 {
   font-weight: 500;
-
 }
-.deleteassignmentcnfrm>button, .deleteassignmentcnfrm>a{
+.deleteassignmentcnfrm > button,
+.deleteassignmentcnfrm > a {
   width: 60px;
 }
-.deleteassignmentcnfrm1{
+.deleteassignmentcnfrm1 {
   opacity: 0;
   display: none;
   user-select: none;
   pointer-events: none;
 }
-.loading{
+.loading {
   height: 100vh;
   width: 98vw;
   z-index: 1111111111;
@@ -832,52 +807,50 @@ pointer-events: none;
   text-align: center;
   z-index: 1111;
   background-color: rgb(0, 0, 0);
-  
+
   opacity: 1;
-  transition: opacity .9s ease;
+  transition: opacity 0.9s ease;
 }
-.loading>img{
+.loading > img {
   margin-top: 20%;
-  
 }
-.loading1{
+.loading1 {
   opacity: 0;
   display: none;
   pointer-events: none;
   user-select: none;
   height: 0px;
-  
 }
-.loginbg{
+.loginbg {
   position: relative;
   text-align: center;
   height: 80vh;
   width: 85vw;
   margin: auto;
-  top:50px;
+  top: 50px;
   border-radius: 10px;
-  
+
   box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.89);
-  background:url(/images/studentloginbg.webp);
-  
+  background: url(/images/studentloginbg.webp);
+
   background-position: left;
 }
-.logincard{
+.logincard {
   position: absolute;
   height: 65vh;
   background-color: rgb(253, 253, 253);
   width: 30vw;
   left: 30%;
-  top:6%;
+  top: 6%;
   overflow: hidden;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.7);
 }
 
-.circlebg{
+.circlebg {
   background: url(/images/friendsbg.jpeg);
-  background-size:cover;
+  background-size: cover;
   background-position: center;
   height: 50vh;
   width: 100%;
@@ -885,19 +858,16 @@ pointer-events: none;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
   transform: translateY(-50%);
 }
-.circlebg>h3{
+.circlebg > h3 {
   position: absolute;
   margin-top: 250px;
   margin-left: 111px;
   color: white;
   font-weight: bolder;
   font-size: 2rem;
-  text-decoration:rgb(255, 166, 0) underline;
-  
- 
-
+  text-decoration: rgb(255, 166, 0) underline;
 }
-.loginuserIcon{
+.loginuserIcon {
   position: absolute;
   margin-top: 285px;
   margin-left: 128px;
@@ -907,100 +877,93 @@ pointer-events: none;
   background-color: rgb(255, 255, 255);
   text-align: center;
   border: 2px solid rgb(253, 7, 7);
-  
 }
-.loginuserIcon>i{
-  justify-self:center;
-  margin: auto;  
+.loginuserIcon > i {
+  justify-self: center;
+  margin: auto;
   margin-top: 11px;
   font-size: 1.2rem;
 }
-.loginform{
+.loginform {
   position: absolute;
-  
-  top:45%;
+
+  top: 45%;
   left: 15%;
 }
-.stdLoginForm{
+.stdLoginForm {
   display: flex;
   flex-direction: column;
   opacity: 1;
-  transition:left 1s;
+  transition: left 1s;
   width: 200px;
 }
-.loginform>form>i{
+.loginform > form > i {
   position: absolute;
   margin-top: 54px;
   margin-left: 200px;
 }
-.passwordoptions{
-  height:15vh;
+.passwordoptions {
+  height: 15vh;
   margin-top: -10px;
-  background:linear-gradient(to left,skyblue,rgb(241, 117, 117));
+  background: linear-gradient(to left, skyblue, rgb(241, 117, 117));
   transition: all 1s;
   border: 2px solid black;
   border-radius: 10px;
   padding: 5px;
-  
 }
-.passwordoptions>p{
-  
+.passwordoptions > p {
   margin-top: -7px;
   opacity: 1;
   transition: 2.5s;
 }
-.passwordoptions>p:hover{
+.passwordoptions > p:hover {
   text-decoration: underline;
   color: rgb(19, 185, 250);
 }
-.passwordoptions1{
+.passwordoptions1 {
   height: 0vh;
   opacity: 0;
   pointer-events: none;
   user-select: none;
 }
-.passwordoptions1>p{
+.passwordoptions1 > p {
   opacity: 0;
 }
 
-.stdLoginForm1{
+.stdLoginForm1 {
   top: -200px;
   position: absolute;
   opacity: 0;
-  
+
   pointer-events: none;
   user-select: none;
-  transition: top .5s ease;
-
+  transition: top 0.5s ease;
 }
-.stdCreatePassword{
+.stdCreatePassword {
   height: 30vh;
   width: 200px;
   display: flex;
   flex-direction: column;
-  margin-top:20%;
+  margin-top: 20%;
   opacity: 1;
-  transition: all .5s ease-in-out;
-  
+  transition: all 0.5s ease-in-out;
 }
-.stdCreatePassword>i{
+.stdCreatePassword > i {
   position: absolute;
   top: -50px;
   left: -10px;
   font-size: 1.6rem;
   border-radius: 50%;
   margin: auto;
-  
-
 }
-.stdCreatePassword1{
+.stdCreatePassword1 {
   opacity: 0;
-  
+
   user-select: none;
   pointer-events: none;
-  transition: all .5s ease-in;
+  transition: all 0.5s ease-in;
 }
-.stdOtp{
+.stdOtp {
   display: flex;
   flex-direction: column;
   margin-top: -70px;
@@ -1009,55 +972,54 @@ pointer-events: none;
   justify-content: space-between;
   opacity: 1;
   transition: 1s;
-  
 }
-.stdOtp1{
+.stdOtp1 {
   opacity: 0;
-pointer-events: none;
-user-select: none;
+  pointer-events: none;
+  user-select: none;
 }
-.errorh2{
+.errorh2 {
   font-size: 1em;
   display: inline;
   opacity: 1;
   text-decoration: underline;
   transition: 2s ease-in;
 }
-.errorh21{
+.errorh21 {
   opacity: 0;
   pointer-events: none;
   user-select: none;
 }
-.errotp{
+.errotp {
   color: red;
   opacity: 1;
   font-size: 1.5em;
   transition: 1s;
 }
-.errotp1{
+.errotp1 {
   opacity: 0;
   pointer-events: none;
   user-select: none;
 }
-.stdNewpassword{
+.stdNewpassword {
   position: absolute;
   opacity: 1;
   margin-top: -70%;
   width: 230px;
   height: 20vh;
   margin-left: -5%;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.stdNewpassword1{
+.stdNewpassword1 {
   opacity: 0;
   pointer-events: none;
-  
+
   user-select: none;
 }
-.matchingerr{
+.matchingerr {
   color: red;
-  font-size: .9rem;
+  font-size: 0.9rem;
   position: absolute;
   font-weight: 700;
   margin-top: -27px;
@@ -1065,62 +1027,63 @@ user-select: none;
   opacity: 1;
   transition: 1s ease-in;
 }
-.matchingerr1{
+.matchingerr1 {
   opacity: 0;
   pointer-events: none;
   user-select: none;
- 
 }
-.loginError{
+.loginError {
   color: red;
   text-decoration: underline;
   transition-duration: 1s;
   opacity: 1;
 }
-.loginError1{
+.loginError1 {
   opacity: 0;
   user-select: none;
   pointer-events: none;
   text-decoration: none;
 }
-.otpLogin{
+.otpLogin {
   width: 200px;
   position: absolute;
   margin-top: -400px;
   height: 30vh;
-  
-
 }
-.otpLogin>input{
+.otpLogin1 {
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+.otpLogin > input {
   margin-top: 10px;
 }
-.otpLogin>button{
+.otpLogin > button {
   position: absolute;
 
-top: 210px;
+  top: 210px;
 }
-.otp-mob-err{
+.otp-mob-err {
   color: red;
 }
-.otp-mob-err1{
+.otp-mob-err1 {
   opacity: 0;
-  
 }
-.wait4otp{
+.wait4otp {
   position: absolute;
   color: red;
   margin-top: -40px;
-  margin-left:10px ;
+  margin-left: 10px;
   opacity: 1;
   transition: 1s;
 }
-.wait4otp1{
+.wait4otp1 {
   opacity: 0;
   user-select: none;
   pointer-events: none;
 }
 
-.otp-Err{
+.otp-Err {
   position: absolute;
   color: red;
   margin-top: 0px;
@@ -1128,87 +1091,81 @@ top: 210px;
   opacity: 1;
   transition: 1s;
 }
-.otp-Err1{
+.otp-Err1 {
   opacity: 0;
   pointer-events: none;
-
 }
-.otpLogin>button{
+.otpLogin > button {
   position: absolute;
   margin-top: -30px;
   margin-left: -26px;
 }
-.Notesboard{
+.Notesboard {
   top: -38px;
   height: 99vh;
   margin: auto;
   background-color: rgb(114, 98, 98);
- 
+
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
 }
-.Notesboard>h1{
+.Notesboard > h1 {
   font-size: 2.5rem;
   font-weight: bolder;
-  background: linear-gradient(to left , rgb(192, 132, 241) , rgb(252, 187, 134));
+  background: linear-gradient(to left, rgb(192, 132, 241), rgb(252, 187, 134));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
 }
-.Notesboard>input{
+.Notesboard > input {
   position: absolute;
-  top:13px ;
+  top: 13px;
   right: 25px;
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.623);
 }
-.notes{
+.notes {
   height: 75vh;
   width: 75vw;
   border: 3px solid black;
   justify-content: center;
   overflow-y: scroll;
-  
-  
 }
-.notes::-webkit-scrollbar{
+.notes::-webkit-scrollbar {
   display: none;
 }
-.note{
+.note {
   height: 165px;
-  
-  
+
   background-color: rgba(128, 230, 230, 0.685);
   text-align: center;
   border: 3px solid black;
   margin: 10px;
 }
-.note>i{
+.note > i {
   position: absolute;
   left: 10px;
   top: 10px;
 }
-.note>p>a>i
-{
+.note > p > a > i {
   text-decoration: none;
-  color:black;
+  color: black;
   margin-left: 15px;
 }
-.note>h3{
+.note > h3 {
   margin: auto;
   max-width: 140px;
-  color:#ee3131;
- 
- overflow-x:scroll ;
+  color: #ee3131;
+
+  overflow-x: scroll;
 }
-.note>h3::-webkit-scrollbar{
-display: none;
+.note > h3::-webkit-scrollbar {
+  display: none;
 }
 
-.searchNotes{
+.searchNotes {
   position: absolute;
   height: 75vh;
   width: 75vw;
@@ -1216,64 +1173,67 @@ display: none;
   justify-content: center;
   overflow-y: scroll;
   background-color: rgb(139, 216, 247);
-  margin-top:55px ;
+  margin-top: 55px;
 }
-.searchNotes::-webkit-scrollbar{
+.searchNotes::-webkit-scrollbar {
   display: none;
-
 }
-.searchNotes1{
+.searchNotes1 {
   display: none;
   pointer-events: none;
   user-select: none;
 }
-.searchwithdText{
+.searchwithdText {
   position: absolute;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   right: 40px;
   top: 35px;
   text-decoration: underline;
- 
 }
 
-.searchwithdText:hover,.searchwithntext:hover{
+.searchwithdText:hover,
+.searchwithntext:hover {
   color: rgb(65, 206, 241);
 }
-.searchwithntext{
+.searchwithntext {
   position: absolute;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   right: 40px;
   top: 35px;
   text-decoration: underline;
 }
-.searchDate,.searchName{
+.searchDate,
+.searchName {
   position: absolute;
-  width:200px;
+  width: 200px;
 }
-.searchDate:focus,.searchName:focus{
-outline: 0;
+.searchDate:focus,
+.searchName:focus {
+  outline: 0;
 }
-.searchDate1,.searchwithntext1,.searchName1,.searchwithdText1{
+.searchDate1,
+.searchwithntext1,
+.searchName1,
+.searchwithdText1 {
   z-index: -111;
   display: none;
   user-select: none;
   pointer-events: none;
 }
-.searchLoad{
+.searchLoad {
   position: absolute;
   left: 45%;
   top: 45%;
-  
 }
-.searchLoad>i{
+.searchLoad > i {
   font-size: 45px;
 }
-.searchLoad1{
+.searchLoad1 {
   display: none;
   pointer-events: none;
   user-select: none;
 }
-.searchCancel{
+.searchCancel {
   position: absolute;
   z-index: 1111;
   background-color: rgb(241, 77, 65);
@@ -1282,43 +1242,38 @@ outline: 0;
   height: 23px;
   width: 23px;
   border-radius: 10px;
-justify-content: center;
-align-items: center;
-text-align: center;
-
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-.searchCancel:hover{
-  background-color:rgba(255, 0, 0, 0.5);
+.searchCancel:hover {
+  background-color: rgba(255, 0, 0, 0.5);
 }
-.atdTablebg{
-position: relative;
+.atdTablebg {
+  position: relative;
   text-align: center;
 
-height: 80vh;
+  height: 80vh;
 }
-.atdTablebg>input{
+.atdTablebg > input {
   position: absolute;
   top: 35px;
   right: 30px;
-  border-radius:10px ;
+  border-radius: 10px;
   border: none;
-  
 }
-.atdTablebg>input:focus{
+.atdTablebg > input:focus {
   outline: 0;
 }
-.attdDate{
+.attdDate {
   position: absolute;
   left: 10px;
-  top:50px;
+  top: 50px;
 }
-.attendanceTable>table{
-  
-  
+.attendanceTable > table {
   border: 1px solid black;
 }
-.taskbg
-{
+.taskbg {
   background-color: rgb(165, 160, 170);
   height: 80vh;
   width: 100vhw;
@@ -1326,7 +1281,7 @@ height: 80vh;
   box-shadow: 0px 0px 3px 5px rgba(0, 0, 0, 0.5);
   display: flex;
 }
-.asstask{
+.asstask {
   position: absolute;
   height: 50vh;
   width: 25vw;
@@ -1337,31 +1292,33 @@ height: 80vh;
   text-align: center;
   box-shadow: 0px 0px 10px 10px rgba(5, 0, 0, 0.37);
 }
-.asstask>h5,.notetask>h5{
-text-decoration:3px solid rgb(221, 97, 97) underline;
-font-size: 1.4rem;
-font-weight: bold;
+.asstask > h5,
+.notetask > h5 {
+  text-decoration: 3px solid rgb(221, 97, 97) underline;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
-.asstask>div,.notetask>div{
+.asstask > div,
+.notetask > div {
   border: 2px solid black;
   border-radius: 10px;
   height: 40vh;
   width: 23vw;
   margin: auto;
   overflow-x: hidden;
-  
 }
-.notetask>div::-webkit-scrollbar{
+.notetask > div::-webkit-scrollbar {
   display: none;
 }
-.asstask>div>p,.notetask>div>p{
+.asstask > div > p,
+.notetask > div > p {
   font-size: 1.2rem;
   font-weight: 800;
 }
-.asstask>div::-webkit-scrollbar{
+.asstask > div::-webkit-scrollbar {
   display: none;
 }
-.asstask>div>a{
+.asstask > div > a {
   margin-top: 25px;
   background-color: skyblue;
   border: none;
@@ -1370,18 +1327,17 @@ font-weight: bold;
   box-shadow: 0px 0px 3px 5px solid rgba(0, 0, 0, 0.5);
   transition: all 1s ease-in;
 }
-.asstask>div>button:hover{
+.asstask > div > button:hover {
   background-color: rgb(24, 224, 228);
 
   border-radius: 5px;
 }
-.asstask>div>form{
+.asstask > div > form {
   display: flex;
   flex-direction: column;
   height: 15vw;
-  
 }
-.asstask>div>form>input{
+.asstask > div > form > input {
   margin-top: 30px;
   margin: auto;
   width: 24vh;
@@ -1389,18 +1345,17 @@ font-weight: bold;
   border: 1px solid black;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.2);
-
 }
-.asstask>div>form>button{
+.asstask > div > form > button {
   margin-top: 10px;
   width: 24vh;
-  margin: auto  ;
+  margin: auto;
   border-radius: 10px;
   background-color: green;
   border: none;
-  box-shadow: 0px 0px 3px 3px solid rgba(0, 0, 0, 0.2) ;
+  box-shadow: 0px 0px 3px 3px solid rgba(0, 0, 0, 0.2);
 }
-.notetask{
+.notetask {
   position: absolute;
   height: 50vh;
   width: 25vw;
@@ -1411,17 +1366,16 @@ font-weight: bold;
   text-align: center;
   box-shadow: 0px 0px 10px 10px rgba(5, 0, 0, 0.37);
 }
-.notetask>div>video{
+.notetask > div > video {
   width: 23vw;
   height: 23vh;
-
 }
-.notetask>div>a{
+.notetask > div > a {
   position: absolute;
   margin-top: -18px;
   margin-left: -15px;
 }
-.viewOrdwnload{
+.viewOrdwnload {
   position: absolute;
   bottom: 40px;
   background-color: skyblue;
@@ -1430,117 +1384,117 @@ font-weight: bold;
   border-radius: 10px;
   padding: 5px;
   box-shadow: 0px 0px 3px 5px solid rgba(0, 0, 0, 0.5);
-
-
-
 }
-.taskbg>h1{
+.taskbg > h1 {
   position: absolute;
   margin-left: 37%;
   font-weight: bolder;
-  
-  
+
   top: 20px;
   transition: all 1s ease-in;
-  animation:color infinite;
+  animation: color infinite;
   animation-duration: 3s;
 }
-@keyframes color{
-  from{
-    background: linear-gradient(to left,rgb(135, 36, 228),rgb(62, 119, 243));  
+@keyframes color {
+  from {
+    background: linear-gradient(to left, rgb(135, 36, 228), rgb(62, 119, 243));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline;
   }
-  to{
-    background: linear-gradient(to left,rgb(62, 119, 243),rgb(135, 36, 228));
+  to {
+    background: linear-gradient(to left, rgb(62, 119, 243), rgb(135, 36, 228));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline;
   }
 }
 
-.stdcardbg{
+.stdcardbg {
   height: 90vh;
   width: 90vw;
- position: relative;
+  position: relative;
 }
-.studentdetails{
+.studentdetails {
   position: absolute;
   height: 80vh;
   width: 40vw;
-  background: linear-gradient(to top,rgb(44, 152, 224),rgb(246, 246, 246));
-  top:6%;
+  background: linear-gradient(to top, rgb(44, 152, 224), rgb(246, 246, 246));
+  top: 6%;
   border-radius: 10px;
   box-shadow: 0px 0px 9px 5px rgba(255, 253, 253, 0.5);
 }
-.studentdetails>img{
+.studentdetails > img {
   margin-left: 90px;
   border: 1px solid black;
   opacity: 0.8;
 }
-.studentdetails>p{
+.studentdetails > p {
   font-size: 1.5rem;
   margin-left: 100px;
   font-weight: 600;
   margin-top: 10px;
 }
-.studentattandance{
+.studentattandance {
   position: absolute;
   height: 38vh;
   width: 35vw;
   background-color: rgb(255, 255, 255);
-  top:6%;
+  top: 6%;
   right: 6%;
-  background: linear-gradient(to top,rgba(177, 86, 86, 0.986),skyblue);
+  background: linear-gradient(to top, rgba(177, 86, 86, 0.986), skyblue);
   border-radius: 10px;
   box-shadow: 0px 0px 9px 5px rgba(255, 253, 253, 0.5);
   overflow-x: scroll;
 }
-.studentattandance>h4{
+.studentattandance > h4 {
   margin-left: 120px;
-  text-decoration:2px skyblue underline;
+  text-decoration: 2px skyblue underline;
   font-weight: 700;
 }
-.studentassignments{
+.studentassignments {
   position: absolute;
   height: 38vh;
   width: 35vw;
   background-color: rgb(255, 255, 255);
   bottom: 6%;
   right: 6%;
-  background: linear-gradient(to top,rgb(180, 176, 176),rgba(177, 86, 86, 0.986));
+  background: linear-gradient(
+    to top,
+    rgb(180, 176, 176),
+    rgba(177, 86, 86, 0.986)
+  );
   border-radius: 10px;
   box-shadow: 0px 0px 9px 5px rgba(255, 253, 253, 0.5);
   overflow-x: scroll;
 }
-.studentassignments::-webkit-scrollbar,.studentattandance::-webkit-scrollbar{
+.studentassignments::-webkit-scrollbar,
+.studentattandance::-webkit-scrollbar {
   display: none;
-
 }
-.studentassignments>h4{
+.studentassignments > h4 {
   margin-left: 120px;
-  text-decoration:2px skyblue underline;
+  text-decoration: 2px skyblue underline;
   font-weight: 700;
 }
-.Assignmentmark>input{
+.Assignmentmark > input {
   width: 50px;
   border-radius: 10px;
   border: none;
   text-align: center;
 }
-.Assignmentmark>input:focus{
+.Assignmentmark > input:focus {
   outline: 0;
 }
 
-.progress-bar{
+.progress-bar {
   transition: width 1s ease-in-out;
 }
 
-.progress1{
+.progress1 {
   display: none;
 }
-.uploadedstatus{
+.uploadedstatus {
   position: absolute;
   background-color: rgb(223, 81, 39);
   border-radius: 5px;
@@ -1551,33 +1505,33 @@ font-weight: bold;
   animation: widthanimate ease-out;
   animation-duration: 2s;
   text-align: center;
-  transition: 1s ease-in ;
+  transition: 1s ease-in;
   opacity: 0;
 }
 @keyframes widthanimate {
-  from{
+  from {
     width: 0px;
     opacity: 0;
   }
-  to{
+  to {
     width: 100px;
     opacity: 1;
   }
 }
-.uploadedstatus1{
+.uploadedstatus1 {
   opacity: 0;
   user-select: none;
   pointer-events: none;
 }
-.ass-card{
+.ass-card {
   overflow-y: scroll;
   background-color: transparent;
   perspective: 1000px;
 }
-.ass-card::-webkit-scrollbar{
+.ass-card::-webkit-scrollbar {
   display: none;
 }
-.ass-cardInner{
+.ass-cardInner {
   position: relative;
   min-height: 200px;
   max-height: 100%;
@@ -1585,79 +1539,72 @@ font-weight: bold;
   background-color: rgba(26, 24, 24, 0.966);
   margin-top: 40px;
   padding: 15px;
-  transition: all .5s  ease;
+  transition: all 0.5s ease;
   transform-style: preserve-3d;
-  
 }
-.ass-cardInner:hover{
- 
-    border-top: 2px solid red;  
+.ass-cardInner:hover {
+  border-top: 2px solid red;
 }
 
-.front-ass>h5{
+.front-ass > h5 {
   font-weight: 600;
   color: skyblue;
   margin-left: 10px;
   overflow-wrap: break-word;
   text-transform: uppercase;
-  font-style:oblique;
+  font-style: oblique;
 }
-.front-ass>p{
+.front-ass > p {
   color: white;
   margin-left: 15px;
 }
-.front-ass,.back-ass{
+.front-ass,
+.back-ass {
   height: 100%;
   width: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  
 }
-.back-ass{
-   transform: rotateY(180deg);
-    color: white;
-    height: 100%;
-    width: 100%;
-    
-    
-  }
-.backload{
+.back-ass {
+  transform: rotateY(180deg);
+  color: white;
+  height: 100%;
+  width: 100%;
+}
+.backload {
   position: absolute;
   color: white;
   margin-top: -50px;
   margin-left: 65px;
 }
-.backload1{
+.backload1 {
   display: none;
   pointer-events: none;
   user-select: none;
 }
-.closeback{
+.closeback {
   position: absolute;
   margin-top: -100px;
   margin-left: 150px;
   background-color: red;
   z-index: 111;
-  
 }
-.closeback:hover{
+.closeback:hover {
   background-color: rgb(246, 168, 168);
   color: black;
 }
-.datadetails{
+.datadetails {
   position: absolute;
   margin-top: -110px;
-  
 }
-.ass-heading{
+.ass-heading {
   margin-left: 35%;
   color: rgb(251, 251, 251);
   font-weight: bolder;
-  text-decoration:rgb(231, 50, 50)  underline;
+  text-decoration: rgb(231, 50, 50) underline;
   font-style: italic;
-  
 }
-.photo-upload-section{
+.photo-upload-section {
   background-color: rgb(191, 230, 245);
   min-height: 60px;
   max-height: 100%;
@@ -1668,26 +1615,24 @@ font-weight: bold;
   box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.5);
   transition: 1s ease-in;
 }
-.photoHeading{
+.photoHeading {
   margin-left: 45%;
   font-weight: bold;
-  text-decoration:3px skyblue underline;
-
+  text-decoration: 3px skyblue underline;
 }
-.photo-upload-section>form>input{
+.photo-upload-section > form > input {
   border: 2px solid black;
   width: 150px;
   overflow: hidden;
   border-radius: 7px;
 }
-.photo-upload-section>form>button{
+.photo-upload-section > form > button {
   height: 30px;
-
 }
-.gallery-section{
+.gallery-section {
   margin-top: 30px;
 }
-.photoBack{
+.photoBack {
   margin-top: 20px;
   background-color: transparent;
   perspective: 1000px;
@@ -1696,31 +1641,29 @@ font-weight: bold;
   width: 250px;
   height: 250px;
 }
-.photoInner{
+.photoInner {
   position: relative;
   height: 100%;
   width: 100%;
-  
+
   transform-style: preserve-3d;
 }
-.photo{
-  transition:  .7s cubic-bezier(0.93,-1.4, 0, 2.74) ;
+.photo {
+  transition: 0.7s cubic-bezier(0.93, -1.4, 0, 2.74);
   height: 100%;
   width: 100%;
   overflow: hidden;
   border-radius: 5px;
-  
 }
-.photo:hover{
-  
+.photo:hover {
   transform: rotateZ(7deg);
 }
-.photo>img{
-height: 100%;
-width: 100%;
-border-radius: 5px;
+.photo > img {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
 }
-.photo>p{
+.photo > p {
   position: absolute;
   margin-top: -30px;
   color: rgb(13, 207, 255);
@@ -1730,73 +1673,69 @@ border-radius: 5px;
   text-transform: uppercase;
 }
 
-.img-view>img{
-height: 350px;
-
+.img-view > img {
+  height: 350px;
 }
-.img-view{
+.img-view {
   margin: auto;
   margin-top: 20px;
   width: 400px;
 }
 
-.delete-photo{
+.delete-photo {
   background-color: rgb(255, 255, 255);
-  position:absolute;
+  position: absolute;
   margin-top: -30px;
-  margin-left:210px ;
+  margin-left: 210px;
   height: 25px;
   width: 25px;
   border-radius: 50%;
   text-align: center;
-  
 }
-.delete-photo:hover{
+.delete-photo:hover {
   background-color: cadetblue;
   color: red;
 }
 
-.photodelete{
-  
-position: fixed;
+.photodelete {
+  position: fixed;
 
-margin-left: 20%;
+  margin-left: 20%;
   width: 400px;
   background-color: rgb(141, 135, 197);
   z-index: 111;
-  height: 100px;  
+  height: 100px;
   text-align: center;
   padding-top: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
 }
-.photodelete1{
+.photodelete1 {
   display: none;
   user-select: none;
   pointer-events: none;
 }
-.Imageback{
+.Imageback {
   background-color: transparent;
   perspective: 1000px;
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.5);
   width: 250px;
-  height: 250px; 
+  height: 250px;
 }
-.imageinner{
+.imageinner {
   position: relative;
   height: 100%;
   width: 100%;
   transform-style: preserve-3d;
 }
-.images{
-  transition:  .93s cubic-bezier(0.93,-1.4, 0, 2.74) ;
+.images {
+  transition: 0.93s cubic-bezier(0.93, -1.4, 0, 2.74);
   height: 100%;
   width: 100%;
-  opacity: .6;
+  opacity: 0.6;
   margin-top: 30px;
-  
 }
-.images>h4{
+.images > h4 {
   position: absolute;
   top: 40%;
   left: 33%;
@@ -1804,26 +1743,23 @@ margin-left: 20%;
   font-weight: bold;
   color: #a816fd;
   text-decoration: 2px underline;
-  transition: .8s ease;
+  transition: 0.8s ease;
 }
-.images:hover.images>h4{
+.images:hover.images > h4 {
   top: 0%;
   left: 0%;
   font-size: 1.5rem;
-  
 }
-.images:hover{
+.images:hover {
   transform: translateZ(100px);
   opacity: 1;
 }
-.gallery-heading{
+.gallery-heading {
   margin-left: 40%;
   font-weight: 800;
   text-decoration: underline;
 }
-.announcementBg{
-  
-  
+.announcementBg {
   min-height: 99vh;
   max-height: 100%;
   width: 100%;
@@ -1831,17 +1767,16 @@ margin-left: 20%;
   margin-top: -34px;
   padding: 10px;
 }
-.announcementBg>h1{
+.announcementBg > h1 {
   margin-left: 33%;
   font-weight: bolder;
-  text-decoration:rgb(65, 53, 53) underline;
+  text-decoration: rgb(65, 53, 53) underline;
 }
-.announcementform{
- 
+.announcementform {
   top: 10%;
   width: 100%;
 }
-.announcementform>form{
+.announcementform > form {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -1849,70 +1784,68 @@ margin-left: 20%;
   border: 3px solid black;
   padding: 20px;
   overflow: hidden;
-  
 }
-.announcementform>form>input{
+.announcementform > form > input {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.announcementform>form>input:focus{
+.announcementform > form > input:focus {
   outline: 0;
 }
-.announcementform>form>label{
-  
+.announcementform > form > label {
   margin-top: 10px;
 }
-.annSection{
+.annSection {
   margin-top: 100px;
 }
-.anncardBack{
+.anncardBack {
   background-color: transparent;
   width: 250px;
   height: 200px;
   margin-top: 20px;
   perspective: 1000px;
-  
 }
-.annInner{
+.annInner {
   position: relative;
   width: 100%;
   height: 100%;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-
-.annFront, .annBack{
+.annFront,
+.annBack {
   position: absolute;
   width: 100%;
   height: 100%;
   overflow-x: scroll;
-  
 }
-.annFront::-webkit-scrollbar , .annBack::-webkit-scrollbar{
+.annFront::-webkit-scrollbar,
+.annBack::-webkit-scrollbar {
   display: none;
 }
-.annFront{
+.annFront {
   background-color: #bbb;
   color: black;
   padding: 20px;
   z-index: 11;
-  transition: .6s ease-in;
+  transition: 0.6s ease-in;
 }
-.annBack{
+.annBack {
   background-color: #2980b9;
   color: white;
   text-align: left;
- z-index: 0;
+  z-index: 0;
 }
-.optionbtnAnn, .optioncnlAnn {
+.optionbtnAnn,
+.optioncnlAnn {
   position: fixed;
 
   left: 10px;
   top: 10px;
-  height: 30px ;
+  height: 30px;
   width: 30px;
   text-align: center;
   border: none;
@@ -1920,67 +1853,68 @@ margin-left: 20%;
   border-radius: 50%;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.452);
   animation: rotate ease-in-out;
-  animation-duration: .6s;
+  animation-duration: 0.6s;
   transition: 1s ease;
 }
-@keyframes rotate{
-  form{
+@keyframes rotate {
+  form {
     transform: rotate(0);
   }
-  to{
+  to {
     transform: rotate(360deg);
   }
 }
-.optionbtnAnn:focus,optioncnlAnn:focus{
+.optionbtnAnn:focus,
+optioncnlAnn:focus {
   outline: 0;
 }
 
-.annFront>p{
+.annFront > p {
   overflow-wrap: break-word;
 }
-.annFront>h4{
+.annFront > h4 {
   text-transform: uppercase;
   text-decoration: underline;
 }
-.optionbtnAnn1, .optioncnlAnn1{
+.optionbtnAnn1,
+.optioncnlAnn1 {
   position: fixed;
   display: none;
   user-select: none;
   pointer-events: none;
 }
 
-.anndelete{
+.anndelete {
   position: fixed;
-top: 40%;
-left: 30%;
+  top: 40%;
+  left: 30%;
   width: 400px;
   background-color: rgb(197, 155, 155);
   z-index: 111;
-  height: 100px;  
+  height: 100px;
   text-align: center;
   padding-top: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
 }
-.anndelete1{
+.anndelete1 {
   display: none;
   user-select: none;
   pointer-events: none;
-
 }
-.annHeading{
+.annHeading {
   font-weight: bolder;
   text-decoration: underline;
   margin-left: 33%;
 }
 
-.std-homebg{
+.std-homebg {
   height: 99vh;
   width: 100%;
   position: relative;
-  background-color:rgba(0, 0, 0, 0.582);
+  background-color: rgba(0, 0, 0, 0.582);
 }
-.annbtn{
+.annbtn {
   position: absolute;
   background-color: cadetblue;
   top: 20px;
@@ -1990,39 +1924,37 @@ left: 30%;
   text-align: center;
   box-shadow: 0px 0px 3px 3px rgba(5, 141, 251, 0.5);
   padding: 5px;
-  
 }
-.annbtn>p{
+.annbtn > p {
   margin-top: 13px;
 }
-.anncontnt{
+.anncontnt {
   transition: all 1s ease-in;
-height: 200px;
-opacity: 1;
-overflow-y: scroll;
-margin-top: 20px;
-overflow-wrap: break-word;
-text-align: left;
+  height: 200px;
+  opacity: 1;
+  overflow-y: scroll;
+  margin-top: 20px;
+  overflow-wrap: break-word;
+  text-align: left;
 }
-.anncontnt>ul{
+.anncontnt > ul {
   margin-left: 10px;
 }
-.anncontnt>ul>li{
+.anncontnt > ul > li {
   margin-top: 5px;
 }
-.anncontnt1{
+.anncontnt1 {
   height: 0px;
   opacity: 0;
   user-select: none;
   pointer-events: none;
 }
-.anncontnt::-webkit-scrollbar{
+.anncontnt::-webkit-scrollbar {
   display: none;
-
 }
-.closeannbtn{
+.closeannbtn {
   border: none;
-  width: 30px ;
+  width: 30px;
   height: 30px;
   border-radius: 30px;
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.5);
@@ -2030,16 +1962,14 @@ text-align: left;
   animation-duration: 1s;
   z-index: 111;
 }
-.closeannbtn:focus{
+.closeannbtn:focus {
   outline: none;
 }
-.closeannbtn1{
+.closeannbtn1 {
   display: none;
 }
 
-
-
-.attendaceStatus{
+.attendaceStatus {
   position: absolute;
   background-color: cadetblue;
   top: 25px;
@@ -2050,82 +1980,78 @@ text-align: left;
   box-shadow: 0px 0px 3px 3px rgba(5, 141, 251, 0.5);
   padding: 5px;
 }
-.todayTasktext{
+.todayTasktext {
   margin-top: 10px;
 }
-.todayTasktext1{
+.todayTasktext1 {
   opacity: 0;
   user-select: none;
   pointer-events: none;
-
 }
-.todayTaskstatus{
-    position: absolute;
-    margin-top: -35px;
-    
+.todayTaskstatus {
+  position: absolute;
+  margin-top: -35px;
 }
-.todayTaskstatus1{
+.todayTaskstatus1 {
   display: none;
   pointer-events: none;
   user-select: none;
 }
-.ann-box{
+.ann-box {
   position: relative;
   height: 84vh;
   width: 50vw;
-  border:3px solid black;
+  border: 3px solid black;
   margin: auto;
   top: -16px;
   overflow-x: hidden;
   overflow-wrap: break-word;
   overflow-y: scroll;
-
 }
-.ann-box::-webkit-scrollbar{
+.ann-box::-webkit-scrollbar {
   display: none;
 }
-.ann-box>h4{
+.ann-box > h4 {
   margin-left: 40%;
   text-transform: uppercase;
 }
 
-.aImg>img{
+.aImg > img {
   position: absolute;
-  height: 200px ;
+  height: 200px;
   width: 250px;
   left: 10px;
 }
-.ann-box>video{
+.ann-box > video {
   position: absolute;
   height: 200px;
   width: 250px;
   right: 10px;
 }
-.ann-box>p{
+.ann-box > p {
   position: absolute;
   top: 50%;
   padding-left: 10px;
   padding-right: 10px;
-  }
-  .ann-btn{
-    position: fixed;
-    bottom: 5%;
-    left: 45%;
-  }
+}
+.ann-btn {
+  position: fixed;
+  bottom: 5%;
+  left: 45%;
+}
 
-.event-addsection{
+.event-addsection {
   position: relative;
 
   height: 60vh;
-width: 100%;
-
+  width: 100%;
 }
-.event-addsection>h3{
+.event-addsection > h3 {
   margin-left: 42%;
   text-decoration: underline;
   font-weight: bolder;
 }
-.evninputs{
+.evninputs {
   position: absolute;
   height: 50vh;
   width: 40%;
@@ -2137,18 +2063,18 @@ width: 100%;
   border: 2px solid rgb(104, 99, 93);
   border-radius: 5px;
 }
-.evninputs>input{
+.evninputs > input {
   width: 60%;
   margin-left: 20%;
   margin-top: 20px;
 }
-.evninputs>label{
+.evninputs > label {
   position: absolute;
   top: 38.5vh;
   left: 35%;
 }
 
-.evnFiles{
+.evnFiles {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -2160,7 +2086,7 @@ width: 100%;
   border: 2px solid rgb(104, 99, 93);
   border-radius: 5px;
 }
-.evnFiles>input{
+.evnFiles > input {
   width: 60%;
   background-color: brown;
   margin-left: 20%;
@@ -2168,108 +2094,100 @@ width: 100%;
   text-overflow: ellipsis;
 }
 
-.amount-input{
+.amount-input {
   opacity: 0;
   transition: 1s ease;
-
 }
-#paid:checked ~ .amount-input{
+#paid:checked ~ .amount-input {
   opacity: 1;
 }
 
-.allevents{
+.allevents {
   background-color: rgba(143, 192, 233, 0.911);
   border: 2px solid rgb(245, 157, 106);
   height: 100%;
   width: 100%;
   padding: 10px;
 }
-.allevents>h3{
+.allevents > h3 {
   text-align: center;
   text-decoration: underline;
   font-weight: bolder;
 }
-.event{
- min-height: 200px;
- max-height: 100%;  
- background-color: rgb(165, 116, 211);
- margin-top: 10px;
+.event {
+  min-height: 200px;
+  max-height: 100%;
+  background-color: rgb(165, 116, 211);
+  margin-top: 10px;
   border-radius: 10px;
   box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.3);
   padding: 20px;
 }
-.event>h4{
+.event > h4 {
   text-align: center;
   text-transform: capitalize;
   font-weight: 900;
-
-
 }
-.event>h5{
- margin-left: 20px;
- margin-top: 15px;
-
+.event > h5 {
+  margin-left: 20px;
+  margin-top: 15px;
 }
-.event>h6{
+.event > h6 {
   margin-left: 25%;
 }
 
-.vieweventBg{
+.vieweventBg {
   position: relative;
   display: flex;
   background-color: rgb(213, 214, 216);
   height: 83vh;
   padding: 20px;
 }
-.eventdetails{
+.eventdetails {
   position: absolute;
   width: 40%;
-border: 2px solid black;
-padding: 10px;
- min-height: 340px ;
- max-height: 100%;
-
+  border: 2px solid black;
+  padding: 10px;
+  min-height: 340px;
+  max-height: 100%;
 }
-.eventdetails>h1{
+.eventdetails > h1 {
   text-transform: uppercase;
   text-decoration: underline;
-  text-align: center;  
+  text-align: center;
 }
-.eventdetails>h3{
+.eventdetails > h3 {
   text-decoration: underline;
 }
-.eventdetails>h4{
+.eventdetails > h4 {
   text-transform: capitalize;
   margin-left: 10%;
   font-size: 1.4rem;
   color: #a816fd;
-  
 }
-.eventPayment{
+.eventPayment {
   position: absolute;
   right: 20px;
   width: 40%;
   height: 340px;
   border: 2px solid black;
-  overflow-y:scroll ;
+  overflow-y: scroll;
   padding: 20px;
-
 }
-.eventPayment>h5{
+.eventPayment > h5 {
   text-decoration: underline;
 }
-.eventPayment::-webkit-scrollbar{
+.eventPayment::-webkit-scrollbar {
   display: none;
-
 }
 
-.paymentMethod>img ,.paymentMethod>a>img{
-margin-left: 15%;
-border-radius: 50%;
-height: 35px;
-
+.paymentMethod > img,
+.paymentMethod > a > img {
+  margin-left: 15%;
+  border-radius: 50%;
+  height: 35px;
 }
-.home-evnt{
+.home-evnt {
   position: absolute;
   background-color: cadetblue;
   top: 25px;
@@ -2283,38 +2201,36 @@ height: 35px;
   user-select: none;
   padding: 5px;
 }
-.home-evnt>p{
+.home-evnt > p {
   margin-top: 10px;
 }
-.homeevnt-cntent{
- 
- min-height: 255px;
- overflow-y: scroll;
-  min-width: 150px ;
+.homeevnt-cntent {
+  min-height: 255px;
+  overflow-y: scroll;
+  min-width: 150px;
   max-width: 70%;
   overflow-x: hidden;
   text-overflow: ellipsis;
   text-align: left;
 }
-.homeevnt-cntent::-webkit-scrollbar{
+.homeevnt-cntent::-webkit-scrollbar {
   display: none;
 }
-.homeevnt-cntent>ul>li{
+.homeevnt-cntent > ul > li {
   margin-left: 10px;
 }
-.homeevnt-cntent1{
-  
+.homeevnt-cntent1 {
   height: 0;
   width: 0;
   user-select: none;
   pointer-events: none;
 }
-.homeevnt-cntent1>ul{
+.homeevnt-cntent1 > ul {
   opacity: 0;
   display: none;
 }
 
-.event-box{
+.event-box {
   position: relative;
   background-color: #a7d9f0;
   width: 60%;
@@ -2324,19 +2240,19 @@ height: 35px;
   overflow-y: scroll;
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
-  padding: 10px ;
+  padding: 10px;
 }
-.event-box::-webkit-scrollbar{
+.event-box::-webkit-scrollbar {
   display: none;
 }
-.event-box>a>img{
+.event-box > a > img {
   position: absolute;
   width: 40%;
   height: 200px;
   left: 15px;
   border-radius: 10px;
 }
-.event-box>video{
+.event-box > video {
   position: absolute;
   width: 40%;
   height: 200px;
@@ -2344,46 +2260,44 @@ height: 35px;
   border-radius: 10px;
 }
 
-.event-box>h3{
-text-align: center;
+.event-box > h3 {
+  text-align: center;
   text-decoration: underline;
   font-size: 2rem;
   font-weight: 900;
 }
-.event-box>h5{
+.event-box > h5 {
   font-size: 1.5rem;
   text-decoration: underline;
 }
-.event-box>p{
-margin-left: 20%;
-font-size: 1.4rem;
-margin-top: -10px;
+.event-box > p {
+  margin-left: 20%;
+  font-size: 1.4rem;
+  margin-top: -10px;
 }
-.event-btn{
+.event-btn {
   z-index: 11;
   position: fixed;
-  
+
   bottom: 30px;
-  
 }
-.event-pay{
+.event-pay {
   position: absolute;
-  margin-top:230px;
+  margin-top: 230px;
   height: 200px;
   width: 97%;
   border-radius: 30px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.2);
 }
-.event-pay>a>img, .event-pay>img{
+.event-pay > a > img,
+.event-pay > img {
   height: 60px;
   border-radius: 50%;
   margin-top: 50px;
-  
 }
 
-.fees-div{
- 
+.fees-div {
   position: absolute;
   background-color: cadetblue;
   top: 25px;
@@ -2397,39 +2311,39 @@ margin-top: -10px;
   user-select: none;
   padding: 5px;
 }
-.fees-div>p{
+.fees-div > p {
   margin-top: 10px;
 }
-.fees-methods{
- 
+.fees-methods {
   display: flex;
   flex-direction: column;
-  
 }
-.fees-methods>h6{
+.fees-methods > h6 {
   text-decoration: underline;
-
 }
-.fees-methods>a,.fees-methods>p{
+.fees-methods > a,
+.fees-methods > p {
   color: #f0f0f0;
 }
-.fees-methods>p:hover{
+.fees-methods > p:hover {
   text-decoration: underline;
   color: #0c466d;
 }
-.fees-methods1{
+.fees-methods1 {
   height: 0;
   width: 0;
   user-select: none;
   pointer-events: none;
 }
-.fees-methods1>h6,.fees-methods1>a,.fees-methods1>p{
+.fees-methods1 > h6,
+.fees-methods1 > a,
+.fees-methods1 > p {
   opacity: 0;
   user-select: none;
   pointer-events: none;
 }
 
-.paidStatus{
+.paidStatus {
   position: absolute;
   background-color: #ee3131;
   border-radius: 30px;
@@ -2440,89 +2354,89 @@ margin-top: -10px;
   padding: 10px;
   top: 20px;
 }
-.paidStatus>p{
+.paidStatus > p {
   margin-top: 10px;
   font-weight: bold;
 }
-.feeTable{
+.feeTable {
   overflow-y: scroll;
   height: 80vh;
   background-color: rgba(177, 174, 174, 0.4);
 }
-.feeTable::-webkit-scrollbar{
+.feeTable::-webkit-scrollbar {
   display: none;
 }
-.feeTable>h3{
-  margin-left:40% ;
+.feeTable > h3 {
+  margin-left: 40%;
   font-size: 2rem;
   font-weight: bolder;
   text-decoration: underline;
 }
-.successHead{
-  margin-left:30% ;
+.successHead {
+  margin-left: 30%;
   font-size: 2rem;
   font-weight: bold;
   margin-top: 40px;
 }
-.successimg{
+.successimg {
   height: 60px;
   width: 70px;
   border-radius: 60%;
   margin-left: 46%;
   margin-top: 10px;
 }
-.successDetails{
-  
+.successDetails {
   height: 60vh;
 }
-.successDetails>h3{
+.successDetails > h3 {
   margin-left: 25%;
   margin-top: 20px;
 }
-.successDetails>h5{
+.successDetails > h5 {
   margin-left: 65%;
   margin-top: -40px;
 }
-.successDetails>a{
+.successDetails > a {
   margin-left: 45%;
   margin-top: 10%;
 }
-.notification{
- margin-left: 10px;
+.notification {
+  margin-left: 10px;
   color: rgb(4, 20, 54);
   font-size: 1rem;
   background-color: rgba(255, 157, 0, 0.911);
   opacity: 1;
   border-radius: 10px;
-  padding:3px 10px;
+  padding: 3px 10px;
 }
-.notification1{
+.notification1 {
   opacity: 0;
   width: 0;
+  user-select: none;
+  pointer-events: none;
 }
-.chat-box1{
+.chat-box1 {
   height: 10px;
-  position:absolute;
-  left:-1000px;
-  
-  transition: all 1s ease;
+  position: absolute;
+  left: -1000px;
 
+  transition: all 1s ease;
 }
-.chat-btn{
+.chat-btn {
   position: absolute;
   background-color: teal;
-  height: 100px ;
+  height: 100px;
   width: 100px;
-  right: 40px ;
+  right: 40px;
   bottom: 100px;
   border-radius: 50%;
   text-align: center;
 }
-.chat-btn>img{
-  height: 100px ;
+.chat-btn > img {
+  height: 100px;
   width: 100px;
 }
-.chat-box{
+.chat-box {
   position: absolute;
   height: 400px;
   width: 350px;
@@ -2536,89 +2450,103 @@ margin-top: -10px;
   transition: all 1s ease;
 }
 
-.chat-head{
+.chat-head {
   text-align: center;
-  
+
   border-bottom: 2px solid black;
 }
-.chat-head>h4{
+.chat-head > h4 {
   margin-top: 3px;
   text-decoration: skyblue underline;
 }
-.chat-body{
+.chat-body {
   display: flex;
   flex-direction: column;
   height: 300px;
   overflow-y: scroll;
 }
-.chat-body::-webkit-scrollbar{
+.chat-body::-webkit-scrollbar {
   display: none;
 }
-.chat-input{
+.chat-input {
   text-align: center;
   margin-top: 6px;
 }
-.chat-input>input{
+.chat-input > input {
   border-radius: 30px;
   padding-left: 4px;
 }
-.chat-input>button{
+.micstd,
+.sendbtnStd,
+.endmicstd {
+  padding-left: 5px;
+  padding-right: 5px;
   background-color: transparent;
   border: none;
 }
-.chat-input>input:focus,.chat-input>button:focus,.chat-close:focus{
+.endmicstd1,
+.micstd1 {
+  display: none;
+}
+.chat-input > input:focus,
+.chat-input > button:focus,
+.chat-close:focus {
   outline: 0;
 }
 
-.message-r{
-  box-shadow: 3px 3px 9px rgba(251, 251, 251, 0.5),3px 3px 5px rgba(0, 0, 0, 0.2);
+.message-r {
+  box-shadow: 3px 3px 9px rgba(251, 251, 251, 0.5),
+    3px 3px 5px rgba(0, 0, 0, 0.2);
   padding: 2px;
   width: 150px;
   border-radius: 10px;
   text-align: center;
 }
-.message-s{
+.message-s {
   padding: 4px;
-  box-shadow:inset 3px 3px 5px rgba(0, 0, 0, 0.2),inset 5px 5px 5px rgba(251, 251, 251, 0.534);
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.2),
+    inset 5px 5px 5px rgba(251, 251, 251, 0.534);
   width: 150px;
   border-radius: 10px;
   text-align: center;
- 
-  margin-left: 175px;
 
+  margin-left: 175px;
 }
-.message-r>p,.message-s>p{
+.message-r > p,
+.message-s > p {
   overflow-wrap: break-word;
 }
-.message-r>i,.message-s>i{
+.message-r > i,
+.message-s > i {
   float: right;
   margin-right: 4px;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
-.admsg-r>i,.admsg-s>i{
+.admsg-r > i,
+.admsg-s > i {
   float: right;
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin-top: -15px;
 }
-.chat-close{
+.chat-close {
   border-radius: 50%;
   position: absolute;
   right: 10px;
   width: 25px;
   margin-top: -40px;
   border: none;
-  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3),inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.3);
 }
-.adchat-box{
+.adchat-box {
   position: relative;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   height: 80vh;
-  text-align: center; 
-  border-radius: 10px ;
+  text-align: center;
+  border-radius: 10px;
   overflow: hidden;
-  
 }
-.studentchat-list{
+.studentchat-list {
   position: absolute;
   width: 30%;
   height: 73vh;
@@ -2628,84 +2556,83 @@ margin-top: -10px;
   border-top: 2px solid black;
   overflow-y: scroll;
 }
-.studentchat-list::-webkit-scrollbar{
+.studentchat-list::-webkit-scrollbar {
   display: none;
 }
-.studentchat-message{
+.studentchat-message {
   position: absolute;
-    right: 0px;
-    width: 70%;
-    height: 73vh;
-    background-color: rgba(226, 189, 189, 0.986);
+  right: 0px;
+  width: 70%;
+  height: 73vh;
+  background-color: rgba(226, 189, 189, 0.986);
   border-top: 2px solid black;
   border-left: 2px solid black;
 }
-.message-body{
+.message-body {
   height: 60vh;
   overflow-y: scroll;
 }
-.message-body::-webkit-scrollbar{
+.message-body::-webkit-scrollbar {
   display: none;
 }
-.messge-input{
+.messge-input {
   height: 7.3vh;
 }
-.messge-input>input{
+.messge-input > input {
   border-radius: 10px;
-   margin-top:8px ;
-   padding-left: 5px;
+  margin-top: 8px;
+  padding-left: 5px;
 }
-.messge-input>input:focus,.messge-input>button:focus{
+.messge-input > input:focus,
+.messge-input > button:focus {
   outline: 0;
 }
-.messge-input>button{
+.messge-input > button {
   border: none;
   background-color: transparent;
-
 }
-.chat-user{
+.chat-user {
   height: 50px;
   width: 90%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 0px;
-  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.2) ,inset -3px -3px 5px rgba(0, 0, 0, 0.2);  
-  transition:box-shadow 1s ease;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.2),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 1s ease;
   border-radius: 10px;
 }
-.selctmsg{
+.selctmsg {
   font-weight: 500;
   font-size: 1.5rem;
-  
 }
-.selctmsg1{
+.selctmsg1 {
   display: none;
-  
 }
-.studentchat-message1,.loadingmsg1{
+.studentchat-message1,
+.loadingmsg1 {
   display: none;
 }
 
-.chat-user>h4{
+.chat-user > h4 {
   margin-top: 10px;
   user-select: none;
 }
-.chat-user:hover{
+.chat-user:hover {
   background-color: rgba(168, 205, 235, 0.911);
 }
-.admsg-r{
+.admsg-r {
   background-color: rgba(138, 116, 116, 0.986);
   width: 250px;
   padding: 5px;
   margin-left: 5px;
   border-radius: 10px;
-  
 }
-.admsg-r>p,.admsg-s>p{
+.admsg-r > p,
+.admsg-s > p {
   overflow-wrap: break-word;
-
 }
-.admsg-s{
+.admsg-s {
   width: 250px;
   background-color: white;
   padding: 5px;
@@ -2713,7 +2640,8 @@ margin-top: -10px;
   margin-left: 60%;
 }
 
-.newmsg,.adnewmsg{
+.newmsg,
+.adnewmsg {
   background-color: #a7d9f0;
   color: black;
   font-size: 1rem;
@@ -2721,39 +2649,39 @@ margin-top: -10px;
   border-radius: 10px;
   transition: all 1s ease;
 }
-.newmsg1,.adnewmsg1{
+.newmsg1,
+.adnewmsg1 {
   opacity: 0;
-  font-size: .05rem;
+  font-size: 0.05rem;
   user-select: none;
   pointer-events: none;
 }
 
-.newmsgicon{
+.newmsgicon {
   position: absolute;
   right: 40px;
   bottom: 160px;
   z-index: 1;
 }
-.newmsgicon1{
+.newmsgicon1 {
   display: none;
-
 }
-.videoCall-DivBg{
+.videoCall-DivBg {
   position: relative;
   height: 80vh;
-border: 3px solid blueviolet;  
+  border: 3px solid blueviolet;
 }
-.videocall-div{
+.videocall-div {
   position: absolute;
   height: 75vh;
   width: 50%;
 }
-.videocall-div>button{
+.videocall-div > button {
   position: fixed;
   bottom: 35px;
   left: 190px;
 }
-.shareLink-div{
+.shareLink-div {
   position: absolute;
   height: 75vh;
   width: 50%;
@@ -2763,7 +2691,7 @@ border: 3px solid blueviolet;
   flex-direction: column;
   text-align: center;
 }
-.shareLink-div>h5{
+.shareLink-div > h5 {
   position: absolute;
   margin-top: 15%;
   margin-left: 25%;
@@ -2771,14 +2699,14 @@ border: 3px solid blueviolet;
   color: red;
   font-style: italic;
   font-weight: 600;
-
 }
-.shareLink-div>input{
+.shareLink-div > input {
   margin: auto;
   margin-top: 30%;
-  margin-bottom: 0px;  
+  margin-bottom: 0px;
   width: 50%;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),-3px -3px 5px rgba(245, 240, 240, 0.3);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+    -3px -3px 5px rgba(245, 240, 240, 0.3);
   border-radius: 10px;
   height: 30px;
   border: none;
@@ -2786,56 +2714,466 @@ border: 3px solid blueviolet;
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
-.shareLink-div>input:focus,.shareLink-div>button:focus{
-outline: 0;
+.shareLink-div > input:focus,
+.shareLink-div > button:focus {
+  outline: 0;
 }
-.shareLink-div>button{
+.shareLink-div > button {
   margin: auto;
   margin-top: 40px;
   margin-bottom: 0px;
 }
-.VideocallHeading{
+.VideocallHeading {
   position: absolute;
   margin-left: 44%;
   margin-top: -30px;
   font-weight: 900;
-  text-decoration:skyblue underline;
+  text-decoration: skyblue underline;
   font-style: oblique;
 }
-.wait4stdLink{
+.wait4stdLink {
   opacity: 1;
   color: #2980b9;
   margin-top: 10px;
   transition: all 1s ease;
 }
-.wait4stdLink1{
+.wait4stdLink1 {
   opacity: 0;
   user-select: none;
   pointer-events: none;
-
 }
-.Videocallnot,.showVideocallEnded{
-font-size: 1.0rem;
-animation: changebg infinite;
-padding: 5px;
-border-radius: 10px;
-font-weight: 700;
-animation-duration: 1s ;
-transition: all 2s ease;
+.Videocallnot,
+.showVideocallEnded {
+  font-size: 1rem;
+  animation: changebg infinite;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: 700;
+  animation-duration: 1s;
+  transition: all 2s ease;
 }
 @keyframes changebg {
-  from{
-    background: linear-gradient(to left,red,black );
+  from {
+    background: linear-gradient(to left, red, black);
   }
-  to{
-    background: linear-gradient(to left,black,red);
+  to {
+    background: linear-gradient(to left, black, red);
   }
 }
 
-.Videocallnot1,.showVideocallEnded1{
+.Videocallnot1,
+.showVideocallEnded1 {
   opacity: 0;
   display: none;
   user-select: none;
   pointer-events: none;
+}
 
+#assSearch {
+  position: absolute;
+  right: 20px;
+  top: 70px;
+  border-radius: 10px;
+  padding-left: 4px;
+  border: 2px solid rgb(226, 90, 90);
+}
+#assSearch:focus {
+  outline: 0;
+}
+.asssearch-div {
+  border-radius: 30px;
+  height: 80vh;
+  color: #8a908c;
+  border: 3px solid red;
+  overflow-y: scroll;
+}
+.asssearch-div::-webkit-scrollbar {
+  display: none;
+}
+.asssearch-div > h4 {
+  text-align: center;
+  text-decoration: black underline;
+  font-weight: 700;
+}
+.asssearch-div1 {
+  display: none;
+}
+#searchbtn {
+  position: absolute;
+  right: 235px;
+  top: 72px;
+  border-radius: 50%;
+  height: 25px;
+  text-align: center;
+  padding: 0px;
+  width: 25px;
+}
+.asssearchclose-btn {
+  float: right;
+  margin-right: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: red;
+  z-index: 11;
+}
+.asssearchclose-btn:focus {
+  outline: 0;
+}
+
+.attPercent {
+  float: left;
+}
+#back2land {
+  float: left;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 742px) {
+  .fees-div {
+    right: 10px;
+    top: 170px;
+  }
+  .paidStatus {
+    left: -400px;
+  }
+  .home-evnt {
+    top: 100px;
+    right: 10px;
+  }
+  .attendaceStatus {
+    top: 240px;
+    right: 10px;
+  }
+  .annbtn {
+    right: 10px;
+  }
+  .chat-btn {
+    bottom: 200px;
+  }
+  .chat-box {
+    bottom: 200px;
+  }
+  .navstdname {
+    top: 2px;
+    position: absolute;
+  }
+  .notification {
+    position: absolute;
+    z-index: 11;
+    top: 35px;
+  }
+  .newmsg {
+    position: absolute;
+    top: 35px;
+    left: 220px;
+  }
+  .Videocallnot,
+  .showVideocallEnded {
+    position: absolute;
+    z-index: 111;
+    top: -2px;
+    left: 200px;
+  }
+  .newmsgicon {
+    bottom: 260px;
+  }
+  .logincard {
+    width: 92%;
+    position: absolute;
+    left: 4%;
+  }
+  .loginuserIcon {
+    top: 25%;
+    left: 6%;
+  }
+  .circlebg > h3 {
+    top: 90px;
+    left: 10px;
+  }
+  .tutorselection > img,
+  .studentselection > img {
+    height: 40vh;
+    width: 80vw;
+    border-radius: 50%;
+    margin-top: 10%;
+    padding: 0px 10px;
+    margin-left: 20px;
+  }
+  .loading {
+    height: 100vh;
+    width: 100vw;
+    z-index: 1111111111;
+    top: 0;
+    left: 0;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1111;
+    background-color: rgb(0, 0, 0);
+
+    opacity: 1;
+    transition: opacity 0.9s ease;
+  }
+  .loading > img {
+    margin-top: 50%;
+    margin-left: -190px;
+  }
+  .adminloginform {
+    width: 95%;
+  }
+  .tutorannouncement {
+    position: absolute;
+    height: 30vh;
+    width: 90%;
+    z-index: 0;
+    margin-top: -400px;
+    margin-left: 5%;
+    background-color: rgb(207, 205, 205);
+    border-radius: 20px;
+    overflow-y: scroll;
+    border: 2px solid steelblue;
+  }
+  .tutorevents {
+    position: absolute;
+    height: 30vh;
+    width: 90%;
+    z-index: 0;
+    margin-top: -100px;
+    margin-left: 5%;
+    border-radius: 20px;
+    background-color: rgb(221, 218, 218);
+    overflow-y: scroll;
+    border: 2px solid steelblue;
+  }
+  .tutorevents > ul,
+  .tutorannouncement > ul {
+    margin-left: 20%;
+  }
+  .profilecard {
+    height: 30vh;
+    left: 30px;
+  }
+  .profilecard > img {
+    height: 10vh;
+  }
+  .myprofilecard {
+    height: 10vh;
+    padding: 0px;
+  }
+  .myprofilecard > h2 {
+    font-size: 1.4rem;
+    text-align: left;
+    margin: 10px;
+    margin-left: 100px;
+    font-weight: bold;
+    background: linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 1s ease-in;
+  }
+  .myprofilecard > h1 {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    text-decoration: underline;
+    background: linear-gradient(to left, rgb(240, 89, 89), rgb(54, 187, 248));
+    -webkit-background-clip: text;
+    margin-left: -150px;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+  .myadrsscard {
+    top: 50%;
+    left: 20px;
+    height: 40vh;
+    width: 400px;
+  }
+  .profileeditcard {
+    top: 94%;
+    width: 200px;
+    height: 100px;
+    left: 30%;
+  }
+  .edittutorprofile {
+    height: 90vh;
+    margin-left: 30px;
+  }
+  .addstudentbg {
+    width: 95%;
+  }
+  #maleLab {
+    margin-left: 20px;
+  }
+  #femaleLab {
+    margin-left: 50px;
+  }
+  #female:checked ~ .gndr-dv {
+    left: 290px;
+  }
+  #male:checked ~ .gndr-dv {
+    left: 170px;
+  }
+  .studnteditconfirm {
+    width: 70%;
+    left: 60px;
+    height: 200px;
+  }
+  .deltestudentcnfrm {
+    width: 80%;
+    left: -40px;
+    height: 200px;
+  }
+  .studentstablebg {
+    min-height: 60vh;
+    max-height: 100%;
+    width: 90%;
+  }
+  .studentdetails {
+    height: 50%;
+    width: 99%;
+  }
+  .studentdetails > img {
+    height: 40%;
+    left: 30px;
+  }
+  .studentattandance {
+    height: 40%;
+    width: 80vw;
+    top: 60%;
+  }
+  .studentassignments {
+    height: 40%;
+    width: 80vw;
+    top: 101%;
+  }
+  .atdTablebg > input {
+    position: absolute;
+    top: 35px;
+    height: 30px;
+    width: 30px;
+    right: 30px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .assignmentTable {
+    top: 40%;
+    margin-left: 2%;
+    width: 90vw;
+    height: 40vh;
+  }
+  .assignmentForm {
+    margin-left: 8%;
+  }
+  .announcementform > form {
+    width: 90%;
+  }
+  .announcementBg > h1 {
+    margin-left: 40px;
+  }
+  .anndelete {
+    left: 20px;
+  }
+  .evninputs {
+    width: 48%;
+    left: 1px;
+  }
+  .evninputs > label {
+    margin-top: -135px;
+    margin-left: 10px;
+  }
+  .evninputs > input {
+    width: 90%;
+    margin: 10px auto;
+  }
+  .evnFiles {
+    width: 48%;
+    right: 1px;
+  }
+  .photodelete {
+    margin-left: 2px;
+  }
+  .videocall-div {
+    width: 90vw;
+    height: 50vh;
+    background-color: tan;
+  }
+  .shareLink-div {
+    width: 90vw;
+    top: 64%;
+    background-color: tomato;
+    height: 28vh;
+    left: 2px;
+    border-radius: 10px;
+  }
+  #VideocallStart,
+  #VideocallEnd {
+    top: 55%;
+    left: 35%;
+    height: 40px;
+  }
+  .ann-box {
+    width: 97%;
+  }
+  .asstask {
+    top: 10%;
+    left: 10%;
+    width: 80%;
+  }
+  .asstask > div {
+    width: 95%;
+  }
+  .taskbg > h1 {
+    margin-top: -15px;
+    margin-left: 20%;
+  }
+  .notetask {
+    left: 10%;
+    width: 80%;
+    top: 55%;
+  }
+  .notetask > div {
+    width: 95%;
+  }
+  .uploadedstatus {
+    top: 5px;
+  }
+  .viewOrdwnload {
+    left: 25%;
+  }
+  .notes,
+  .searchNotes {
+    margin-top: 10%;
+  }
+  .searchName,
+  .searchDate {
+    margin-top: 35px;
+  }
+  .searchwithdText,
+  .searchwithntext {
+    margin-top: 38px;
+  }
+  #assSearch {
+    margin-top: 44px;
+  }
+  #asslist {
+    margin-top: 10%;
+  }
+  #searchbtn {
+    margin-top: 44px;
+    right: 58%;
+  }
+  .asssearch-div {
+    margin-top: 20%;
+  }
+  .annHeading {
+    margin-left: 15%;
+  }
+  #back2land {
+    float: left;
+    margin-left: 20px;
+    margin-top: 0px;
+  }
 }

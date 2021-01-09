@@ -1,7 +1,17 @@
 <section style="background-color: black;min-height:99vh; max-height: 100%; margin-top:-39px">
     <div class="container">
         <h1 class="ass-heading">Assignments</h1>
+        <input type="search"id="assSearch" name="assval"   placeholder="Search.." >
+        <button id="searchbtn" onclick="asssearch()" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+        <div  class="asssearch-div1">
+            <h4>Search Result.</h4>
+        <p class="searchLoad"> <i class="fa fa-spinner fa-spin" ></i></p>
         <div class="col-md-12">
+            <button class="asssearchclose-btn" onclick="closeasssearch()"><i class="fa fa-close"></i></button>
+        <div class="row" id="asssearch-div"></div>
+        </div>
+    </div>
+        <div id="asslist" class="col-md-12">
            <div class="row">
             {{#each assignments}}
             <div class="col-md-3" >
@@ -23,5 +33,7 @@
              {{/each}}
         </div>
         </div>
+        
     </div>
+    
 </section>

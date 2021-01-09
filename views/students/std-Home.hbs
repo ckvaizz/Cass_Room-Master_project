@@ -3,7 +3,7 @@
       <div class="paidStatus">
          <p>Payment Success</p>
       </div>
-      <div onclick="openfee()" class="fees-div"> 
+      <div onclick="openfee()" class="fees-div">
          <p>Pay fee</p>
          <div class="fees-methods1">
             <h6>25000</h6>
@@ -15,127 +15,132 @@
 
       </div>
       <div onclick="openhomeevnt()" class="home-evnt">
-        <p>Events</p>
-        <div  class="homeevnt-cntent1">
+         <p>Events</p>
+         <div class="homeevnt-cntent1">
             <ul>
-                 {{#each events}}
-                  <li>
-                     *<a href="/view-event?id={{this._id}}" style=" color:rgb(185, 32, 223);"> {{this.Event}} </a> {{#if this.Paid}}(Paid){{/if}} 
-                  </li>
-                 {{/each}}
+               {{#each events}}
+               <li>
+                  *<a href="/view-event?id={{this._id}}" style=" color:rgb(185, 32, 223);"> {{this.Event}} </a> {{#if
+                  this.Paid}}(Paid){{/if}}
+               </li>
+               {{/each}}
 
 
-              </ul>
-        </div>
+            </ul>
+         </div>
       </div>
-       <div class="attendaceStatus" onclick="showAttstatus()">
-          <p class="todayTasktext">Today's Attedance</p>
-          <p class="todayTaskstatus1">{{#if todayStatus}}Present{{else}} <a href="/todayTask" style="color: blue;">Not Present {{/if}}</a> </p>
-       </div>
-       <div onclick="openAnn()" class="annbtn">
-          <p>Announcements</p>
-          <button   class="closeannbtn1"><i  class='fa fa-angle-double-up'></i></button>
-          <div class="anncontnt1">
-              <ul>
-                  {{#each announcements}}
-                  <li>
-                     *<a href="/view-announcement?id={{this._id}}" style=" color:rgb(185, 32, 223);"> {{this.Message}}</a> 
-                  </li>
-                 {{/each}}
+      <div class="attendaceStatus" onclick="showAttstatus()">
+         <p class="todayTasktext">Today's Attedance</p>
+         <p class="todayTaskstatus1">{{#if todayStatus}}Present{{else}} <a href="/todayTask" style="color: blue;">Not
+               Present {{/if}}</a> </p>
+      </div>
+      <div onclick="openAnn()" class="annbtn">
+         <p>Announcements</p>
+         <button class="closeannbtn1"><i class='fa fa-angle-double-up'></i></button>
+         <div class="anncontnt1">
+            <ul>
+               {{#each announcements}}
+               <li>
+                  *<a href="/view-announcement?id={{this._id}}" style=" color:rgb(185, 32, 223);"> {{this.Message}}</a>
+               </li>
+               {{/each}}
 
 
-              </ul>
+            </ul>
 
-          </div>
-       </div>
-       <div class="newmsgicon1"><i class="fa fa-exclamation-circle" style="font-size:35px;color:red"></i></div>
+         </div>
+      </div>
+      <div class="newmsgicon1"><i class="fa fa-exclamation-circle" style="font-size:35px;color:red"></i></div>
       <div class="chat-btn" onclick="showchat_box()">
          <img src="/images/chaticon1.png" alt="">
       </div>
       <div class="chat-box1">
-         <div class="chat-head"><h4>Chat-Box</h4> <button class="chat-close" onclick="hidechat_box()"><i class="fa fa-times-circle"></i></button></div>
+         <div class="chat-head">
+            <h4>Chat-Box</h4> <button class="chat-close" onclick="hidechat_box()"><i
+                  class="fa fa-times-circle"></i></button>
+         </div>
          <div id="chat-body" class="chat-body">
-               {{#each Messages}}
-               {{#if this.Tutor}}
-               <div class="message-r">
-                     <p>{{this.Message}}</p>
-                     <i>{{this.Time}}</i>
-               </div>
-               {{else}}
-               <div class="message-s">
-                  <p>{{this.Message}}</p>
-                  <i>{{this.Time}}</i>
-               </div>
-               {{/if}}
-              {{/each}}
+            {{#each Messages}}
+            {{#if this.Tutor}}
+            <div class="message-r">
+               <p>{{this.Message}}</p>
+               <i>{{this.Time}}</i>
+            </div>
+            {{else}}
+            <div class="message-s">
+               <p>{{this.Message}}</p>
+               <i>{{this.Time}}</i>
+            </div>
+            {{/if}}
+            {{/each}}
          </div>
          <div class="chat-input">
             <input type="text" name="message" id="msg">
-            <button onclick="stdsend_Message()" > <i class="fa fa-send"></i></button>
+            <button onclick="stdsend_Message()" class="sendbtnStd"> <i class="fa fa-send"></i></button>
          </div>
       </div>
-    
-    
+
+
 
    </div>
 
 </section>
 
 <script>
-var openstatus = false
-   showchat_box1=()=>{
-     openstatus = true
-     $('.newmsg').addClass('newmsg1').removeClass('newmsg')
+   var openstatus = false
+   showchat_box1 = () => {
+      openstatus = true
+      $('.newmsg').addClass('newmsg1').removeClass('newmsg')
       $('.newmsgicon').addClass('newmsgicon1').removeClass('newmsgicon')
-  }
-  function hidechat_box1(){
-     openstatus=false
-     
-  }
+   }
+   function hidechat_box1() {
+      openstatus = false
+
+   }
    var socket = io.connect();
-   socket.on('admmsg',(data)=>{
-      
+   socket.on('admmsg', (data) => {
+
 
       $.ajax({
-         url:'/verifySelectedstd',
-         method:'post',
-         data:{
-            Id:data.Id
-         },success:(res)=>{
-            if(res.status){
-               if(openstatus){
+         url: '/verifySelectedstd',
+         method: 'post',
+         data: {
+            Id: data.Id
+         }, success: (res) => {
+            if (res.status) {
+               if (openstatus) {
 
-               document.getElementById('chat-body').innerHTML += `
+                  document.getElementById('chat-body').innerHTML += `
       <div class="message-r">
                   <p>${data.data.Message}</p>
                   <i>${data.data.Time}</i>
        </div>`
-       var height = 0;
-               $('#chat-body div').each(function(i, value){
-                height += parseInt($(this).height());
-                
-                });
-           
-            height += '';
-            
-            $('#chat-body').animate({scrollTop: height*height});
-         
-               }else{
+                  var height = 0;
+                  $('#chat-body div').each(function (i, value) {
+                     height += parseInt($(this).height());
 
-               document.getElementById('chat-body').innerHTML += `
+                  });
+
+                  height += '';
+
+                  $('#chat-body').animate({ scrollTop: height * height });
+
+               } else {
+
+                  document.getElementById('chat-body').innerHTML += `
       <div class="message-r">
                   <p>${data.data.Message}</p>
                   <i>${data.data.Time}</i>
        </div>`
-       var height = 0;
-               $('#chat-body div').each(function(i, value){
-                height += parseInt($(this).height());
-                
-                });
-           
-            height += '';
-            
-            $('#chat-body').animate({scrollTop: height*height});
+                  var height = 0;
+                  $('#chat-body div').each(function (i, value) {
+                     height += parseInt($(this).height());
+
+                  });
+
+                  height += '';
+
+                  $('#chat-body').animate({ scrollTop: height * height });
                   $('.newmsg1').addClass('newmsg').removeClass('newmsg1')
                   $('.newmsgicon1').addClass('newmsgicon').removeClass('newmsgicon1')
 
@@ -143,6 +148,9 @@ var openstatus = false
             }
          }
       })
-         
+
    })
+  
+
+   
 </script>

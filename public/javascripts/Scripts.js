@@ -470,7 +470,9 @@ changeMark = (Id, std) => {
 
 $(document).ready(function () {
   $("#taskForm").submit(function (e) {
+
     e.preventDefault();
+    if($('#assFile').files == null) return alert('select File..')
     $(this).ajaxSubmit({
       xhr: function () {
         var xhr = new window.XMLHttpRequest();
@@ -482,7 +484,7 @@ $(document).ready(function () {
               var percentComplete = (evt.loaded / evt.total) * 100;
               // Place upload progress bar visibility code here
               $(".progress-bar").css("width", percentComplete + "%");
-              console.log(percentComplete);
+              
             }
           },
           false

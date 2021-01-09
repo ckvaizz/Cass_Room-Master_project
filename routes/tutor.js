@@ -18,7 +18,9 @@ router.get("/ERROR", (req, res) => {
       `<center></br><h1>Internal SERVER error  </h1> </br> <h4>Please Try Again.. </h4></center>`
     );
 });
-
+router.get('/FileERROR',(req,res)=>{
+  res.send(`<center><h1>Select Any File</h1> <br> <button onclick="window.history.back()" class="btn btn-secondary">Back</button></center>`)
+})
 router.get("/", async function (req, res, next) {
   let announcement = await adminHelper.getAnnouncements();
   let events = await adminHelper.getEvents();
@@ -173,6 +175,7 @@ router.get("/assignments", verifyLogin, async (req, res) => {
 });
 
 router.post("/assignment", (req, res) => {
+  if(req.files == null) res.redirect('/admin/FileERROR')
   let file = {
     Name: req.body.Name,
     Date: new Date().toLocaleDateString(),
@@ -233,6 +236,7 @@ router.get("/notes", verifyLogin, async (req, res) => {
 });
 router.post("/notes", verifyLogin, (req, res) => {
   let file = "";
+  if(req.files == null ) res.redirect('/admin/FileERROR')
   if (req.files.File)
     file = {
       Name: req.body.Name,
@@ -475,6 +479,7 @@ router.get("/announcement", verifyLogin, async (req, res) => {
 });
 
 router.post("/uploadAnnouncement", verifyLogin, (req, res) => {
+  if(req.files == null )res.redirect('/admin/FileERROR')
   let file = {
     Message: req.body.Message,
     Description: req.body.Description,

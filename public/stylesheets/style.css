@@ -2212,6 +2212,7 @@ optioncnlAnn:focus {
   overflow-x: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  z-index: 11;
 }
 .homeevnt-cntent::-webkit-scrollbar {
   display: none;
@@ -2317,6 +2318,7 @@ optioncnlAnn:focus {
 .fees-methods {
   display: flex;
   flex-direction: column;
+  z-index: 11;
 }
 .fees-methods > h6 {
   text-decoration: underline;

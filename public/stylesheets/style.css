@@ -2848,6 +2848,7 @@ optioncnlAnn:focus {
   .attendaceStatus {
     top: 240px;
     right: 10px;
+    z-index: -1;
   }
   .annbtn {
     right: 10px;

@@ -289,6 +289,7 @@ router.get("/view-Assignment", verifyLogin, async (req, res) => {
 });
 
 router.post("/submitAssignment", verifyLogin, (req, res) => {
+  if(!req.files) return res.json(false)
   let file = {
     Topic: req.body.Topicname,
     TopicId: req.body.assId,

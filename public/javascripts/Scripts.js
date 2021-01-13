@@ -472,7 +472,7 @@ $(document).ready(function () {
   $("#taskForm").submit(function (e) {
 
     e.preventDefault();
-    if($('#assFile').files == null) return alert('select File..')
+    
     $(this).ajaxSubmit({
       xhr: function () {
         var xhr = new window.XMLHttpRequest();
@@ -493,6 +493,10 @@ $(document).ready(function () {
       },
 
       success: function (response) {
+        if(!response){
+          $(".progress").addClass("progress1").removeClass("progress");
+          return alert('select any file')
+        }
         setTimeout(() => {
           $(".progress").addClass("progress1").removeClass("progress");
           $(".uploadedstatus1")
